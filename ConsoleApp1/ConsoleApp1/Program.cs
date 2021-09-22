@@ -10,11 +10,15 @@ namespace ConsoleApp1
     {
        public string Name { get; set; }
     }
-
     public class Card
         {
+        public enum Suit {Трефа, Піка, Чирва, Бубна};
+        public int[] numbers;
         }
-
+    public class Deck
+        {
+        
+        }
     class Program
     {
         static void Main(string[] args)
@@ -22,9 +26,9 @@ namespace ConsoleApp1
      
             string player = new Player().ToString();
             Console.WriteLine("Вiтаю, ви граєте в BlackJack");
-            Console.WriteLine("Введіть ваше ім'я");
+            Console.WriteLine("Введiть ваше iм'я");
             player = Console.ReadLine();
-            Console.WriteLine($"Вітаю вас {player}");
+            Console.WriteLine($"Вiтаю вас {player}");
             int a = 21;
             Console.WriteLine(a);
             if (a == 21)
