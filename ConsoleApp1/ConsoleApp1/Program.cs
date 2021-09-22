@@ -6,14 +6,29 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
+    public class Player
+    {
+        string Name;
+    }
+
+    public class Card
+        {
+        }
+
     class Program
     {
         static void Main(string[] args)
         {
-            const int i = 10;
-            for (int z = 0; z < i; z++)
+            int a = 21;
+            Console.WriteLine(a);
+            Console.WriteLine("Вiтаю, ви граєте в BlackJack");
+            if (a == 21)
             {
-                Console.WriteLine("Day " + z);
+                Console.WriteLine("Ви виграли");
+            }
+            else
+            {
+                Console.WriteLine("Ви програли");
             }
             Console.ReadKey();
         }
