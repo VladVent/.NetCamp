@@ -10,7 +10,12 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Day 1");
+            const int i = 10;
+            for (int z = 0; z < i; z++)
+            {
+            Console.WriteLine("Day " + z);
+              
+            }
             Console.ReadKey();
         }
     }
