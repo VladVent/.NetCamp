@@ -13,8 +13,7 @@ namespace ConsoleApp1
             const int i = 10;
             for (int z = 0; z < i; z++)
             {
-            Console.WriteLine("Day " + z);
-              
+                Console.WriteLine("Day " + z);
             }
             Console.ReadKey();
         }
