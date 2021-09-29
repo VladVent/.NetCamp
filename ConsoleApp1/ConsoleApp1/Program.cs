@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,35 +7,44 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
+    public enum Suit {
+        Трефа,
+        Піка,
+        Чирва,
+        Бубна };
+
     public class Player
     {
        public string Name { get; set; }
     }
-
     public class Card
+    {
+        public int numbers { get; set; }
+    }
+    public class Deck
         {
+        
+        public List<Card> cards = new List<Card>();
+        public List<Card> GetCard()
+        {
+            return cards;
         }
+       
+        public  void ChangeDeck()
+            {
+            Console.WriteLine(cards);
+            }
 
+       
+    }
     class Program
     {
         static void Main(string[] args)
         {
-     
-            string player = new Player().ToString();
-            Console.WriteLine("Вiтаю, ви граєте в BlackJack");
-            Console.WriteLine("Введіть ваше ім'я");
-            player = Console.ReadLine();
-            Console.WriteLine($"Вітаю вас {player}");
-            int a = 21;
-            Console.WriteLine(a);
-            if (a == 21)
-            {
-                Console.WriteLine("Ви виграли");
-            }
-            else
-            {
-                Console.WriteLine("Ви програли");
-            }
+           
+            Deck deck = new Deck();
+           Console.WriteLine(deck.GetCard());
+           deck.ChangeDeck();
             Console.ReadKey();
         }
     }
