@@ -7,59 +7,54 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    public enum Suit {
+    public enum Suit
+    {
         Трефа,
         Піка,
         Чирва,
-        Бубна };
+        Бубна
+    };
 
     public class Player
     {
-       public string Name { get; set; }
+        public string Name { get; set; }
     }
-    public class Card: IEquatable<Card>
+    public class Card
     {
         //public Suit suit;
         public int numbers;
-
-        public bool Equals(Card other)
-        {
-            throw new NotImplementedException();
-        }
     }
     public class Deck
-    { 
-        public  List<Card> card = new List<Card>();
-        public int GetCard()
-        {
+    {
+        public static List<Card> CreateCards()
+         {
+            List<Card> card = new List<Card>();
             for (var i = 2; i <= 10; i++)
             {
                 card.Add(new Card { numbers = i });
+                Console.WriteLine( card.GetEnumerator());
             }
+            return card;
+        }
+        public void ShuffleDeck()
+        {
+            Random rand = new Random();
+            rand.Next(CreateCards().Count);
+        }
+        public int RozdatyCards()
+        {
             return 0;
         }
-       
-        public  void ChangeDeck()
-            {
-            Random rand = new Random();
-            rand.Next(GetCard());
-            Console.WriteLine(rand.ToString());
-            }
-        public void RozdatyCards()
-        {
 
-        }
-       
     }
     class Program
     {
         static void Main(string[] args)
         {
-            
-           Deck deck = new Deck();
-           deck.GetCard();
-           deck.ChangeDeck();
-           Console.ReadKey();
+
+            var deck = Deck.CreateCards();
+            Console.WriteLine(deck);
+            Console.ReadKey();
         }
     }
 }
