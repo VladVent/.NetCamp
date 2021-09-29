@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp1.Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,33 +28,35 @@ namespace ConsoleApp1
     public class Deck
     {
         public static List<Card> CreateCards()
-         {
+        {
             List<Card> card = new List<Card>();
             for (var i = 2; i <= 10; i++)
             {
                 card.Add(new Card { numbers = i });
-                Console.WriteLine( card.GetEnumerator());
             }
             return card;
         }
-        public void ShuffleDeck()
+        public static void ShuffleDeck(ref List<Card> cards)
         {
             Random rand = new Random();
-            rand.Next(CreateCards().Count);
+            cards = cards.OrderBy(x => rand.Next()).ToList();
         }
+
         public int RozdatyCards()
         {
             return 0;
         }
-
     }
+  
     class Program
     {
         static void Main(string[] args)
         {
 
             var deck = Deck.CreateCards();
-            Console.WriteLine(deck);
+            deck.outputdesc();
+            Deck.ShuffleDeck(ref deck);
+            deck.outputdesc();
             Console.ReadKey();
         }
     }
