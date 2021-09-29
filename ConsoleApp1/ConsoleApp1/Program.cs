@@ -29,22 +29,26 @@ namespace ConsoleApp1
     }
     public class Deck
     { 
-        public void GetCard()
+        public  List<Card> card = new List<Card>();
+        public int GetCard()
         {
-            List<Card> card = new List<Card>();
-            for (var i = 1; i > 11; i++)
+            for (var i = 2; i <= 10; i++)
             {
                 card.Add(new Card { numbers = i });
-            Console.WriteLine(card[i]);
             }
+            return 0;
         }
        
         public  void ChangeDeck()
             {
             Random rand = new Random();
-
+            rand.Next(GetCard());
+            Console.WriteLine(rand.ToString());
             }
+        public void RozdatyCards()
+        {
 
+        }
        
     }
     class Program
