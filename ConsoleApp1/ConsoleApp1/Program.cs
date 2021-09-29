@@ -17,22 +17,32 @@ namespace ConsoleApp1
     {
        public string Name { get; set; }
     }
-    public class Card
+    public class Card: IEquatable<Card>
     {
-        public int numbers { get; set; }
+        //public Suit suit;
+        public int numbers;
+
+        public bool Equals(Card other)
+        {
+            throw new NotImplementedException();
+        }
     }
     public class Deck
+    { 
+        public void GetCard()
         {
-        
-        public List<Card> cards = new List<Card>();
-        public List<Card> GetCard()
-        {
-            return cards;
+            List<Card> card = new List<Card>();
+            for (var i = 1; i > 11; i++)
+            {
+                card.Add(new Card { numbers = i });
+            Console.WriteLine(card[i]);
+            }
         }
        
         public  void ChangeDeck()
             {
-            Console.WriteLine(cards);
+            Random rand = new Random();
+
             }
 
        
@@ -41,11 +51,11 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-           
-            Deck deck = new Deck();
-           Console.WriteLine(deck.GetCard());
+            
+           Deck deck = new Deck();
+           deck.GetCard();
            deck.ChangeDeck();
-            Console.ReadKey();
+           Console.ReadKey();
         }
     }
 }
