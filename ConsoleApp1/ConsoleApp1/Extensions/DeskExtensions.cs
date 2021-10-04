@@ -10,7 +10,7 @@ namespace ConsoleApp1.Extensions
     {
         public static void outputdesc(this List<Card> cards)
         {
-            cards.ForEach(x => Console.WriteLine(x.numbers));
+            cards.ForEach(x => Console.WriteLine(x.numbers +" " + x.suit.ToString()));
         }
     }
 }
