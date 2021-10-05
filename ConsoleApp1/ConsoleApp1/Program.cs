@@ -53,12 +53,14 @@ namespace ConsoleApp1
             }
             return card;
         }
-        public static void ShuffleDeck(this Stack<Card> cards)
+        public static Stack<Card> ShuffleDeck(this Stack<Card> cards)
         {
-            Card[] card = cards.ToArray();
             Random rand = new Random();
-            card = cards.OrderBy(x=>rand.Next()).ToArray();
-            cards.Push(card);
+            /*var values = cards.ToArray();
+            cards.Clear();
+            foreach (var value in values.OrderBy(x => rand.Next()))
+                cards.Push(value);*/
+            return new Stack<Card>(cards.OrderBy(x => rand.Next()));
         }
         public static int CardsonHands()
         {
