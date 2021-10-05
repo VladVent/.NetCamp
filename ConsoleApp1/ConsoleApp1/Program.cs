@@ -56,15 +56,15 @@ namespace ConsoleApp1
         public static Stack<Card> ShuffleDeck(this Stack<Card> cards)
         {
             Random rand = new Random();
-            /*var values = cards.ToArray();
+            var values = cards.ToArray();
             cards.Clear();
             foreach (var value in values.OrderBy(x => rand.Next()))
-                cards.Push(value);*/
+                cards.Push(value);
             return new Stack<Card>(cards.OrderBy(x => rand.Next()));
         }
-        public static int CardsonHands()
+        public static Stack<Card> CardsonHands(this Stack<Card> cards)
         {
-            return 0;
+            return cards;
         }
     }
 
@@ -74,10 +74,10 @@ namespace ConsoleApp1
         {
 
             var deck = Deck.CreateCards();
-            deck.outputdesc();
+           // deck.outputdesc();
             Deck.ShuffleDeck(deck);
             Console.WriteLine("Shuffle");
-            deck.outputdesc();
+           // deck.outputdesc();
             Console.ReadKey();
         }
     }
