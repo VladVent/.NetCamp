@@ -62,8 +62,12 @@ namespace ConsoleApp1
                 cards.Push(value);
             return new Stack<Card>(cards.OrderBy(x => rand.Next()));
         }
-        public static Stack<Card> CardsonHands(this Stack<Card> cards)
+        public static Stack<Card> CardsInHands(this Stack<Card> cards)
         {
+            while (cards.Count() >= 3)
+            {
+                cards.Pop();
+            }
             return cards;
         }
     }
@@ -74,10 +78,13 @@ namespace ConsoleApp1
         {
 
             var deck = Deck.CreateCards();
-           // deck.outputdesc();
+            // deck.outputdesc();
             Deck.ShuffleDeck(deck);
-            Console.WriteLine("Shuffle");
-           // deck.outputdesc();
+            //Console.WriteLine("Shuffle");
+            // deck.outputdesc();
+            Deck.CardsInHands(deck);
+            Console.WriteLine("CardInHand");
+            deck.outputdesc();
             Console.ReadKey();
         }
     }
