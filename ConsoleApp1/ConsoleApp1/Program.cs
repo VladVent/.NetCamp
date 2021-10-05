@@ -15,6 +15,15 @@ namespace ConsoleApp1
         Diamonds,
         Clubs
     };
+    public enum OldestCard
+    {
+        Jack = 11,
+        Queen = 12,
+        King = 13,
+        Ace = 14
+    };
+
+
 
     public class Player
     {
@@ -24,33 +33,39 @@ namespace ConsoleApp1
     {
         public Suit suit;
         public int numbers;
+        public OldestCard oldestCard;
     }
-    public class Deck
+    public static class Deck
     {
-        public static List<Card> CreateCards()
+        public static Stack<Card> CreateCards()
         {
-            List<Card> card = new List<Card>();
-            for (var i = 2; i <= 10; i++)
-                {
+            Stack<Card> card = new Stack<Card>();
             foreach (var suit in Enum.GetValues(typeof(Suit)))
             {
-                card.Add(new Card { suit =(Suit)suit,  numbers = i});
+                foreach (var oldcard in Enum.GetValues(typeof(OldestCard)))
+                {
+                    for (var i = 2; i <= 14; i++)
+                    {
+                        card.Push(new Card { numbers = i, suit = (Suit)suit });
+                    }
+                    break;
                 }
             }
             return card;
         }
-        public static void ShuffleDeck(ref List<Card> cards)
+        public static void ShuffleDeck(this Stack<Card> cards)
         {
+            Card[] card = cards.ToArray();
             Random rand = new Random();
-            cards = cards.OrderBy(x => rand.Next()).ToList();
+            card = cards.OrderBy(x=>rand.Next()).ToArray();
+            cards.Push(card);
         }
-
-        public int RozdatyCards()
+        public static int CardsonHands()
         {
             return 0;
         }
     }
-  
+
     class Program
     {
         static void Main(string[] args)
@@ -58,7 +73,7 @@ namespace ConsoleApp1
 
             var deck = Deck.CreateCards();
             deck.outputdesc();
-            Deck.ShuffleDeck(ref deck);
+            Deck.ShuffleDeck(deck);
             Console.WriteLine("Shuffle");
             deck.outputdesc();
             Console.ReadKey();

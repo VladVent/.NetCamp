@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Extensions
 {
-   public static class DeskExtensions
+    public static class DeskExtensions
     {
-        public static void outputdesc(this List<Card> cards)
+        public static void outputdesc(this Stack<Card> cards)
         {
-            cards.ForEach(x => Console.WriteLine(x.numbers +" " + x.suit.ToString()));
+            foreach (Card c in cards)
+            {
+                Console.WriteLine(c.numbers + c.oldestCard + " " + c.suit);
+            }
         }
     }
 }
