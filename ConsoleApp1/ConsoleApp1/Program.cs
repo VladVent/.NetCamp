@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
+
 namespace ConsoleApp1
 {
     public enum Suit
@@ -64,27 +66,47 @@ namespace ConsoleApp1
         }
         public static Stack<Card> CardsInHands(this Stack<Card> cards)
         {
-            while (cards.Count() >= 3)
+            Stack<Card> card = new Stack<Card>();
+            for (var i = 0; i < 2; i++)
             {
-                cards.Pop();
+                card.Push(cards.Pop());
             }
-            return cards;
+            return card;
         }
+
+        public static int SumCards(this Stack<Card> cards)
+        {
+            int a = 0;
+            a = cards.Sum(x => x.numbers);
+            return a;
+        }
+    }
+
+
+    public static class TableSessions
+    {
+        public static List<Player> players;
+        public static Stack<Card> deck = Deck.CreateCards();
+
     }
 
     class Program
     {
         static void Main(string[] args)
         {
-
             var deck = Deck.CreateCards();
-            // deck.outputdesc();
+            //deck.outputdesc();
             Deck.ShuffleDeck(deck);
             //Console.WriteLine("Shuffle");
-            // deck.outputdesc();
-            Deck.CardsInHands(deck);
+            //deck.outputdesc();
+            Console.WriteLine(Deck.CardsInHands(deck));
             Console.WriteLine("CardInHand");
-            deck.outputdesc();
+            //deck.outputdesc();
+            Deck.SumCards(deck);
+            //Console.WriteLine(deck.Count);
+            //Console.WriteLine("Sum");
+            Console.WriteLine(Deck.SumCards(deck));
+
             Console.ReadKey();
         }
     }
