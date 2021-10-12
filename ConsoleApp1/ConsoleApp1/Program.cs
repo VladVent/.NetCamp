@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace ConsoleApp1
@@ -17,8 +18,17 @@ namespace ConsoleApp1
         Diamonds,
         Clubs
     };
-    public enum OldestCard
+    public enum Cards
     {
+        Two = 2,
+        Tree = 3,
+        Four = 4,
+        Five = 5,
+        Six = 6,
+        Seven = 7,
+        Eight = 8,
+        Nine = 9,
+        Ten = 10,
         Jack = 11,
         Queen = 12,
         King = 13,
@@ -35,7 +45,7 @@ namespace ConsoleApp1
     {
         public Suit suit;
         public int numbers;
-        public OldestCard oldestCard;
+        public Cards oldestCard;
     }
     public static class Deck
     {
@@ -44,7 +54,7 @@ namespace ConsoleApp1
             Stack<Card> card = new Stack<Card>();
             foreach (var suit in Enum.GetValues(typeof(Suit)))
             {
-                foreach (var oldcard in Enum.GetValues(typeof(OldestCard)))
+                foreach (var oldcard in Enum.GetValues(typeof(Cards)))
                 {
                     for (var i = 2; i <= 14; i++)
                     {
@@ -64,14 +74,14 @@ namespace ConsoleApp1
                 cards.Push(value);
             return new Stack<Card>(cards.OrderBy(x => rand.Next()));
         }
-        public static Stack<Card> CardsInHands(this Stack<Card> cards, Stack<Card> card)
+        public static Stack<Card> CardsInHands(this Stack<Card> cards, Stack<Card> cardinhand)
         {
             //Stack<Card> card = new Stack<Card>();
-           for (var i = 0; i < 2 && cards.Count > 0; i++)
-           {
-           card.Push(cards.Pop());
-           }
-           return card;
+            for (var i = 0; i < 2 && cards.Count > 0; i++)
+            {
+                cardinhand.Push(cards.Pop());
+            }
+            return cardinhand;
         }
 
         public static int SumCards(this Stack<Card> cards)
@@ -79,6 +89,24 @@ namespace ConsoleApp1
             int a = 0;
             a = cards.Sum(x => x.numbers);
             return a;
+        }
+
+        public static void TakeCard(this Stack<Card> cards, Stack<Card> cardinhand) //Тут звернути увагу
+        {
+            var sum = Deck.SumCards(cardinhand);
+            if (sum <= 21)
+            {
+                while (sum <= 21)
+                {
+                    cardinhand.Push(cards.Pop());
+                    sum = Deck.SumCards(cardinhand);
+                }
+            }
+            else
+            {
+                Console.WriteLine("U LOSE!!!!");
+            }
+            //return cardinhand;
         }
     }
 
@@ -99,8 +127,13 @@ namespace ConsoleApp1
             Console.WriteLine("CardInHand");
             hanCards.outputdesc();
             Deck.SumCards(deck);
-            Console.WriteLine(hanCards.Count);
+            // Console.WriteLine(hanCards.Count);
             //Console.WriteLine("Sum");
+            Console.WriteLine(Deck.SumCards(hanCards));
+            Console.WriteLine("TakeCard");
+            Deck.TakeCard(deck, hanCards);
+            hanCards.outputdesc();
+            Console.WriteLine(hanCards.Count);
             Console.WriteLine(Deck.SumCards(hanCards));
         }
     }
