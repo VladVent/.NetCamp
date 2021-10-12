@@ -64,14 +64,14 @@ namespace ConsoleApp1
                 cards.Push(value);
             return new Stack<Card>(cards.OrderBy(x => rand.Next()));
         }
-        public static Stack<Card> CardsInHands(this Stack<Card> cards)
+        public static Stack<Card> CardsInHands(this Stack<Card> cards, Stack<Card> card)
         {
-            Stack<Card> card = new Stack<Card>();
-            for (var i = 0; i < 2; i++)
-            {
-                card.Push(cards.Pop());
-            }
-            return card;
+            //Stack<Card> card = new Stack<Card>();
+           for (var i = 0; i < 2 && cards.Count > 0; i++)
+           {
+           card.Push(cards.Pop());
+           }
+           return card;
         }
 
         public static int SumCards(this Stack<Card> cards)
@@ -87,26 +87,29 @@ namespace ConsoleApp1
     {
         public static List<Player> players;
         public static Stack<Card> deck = Deck.CreateCards();
-
+        public static void Table()
+        {
+            var deck = Deck.CreateCards();
+            Stack<Card> hanCards = new Stack<Card>();
+            //deck.outputdesc();
+            Deck.ShuffleDeck(deck);
+            //Console.WriteLine("Shuffle");
+            //deck.outputdesc();
+            Deck.CardsInHands(deck, hanCards);
+            Console.WriteLine("CardInHand");
+            hanCards.outputdesc();
+            Deck.SumCards(deck);
+            Console.WriteLine(hanCards.Count);
+            //Console.WriteLine("Sum");
+            Console.WriteLine(Deck.SumCards(hanCards));
+        }
     }
 
     class Program
     {
         static void Main(string[] args)
         {
-            var deck = Deck.CreateCards();
-            //deck.outputdesc();
-            Deck.ShuffleDeck(deck);
-            //Console.WriteLine("Shuffle");
-            //deck.outputdesc();
-            Console.WriteLine(Deck.CardsInHands(deck));
-            Console.WriteLine("CardInHand");
-            //deck.outputdesc();
-            Deck.SumCards(deck);
-            //Console.WriteLine(deck.Count);
-            //Console.WriteLine("Sum");
-            Console.WriteLine(Deck.SumCards(deck));
-
+            TableSessions.Table();
             Console.ReadKey();
         }
     }
