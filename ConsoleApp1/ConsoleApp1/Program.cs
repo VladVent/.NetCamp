@@ -94,19 +94,22 @@ namespace ConsoleApp1
         public static void TakeCard(this Stack<Card> cards, Stack<Card> cardinhand) //Тут звернути увагу
         {
             var sum = Deck.SumCards(cardinhand);
-            if (sum <= 21)
+
+            while (sum <= 28)
             {
-                while (sum <= 21)
+                if (sum <= 21)
                 {
+
                     cardinhand.Push(cards.Pop());
                     sum = Deck.SumCards(cardinhand);
                 }
+                else
+                {
+                    Console.WriteLine("U Lost!!!!!");
+                    break;
+                }
             }
-            else
-            {
-                Console.WriteLine("U LOSE!!!!");
-            }
-            //return cardinhand;
+        //return cardinhand;
         }
     }
 
@@ -117,19 +120,14 @@ namespace ConsoleApp1
         public static Stack<Card> deck = Deck.CreateCards();
         public static void Table()
         {
-            var deck = Deck.CreateCards();
             Stack<Card> hanCards = new Stack<Card>();
-            //deck.outputdesc();
             Deck.ShuffleDeck(deck);
-            //Console.WriteLine("Shuffle");
-            //deck.outputdesc();
+            Console.WriteLine("Shuffle");
             Deck.CardsInHands(deck, hanCards);
             Console.WriteLine("CardInHand");
             hanCards.outputdesc();
             Deck.SumCards(deck);
-            // Console.WriteLine(hanCards.Count);
-            //Console.WriteLine("Sum");
-            Console.WriteLine(Deck.SumCards(hanCards));
+            Console.WriteLine($"Sum: {Deck.SumCards(hanCards)})");
             Console.WriteLine("TakeCard");
             Deck.TakeCard(deck, hanCards);
             hanCards.outputdesc();
