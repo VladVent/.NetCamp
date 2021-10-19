@@ -13,7 +13,14 @@ namespace ConsoleApp1.Extensions
         {
             foreach (Card c in cards)
             {
-                Console.WriteLine(c.numbers + c.oldestCard + " " + c.suit);
+                Console.WriteLine(c.oldestCard + " " + c.suit);
+            }
+        }
+        public static void Out(this Stack<Player> players)
+        {
+            foreach (Player c in players)
+            {
+                Console.WriteLine(c.Name);
             }
         }
     }

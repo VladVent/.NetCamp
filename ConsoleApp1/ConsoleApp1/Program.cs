@@ -20,19 +20,19 @@ namespace ConsoleApp1
     };
     public enum Cards
     {
-        Two = 2,
-        Tree = 3,
-        Four = 4,
-        Five = 5,
-        Six = 6,
-        Seven = 7,
-        Eight = 8,
-        Nine = 9,
-        Ten = 10,
-        Jack = 11,
-        Queen = 12,
-        King = 13,
-        Ace = 14
+        Two,
+        Tree,
+        Four,
+        Five,
+        Six,
+        Seven,
+        Eight,
+        Nine,
+        Ten,
+        Jack,
+        Queen,
+        King,
+        Ace 
     };
 
 
@@ -46,6 +46,48 @@ namespace ConsoleApp1
         public Suit suit;
         public int numbers;
         public Cards oldestCard;
+        public Card(Suit suit, Cards oldestCard)
+        {
+            this.suit = suit;
+            this.oldestCard = oldestCard;
+            switch (oldestCard)
+            {
+                case Cards.Two:
+                    numbers = 2;
+                    break;
+                case Cards.Tree:
+                    numbers = 3;
+                    break;
+                case Cards.Four:
+                    numbers = 4;
+                    break;
+                case Cards.Five:
+                    numbers = 5;
+                    break;
+                case Cards.Six:
+                    numbers = 6;
+                    break;
+                case Cards.Seven:
+                    numbers = 7;
+                    break;
+                case Cards.Eight:
+                    numbers = 8;
+                    break;
+                case Cards.Nine:
+                    numbers = 9;
+                    break;
+                case Cards.Ten:
+                case Cards.Jack:
+                case Cards.Queen:
+                case Cards.King:
+                    numbers = 10;
+                    break;
+                case Cards.Ace:
+                    numbers = 11;
+                    break;
+            }
+
+        }
     }
     public static class Deck
     {
@@ -56,11 +98,7 @@ namespace ConsoleApp1
             {
                 foreach (var oldcard in Enum.GetValues(typeof(Cards)))
                 {
-                    for (var i = 2; i <= 14; i++)
-                    {
-                        card.Push(new Card { numbers = i, suit = (Suit)suit });
-                    }
-                    break;
+                    card.Push(new Card((Suit) suit, (Cards) oldcard));
                 }
             }
             return card;
@@ -93,46 +131,40 @@ namespace ConsoleApp1
 
         public static void TakeCard(this Stack<Card> cards, Stack<Card> cardinhand) //Тут звернути увагу
         {
-            var sum = Deck.SumCards(cardinhand);
-
-            while (sum <= 28)
-            {
-                if (sum <= 21)
-                {
-
-                    cardinhand.Push(cards.Pop());
-                    sum = Deck.SumCards(cardinhand);
-                }
-                else
-                {
-                    Console.WriteLine("U Lost!!!!!");
-                    break;
-                }
-            }
-        //return cardinhand;
+            cardinhand.Push(cards.Pop());
         }
     }
 
 
     public static class TableSessions
     {
-        public static List<Player> players;
+        public static Stack<Player> players = new Stack<Player>();
         public static Stack<Card> deck = Deck.CreateCards();
         public static void Table()
         {
             Stack<Card> hanCards = new Stack<Card>();
+            //deck.outputdesc();
             Deck.ShuffleDeck(deck);
             Console.WriteLine("Shuffle");
             Deck.CardsInHands(deck, hanCards);
             Console.WriteLine("CardInHand");
             hanCards.outputdesc();
             Deck.SumCards(deck);
-            Console.WriteLine($"Sum: {Deck.SumCards(hanCards)})");
+            Console.WriteLine($"Sum: {Deck.SumCards(hanCards)}");
             Console.WriteLine("TakeCard");
             Deck.TakeCard(deck, hanCards);
             hanCards.outputdesc();
             Console.WriteLine(hanCards.Count);
-            Console.WriteLine(Deck.SumCards(hanCards));
+            Console.WriteLine($"Sum: {Deck.SumCards(hanCards)}");
+        }
+
+        public static void Turn()
+        {
+
+        }
+        public static void Join(Player player)
+        {
+            players.Push(player);
         }
     }
 
@@ -141,6 +173,11 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             TableSessions.Table();
+            Player p1 = new Player() {Name = "TempName"};
+            TableSessions.Join(p1);
+            Player p2 = new Player() {Name = "Eve" };
+            TableSessions.Join(p2);
+            TableSessions.players.Out();
             Console.ReadKey();
         }
     }
