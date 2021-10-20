@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace ConsoleApp1
@@ -133,8 +134,8 @@ namespace ConsoleApp1
 
     public class PlayerCards
     {
-        public Player player;
-        public Stack<Cards> HandCardsStack;
+        public Stack<Player> player;
+        public Stack<Card> HandCardsStack;
     }
 
 
@@ -145,12 +146,14 @@ namespace ConsoleApp1
         private static Stack<Card> handCards = new Stack<Card>();
         public static Stack<Player> players = new Stack<Player>();
         public static Stack<Card> deck = Deck.CreateCards();
+        public static Stack<PlayerCards> PC = new Stack<PlayerCards>();
         public static void Table()
         {
             TableSessions.MessageDeckShuffle();
             TableSessions.MessageDeckCount();
+            TableSessions.PlayersCard(players, handCards);
             TableSessions.MessageCardinHand();
-            
+
         }
         public static void Turn()
         {
@@ -180,6 +183,7 @@ namespace ConsoleApp1
         {
             Notify += (string a) =>
             {
+                players.Out();
                 handCards.outputdesc();
             };
             Deck.CardsInHands(deck, handCards);
@@ -193,12 +197,10 @@ namespace ConsoleApp1
             };
             Notify?.Invoke("Count Card");
         }
-        public static Stack<PlayerCards> PlayersCard(Player player)
+        public static Stack<PlayerCards> PlayersCard(this Stack<Player> play, Stack<Card> cardin)
         {
-            Stack<PlayerCards> PC = new Stack<PlayerCards>();
-            PC.Push(new PlayerCards());
+            PC.Push(new PlayerCards{player = play, HandCardsStack = deck.CardsInHands(cardin)});
             return PC;
-
         }
     }
 
@@ -211,10 +213,8 @@ namespace ConsoleApp1
         {
             Player p1 = new Player() {Name = "TempName"};
             TableSessions.Join(p1);
-            TableSessions.PlayersCard(p1);
             Player p2 = new Player() {Name = "Eve" };
             TableSessions.Join(p2);
-            TableSessions.PlayersCard(p2);
             TableSessions.Table();
             Console.ReadKey();
         }

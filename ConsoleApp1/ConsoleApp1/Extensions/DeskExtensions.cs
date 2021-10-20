@@ -16,6 +16,7 @@ namespace ConsoleApp1.Extensions
                 Console.WriteLine(c.oldestCard + " " + c.suit);
             }
         }
+
         public static void Out(this Stack<Player> players)
         {
             foreach (Player c in players)
@@ -23,15 +24,12 @@ namespace ConsoleApp1.Extensions
                 Console.WriteLine(c.Name);
             }
         }
-        public static void OutPC(this Stack<Player> players, Stack<Card> cards)
+
+        public static void OutPC(this Stack<PlayerCards> pc)
         {
-            foreach (Player p in players)
+            foreach (var VARIABLE in pc)
             {
-                foreach (var c in cards)
-                {
-                Console.WriteLine(p.Name);
-                Console.WriteLine(c.oldestCard + " " + c.suit);
-                }
+                Console.WriteLine(VARIABLE.player + "  " + VARIABLE.HandCardsStack);
             }
         }
     }
