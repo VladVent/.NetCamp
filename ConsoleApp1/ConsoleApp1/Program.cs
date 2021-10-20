@@ -34,7 +34,7 @@ namespace ConsoleApp1
         King,
         Ace 
     };
-
+   
 
 
     public class Player
@@ -121,15 +121,13 @@ namespace ConsoleApp1
             }
             return cardinhand;
         }
-
         public static int SumCards(this Stack<Card> cards)
         {
             int a = 0;
             a = cards.Sum(x => x.numbers);
             return a;
         }
-
-        public static void TakeCard(this Stack<Card> cards, Stack<Card> cardinhand) //Тут звернути увагу
+        public static void TakeCard(this Stack<Card> cards, Stack<Card> cardinhand)
         {
             cardinhand.Push(cards.Pop());
         }
@@ -138,26 +136,17 @@ namespace ConsoleApp1
 
     public static class TableSessions
     {
+        public delegate void GameCatcher(string message);
+        public static event GameCatcher Notify;
+        private static Stack<Card> handCards = new Stack<Card>();
         public static Stack<Player> players = new Stack<Player>();
         public static Stack<Card> deck = Deck.CreateCards();
         public static void Table()
         {
-            Stack<Card> hanCards = new Stack<Card>();
-            //deck.outputdesc();
-            Deck.ShuffleDeck(deck);
-            Console.WriteLine("Shuffle");
-            Deck.CardsInHands(deck, hanCards);
-            Console.WriteLine("CardInHand");
-            hanCards.outputdesc();
-            Deck.SumCards(deck);
-            Console.WriteLine($"Sum: {Deck.SumCards(hanCards)}");
-            Console.WriteLine("TakeCard");
-            Deck.TakeCard(deck, hanCards);
-            hanCards.outputdesc();
-            Console.WriteLine(hanCards.Count);
-            Console.WriteLine($"Sum: {Deck.SumCards(hanCards)}");
+            TableSessions.DeckShuffle();
+            TableSessions.DeckCount();
+            TableSessions.CardinHand();
         }
-
         public static void Turn()
         {
 
@@ -166,18 +155,59 @@ namespace ConsoleApp1
         {
             players.Push(player);
         }
+        public static void Winner()
+        {
+
+        }
+        public static void ResetGame()
+        {
+        }
+        public static void PlayersCard()
+        {
+
+        }
+        public static void DeckShuffle()
+        {
+            Notify += (string a) =>
+            {
+                Console.WriteLine(a);
+            };
+            Deck.ShuffleDeck(deck);
+            Notify?.Invoke("Deck is shuffle!");
+        }
+        public static void CardinHand()
+        {
+            Notify += (string a) =>
+            {
+                handCards.outputdesc();
+            };
+            Deck.CardsInHands(deck, handCards);
+            Notify?.Invoke("Ur Card");
+        }
+        public static void DeckCount()
+        {
+            Notify += (string a) =>
+            {
+                Console.WriteLine($"Count : {deck.Count()}");
+            };
+            Notify?.Invoke("Count Card");
+        }
+
     }
+
+   
+
 
     class Program
     {
         static void Main(string[] args)
         {
             TableSessions.Table();
-            Player p1 = new Player() {Name = "TempName"};
-            TableSessions.Join(p1);
-            Player p2 = new Player() {Name = "Eve" };
-            TableSessions.Join(p2);
-            TableSessions.players.Out();
+            //Player p1 = new Player() {Name = "TempName"};
+            //TableSessions.Join(p1);
+            //Player p2 = new Player() {Name = "Eve" };
+            //TableSessions.Join(p2);
+            //TableSessions.players.Out();
             Console.ReadKey();
         }
     }
