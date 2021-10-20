@@ -150,7 +150,7 @@ namespace ConsoleApp1
             TableSessions.MessageDeckShuffle();
             TableSessions.MessageDeckCount();
             TableSessions.MessageCardinHand();
-            TableSessions.PlayersCard(players, handCards);
+          //  TableSessions.PlayersCard(players, handCards);
         }
         public static void Turn()
         {
@@ -198,7 +198,7 @@ namespace ConsoleApp1
             Dictionary<Stack<Player>, Stack<Card>> PC = new Dictionary<Stack<Player>, Stack<Card>>();
             foreach (var kvp in PC)
             {
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+               
             }
             return PC;
 
