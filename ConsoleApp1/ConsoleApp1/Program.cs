@@ -1,12 +1,7 @@
 ﻿using ConsoleApp1.Extensions;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace ConsoleApp1
@@ -118,7 +113,6 @@ namespace ConsoleApp1
         }
         public static Stack<Card> CardsInHands(this Stack<Card> cards, Stack<Card> cardinhand)
         {
-            //Stack<Card> card = new Stack<Card>();
             for (var i = 0; i < 2 && cards.Count > 0; i++)
             {
                 cardinhand.Push(cards.Pop());
@@ -137,6 +131,12 @@ namespace ConsoleApp1
         }
     }
 
+    public class PlayerCards
+    {
+        public Player player;
+        public Stack<Cards> HandCardsStack;
+    }
+
 
     public static class TableSessions
     {
@@ -150,7 +150,7 @@ namespace ConsoleApp1
             TableSessions.MessageDeckShuffle();
             TableSessions.MessageDeckCount();
             TableSessions.MessageCardinHand();
-          //  TableSessions.PlayersCard(players, handCards);
+            
         }
         public static void Turn()
         {
@@ -164,7 +164,7 @@ namespace ConsoleApp1
         {
 
         }
-        public static void ResetGame()
+        public static void ResetTable()
         {
         }
         public static void MessageDeckShuffle()
@@ -193,13 +193,10 @@ namespace ConsoleApp1
             };
             Notify?.Invoke("Count Card");
         }
-        public static Dictionary<Stack<Player>, Stack<Card>> PlayersCard(this Stack<Player> players, Stack<Card> handCard)
+        public static Stack<PlayerCards> PlayersCard(Player player)
         {
-            Dictionary<Stack<Player>, Stack<Card>> PC = new Dictionary<Stack<Player>, Stack<Card>>();
-            foreach (var kvp in PC)
-            {
-               
-            }
+            Stack<PlayerCards> PC = new Stack<PlayerCards>();
+            PC.Push(new PlayerCards());
             return PC;
 
         }
@@ -214,8 +211,10 @@ namespace ConsoleApp1
         {
             Player p1 = new Player() {Name = "TempName"};
             TableSessions.Join(p1);
+            TableSessions.PlayersCard(p1);
             Player p2 = new Player() {Name = "Eve" };
             TableSessions.Join(p2);
+            TableSessions.PlayersCard(p2);
             TableSessions.Table();
             Console.ReadKey();
         }
