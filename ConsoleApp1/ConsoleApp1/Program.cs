@@ -40,6 +40,10 @@ namespace ConsoleApp1
     public class Player
     {
         public string Name { get; set; }
+
+        public Player()
+        {
+        }
     }
     public class Card
     {
@@ -143,9 +147,10 @@ namespace ConsoleApp1
         public static Stack<Card> deck = Deck.CreateCards();
         public static void Table()
         {
-            TableSessions.DeckShuffle();
-            TableSessions.DeckCount();
-            TableSessions.CardinHand();
+            TableSessions.MessageDeckShuffle();
+            TableSessions.MessageDeckCount();
+            TableSessions.MessageCardinHand();
+            TableSessions.PlayersCard(players, handCards);
         }
         public static void Turn()
         {
@@ -162,11 +167,7 @@ namespace ConsoleApp1
         public static void ResetGame()
         {
         }
-        public static void PlayersCard()
-        {
-
-        }
-        public static void DeckShuffle()
+        public static void MessageDeckShuffle()
         {
             Notify += (string a) =>
             {
@@ -175,7 +176,7 @@ namespace ConsoleApp1
             Deck.ShuffleDeck(deck);
             Notify?.Invoke("Deck is shuffle!");
         }
-        public static void CardinHand()
+        public static void MessageCardinHand()
         {
             Notify += (string a) =>
             {
@@ -184,7 +185,7 @@ namespace ConsoleApp1
             Deck.CardsInHands(deck, handCards);
             Notify?.Invoke("Ur Card");
         }
-        public static void DeckCount()
+        public static void MessageDeckCount()
         {
             Notify += (string a) =>
             {
@@ -192,7 +193,16 @@ namespace ConsoleApp1
             };
             Notify?.Invoke("Count Card");
         }
+        public static Dictionary<Stack<Player>, Stack<Card>> PlayersCard(this Stack<Player> players, Stack<Card> handCard)
+        {
+            Dictionary<Stack<Player>, Stack<Card>> PC = new Dictionary<Stack<Player>, Stack<Card>>();
+            foreach (var kvp in PC)
+            {
+                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+            }
+            return PC;
 
+        }
     }
 
    
@@ -202,12 +212,11 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            Player p1 = new Player() {Name = "TempName"};
+            TableSessions.Join(p1);
+            Player p2 = new Player() {Name = "Eve" };
+            TableSessions.Join(p2);
             TableSessions.Table();
-            //Player p1 = new Player() {Name = "TempName"};
-            //TableSessions.Join(p1);
-            //Player p2 = new Player() {Name = "Eve" };
-            //TableSessions.Join(p2);
-            //TableSessions.players.Out();
             Console.ReadKey();
         }
     }

@@ -23,5 +23,16 @@ namespace ConsoleApp1.Extensions
                 Console.WriteLine(c.Name);
             }
         }
+        public static void OutPC(this Stack<Player> players, Stack<Card> cards)
+        {
+            foreach (Player p in players)
+            {
+                foreach (var c in cards)
+                {
+                Console.WriteLine(p.Name);
+                Console.WriteLine(c.oldestCard + " " + c.suit);
+                }
+            }
+        }
     }
 }
