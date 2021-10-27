@@ -7,7 +7,7 @@ namespace ConsoleApp1
 	{
 		public string Name { get; set; }
 		public Stack<Card> CardsInHands = new Stack<Card>();
-
+        public int Point;
 		public bool Exact21Point() => PointMark() == 21;
 		public bool BeyondPointMark() => PointMark() > 21;
 
@@ -22,15 +22,17 @@ namespace ConsoleApp1
 			if (BeyondPointMark())
 				GameOver();
 
-			if (Exact21Point())
-				YouAreWinner();
-		}
+            if (Exact21Point())
+                //WinPoints();
+                CleanWin();
 
+        }
 
-		public string YouAreWinner()=> "GG WP!";
       
+       public int WinPoints() => Point += 1;
 
-		public string GameOver() => "Loser!";
+       public string CleanWin() => "GG EZ!";
+       public string GameOver() => "Loser!";
       
 	}
 }

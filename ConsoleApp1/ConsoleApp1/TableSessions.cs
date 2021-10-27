@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 
 namespace ConsoleApp1
@@ -36,10 +37,25 @@ namespace ConsoleApp1
 			player.GameRule();
 		}
 
+        internal void NextTurn()
+        {
+            throw new NotImplementedException();
+        }
 
         public void FinishDobora(Player p2)
         {
           
+        }
+
+        public void PlayerPoint(Player player)
+        {
+            player.PointMark();
+            player.GameRule();
+        }
+
+        public void WinPoints(Player player)
+        {
+            player.WinPoints();
         }
     }
 }
