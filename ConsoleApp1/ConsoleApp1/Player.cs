@@ -7,16 +7,15 @@ namespace ConsoleApp1
     {
         public string Name { get; set; }
         public Stack<Card> CardsInHands = new Stack<Card>();
-        public int Point;
+        public int SumPoint;
         public bool Exact21Point() => PointMark() == 21;
         public bool BeyondPointMark() => PointMark() > 21;
-        public bool JustRount() => PointMark() <= 21;
+        public bool RountCheck() => PointMark() <= 21;
 
         public int PointMark()
         {
-            return CardsInHands.Sum(x => x.Power);
+            return SumPoint =  CardsInHands.Sum(x => x.Power);
         }
-
 
         public void GameRule()
         {
@@ -24,12 +23,11 @@ namespace ConsoleApp1
                 GameOver();
             if (Exact21Point())
                 CleanWin();
+            if (RountCheck())
+                Win();
 
         }
-
-
-        public int WinPoints() => Point += 1;
-
+        public string Win() => $"{Name} Win!";
         public string CleanWin() => "GG EZ!";
         public string GameOver() => "Loser!";
 

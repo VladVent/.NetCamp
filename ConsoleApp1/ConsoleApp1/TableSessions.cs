@@ -8,7 +8,7 @@ namespace ConsoleApp1
     {
         public Stack<Card> deck = Deck.CreateCards();
         public List<Player> players = new List<Player>();
-
+        public int Point { get; set; }
 
         //????
         public void GetACard(Player player)
@@ -28,8 +28,6 @@ namespace ConsoleApp1
 
         private string WarningMassage() => "DeckIsEmpty";
 
-
-
         public void Join(Player player)
         {
             players.Add(player);
@@ -38,25 +36,30 @@ namespace ConsoleApp1
             player.GameRule();
         }
 
-        internal void NextTurn()
+        public void CheckRount()
         {
-            throw new NotImplementedException();
+            foreach (var p in players)
+            {
+                if (p.PointMark()<=21)
+                {
+                   p.Win();
+                   WinPoints();
+                }
+                else
+                {
+                    p.GameOver();
+                }
+            }
+            
         }
 
-        public void FinishDobora(Player p2)
-        {
-            //????????????????????????
-        }
+        public Stack<Card> ShowCard(Player player) => player.CardsInHands;
+       
 
-        public void PlayerPoint(Player player)
-        {
-            player.PointMark();
-            player.GameRule();
-        }
+    
 
-        public void WinPoints(Player player)
-        {
-            player.WinPoints();
-        }
+        public int WinPoints() => Point += 1;
+
+        public bool DeckIsEmpty() => deck.Count >= 1;
     }
 }

@@ -8,12 +8,20 @@ namespace ConsoleApp1
     {
         public static void Dump(Stack<Card> cards)
         {
-            foreach (var card in cards)
+            foreach (var c in cards)
             {
-                Console.WriteLine(card);
+                Console.WriteLine($"{c.Name} {c.CardSuit} {c.Power}");
             }
         }
+        public static void PName(Player players)
+        {
+            Console.WriteLine(players.Name);
+        }
 
+        public static void PPower(Player players)
+        {
+            Console.WriteLine(players.SumPoint);
+        }
 
         static void Main(string[] args)
         {
@@ -22,20 +30,18 @@ namespace ConsoleApp1
 
             var session = new TableSessions();
 
-            session.Join(p1);
-            session.Join(p2);
 
-            session.GetACard(p1);
+            while (session.DeckIsEmpty())
+            {
 
-            session.PlayerPoint(p1);
-
-            session.FinishDobora(p2);
-
+                session.Join(p1);
+                session.Join(p2);
+                session.ShowCard(p2);
+                PName(p1);
             Dump(p1.CardsInHands);
-
-            // session.NextTurn();
-
-            session.WinPoints(p1);
+            PPower(p1);
+            session.CheckRount();
+            }
             Console.ReadKey();
         }
     }
