@@ -31,23 +31,24 @@ namespace ConsoleApp1
             var session = new TableSessions();
 
 
-            while (session.DeckIsEmpty())
-            {
-
                 session.Join(p1);
                 session.Join(p2);
-
+            while (session.DeckIsEmpty())
+            {
+                session.DealCard(p1);
+                session.DealCard(p2);
 
                 session.GetACard(p2);
+
+                session.CheckRound();
                 PName(p1);
             Dump(p1.CardsInHands);
             PPower(p1);
             PName(p2);
             Dump(p2.CardsInHands);
                 PPower(p2);
-                session.CheckRount();
             }
-                session.WinPoints();
+               session.WinPoints();
 
             Console.ReadKey();
         }

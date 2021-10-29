@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Linq;
 
 namespace ConsoleApp1
 {
@@ -10,9 +11,19 @@ namespace ConsoleApp1
         public Stack<Card> deck = Deck.CreateCards().ShuffleDeck();
         public List<Player> players = new List<Player>();
         public int Point { get; set; }
-
         public TableSessions() => this.gameRuleState = new GameRule();
             
+        public void Join(Player player)
+        {
+            players.Add(player);
+        }
+
+        public void DealCard(Player player)
+        {
+            player.CardsInHands = Deck.DealTheCards(deck);
+            player.PointMark();
+            //GameRule();
+        }
         public void GetACard(Player player)
         {
             if (deck.Count >= 1)
@@ -23,25 +34,35 @@ namespace ConsoleApp1
             {
                 WarningMassage();
             }
-            player.GameRule();
+            player.PointMark();
         }
 
         private string WarningMassage() => "DeckIsEmpty";
 
-        public void Join(Player player)
-        {
-           players.Add(player);
-            player.CardsInHands = Deck.DealTheCards(deck);
-            player.GameRule();
-        }
 
-        public int CheckRount()
+        public void GameRule()
         {
             foreach (var p in players)
             {
-                if (p.PointMark()<=21)
+                if (p.SumPoint > 21)
+                    gameRuleState.GameOver();
+
+                if (p.SumPoint == 21)
+                    gameRuleState.CleanWin();
+                if (players.Max(t => t.SumPoint) <  p.PointMark() )
                 {
-                   gameRuleState.Win();
+                    gameRuleState.Win();
+                }
+            }
+        }
+
+        public int CheckRound()
+        {
+            foreach (var p in players)
+            {
+                if (p.SumPoint == players.Max(t=>t.SumPoint) )
+                {
+                   GameRule();
                    WinPoints();
                 }
                 else
@@ -49,9 +70,7 @@ namespace ConsoleApp1
                    gameRuleState.GameOver();
                 }
             }
-
             return Point;
-
         }
 
         public int WinPoints() => Point += 1;
