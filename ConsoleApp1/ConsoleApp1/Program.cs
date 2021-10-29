@@ -40,13 +40,13 @@ namespace ConsoleApp1
 
                 session.GetACard(p2);
 
-                session.CheckRound();
                 PName(p1);
             Dump(p1.CardsInHands);
             PPower(p1);
             PName(p2);
             Dump(p2.CardsInHands);
                 PPower(p2);
+                session.CheckRound();
             }
                session.WinPoints();
 

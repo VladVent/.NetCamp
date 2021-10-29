@@ -12,7 +12,7 @@ namespace ConsoleApp1
         public List<Player> players = new List<Player>();
         public int Point { get; set; }
         public TableSessions() => this.gameRuleState = new GameRule();
-            
+
         public void Join(Player player)
         {
             players.Add(player);
@@ -44,14 +44,20 @@ namespace ConsoleApp1
         {
             foreach (var p in players)
             {
-                if (p.SumPoint > 21)
-                    gameRuleState.GameOver();
+
 
                 if (p.SumPoint == 21)
                     gameRuleState.CleanWin();
-                if (players.Max(t => t.SumPoint) <  p.PointMark() )
+                else
                 {
-                    gameRuleState.Win();
+                    if (players.Max(t => t.SumPoint) < 21 && players.Max(t => t.SumPoint) == p.SumPoint || players.Max(t => t.PointMark()) > 21 && players.Max(t => t.SumPoint) > p.SumPoint)/// Майже працює
+                    {
+                        gameRuleState.Win();
+                    }
+                    else
+                    {
+                        gameRuleState.GameOver();
+                    }
                 }
             }
         }
@@ -60,14 +66,10 @@ namespace ConsoleApp1
         {
             foreach (var p in players)
             {
-                if (p.SumPoint == players.Max(t=>t.SumPoint) )
+                if (p.SumPoint == players.Max(t => t.SumPoint))
                 {
-                   GameRule();
-                   WinPoints();
-                }
-                else
-                {
-                   gameRuleState.GameOver();
+                    GameRule();
+                    WinPoints();
                 }
             }
             return Point;
