@@ -10,7 +10,7 @@ namespace ConsoleApp1
         public int SumPoint;
         public bool Exact21Point() => PointMark() == 21;
         public bool BeyondPointMark() => PointMark() > 21;
-        public bool RountCheck() => PointMark() <= 21;
+        public bool RountCheck() => PointMark() < 21;
 
         public int PointMark()
         {

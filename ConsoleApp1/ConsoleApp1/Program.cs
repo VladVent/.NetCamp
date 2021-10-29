@@ -36,12 +36,16 @@ namespace ConsoleApp1
 
                 session.Join(p1);
                 session.Join(p2);
-                session.ShowCard(p2);
                 PName(p1);
             Dump(p1.CardsInHands);
             PPower(p1);
-            session.CheckRount();
+            PName(p2);
+            Dump(p2.CardsInHands);
+                PPower(p2);
+                session.CheckRount();
             }
+                session.WinPoints();
+
             Console.ReadKey();
         }
     }

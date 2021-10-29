@@ -6,14 +6,12 @@ namespace ConsoleApp1
 {
     public class TableSessions
     {
-        public Stack<Card> deck = Deck.CreateCards();
+        public Stack<Card> deck = Deck.CreateCards().ShuffleDeck();
         public List<Player> players = new List<Player>();
         public int Point { get; set; }
 
-        //????
         public void GetACard(Player player)
         {
-
             if (deck.Count >= 1)
             {
                 player.CardsInHands.Push(Deck.GetACard(deck));
@@ -31,12 +29,11 @@ namespace ConsoleApp1
         public void Join(Player player)
         {
             players.Add(player);
-            Deck.ShuffleDeck(deck);
             player.CardsInHands = Deck.DealTheCards(deck);
             player.GameRule();
         }
 
-        public void CheckRount()
+        public int CheckRount()
         {
             foreach (var p in players)
             {
@@ -50,14 +47,13 @@ namespace ConsoleApp1
                     p.GameOver();
                 }
             }
-            
+
+            return Point;
+
         }
 
-        public Stack<Card> ShowCard(Player player) => player.CardsInHands;
-       
-
-    
-
+       // public Stack<Card> ShowCard(Player player) => player.CardsInHands;
+        
         public int WinPoints() => Point += 1;
 
         public bool DeckIsEmpty() => deck.Count >= 1;
