@@ -15,7 +15,7 @@ namespace ConsoleApp1
         public bool BeyondPointMark() => PointMark() > 21;
         public bool RountCheck() => PointMark() < 21;
 
-        public Player() => this.gameRuleState = new GameCleanWin();
+        public Player() => this.gameRuleState = new GameRule();
     
         public int PointMark()
         {

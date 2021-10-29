@@ -11,7 +11,7 @@ namespace ConsoleApp1
         public List<Player> players = new List<Player>();
         public int Point { get; set; }
 
-        public TableSessions() => this.gameRuleState = new GameCleanWin();
+        public TableSessions() => this.gameRuleState = new GameRule();
             
         public void GetACard(Player player)
         {

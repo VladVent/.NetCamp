@@ -2,7 +2,7 @@
 
 namespace ConsoleApp1
 {
-    public class GameCleanWin: IGameRuleState
+    public class GameRule: IGameRuleState
     {
         public void CleanWin()
         {
