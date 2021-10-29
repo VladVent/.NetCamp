@@ -46,6 +46,8 @@
     <Compile Include="Card.cs" />
     <Compile Include="CardName.cs" />
     <Compile Include="Deck.cs" />
+    <Compile Include="GameCleanWin.cs" />
+    <Compile Include="IGameRuleState.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

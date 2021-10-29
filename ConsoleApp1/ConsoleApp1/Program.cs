@@ -25,9 +25,9 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
-            var p1 = new Player { Name = "TempName" };
+            var p1 = new Player { Name = "TempName",};
             var p2 = new Player { Name = "TempName2" };
-
+            
             var session = new TableSessions();
 
 
@@ -36,6 +36,9 @@ namespace ConsoleApp1
 
                 session.Join(p1);
                 session.Join(p2);
+
+
+                session.GetACard(p2);
                 PName(p1);
             Dump(p1.CardsInHands);
             PPower(p1);

@@ -21,14 +21,13 @@ namespace ConsoleApp1
                 WarningMassage();
             }
             player.GameRule();
-
         }
 
         private string WarningMassage() => "DeckIsEmpty";
 
         public void Join(Player player)
         {
-            players.Add(player);
+           players.Add(player);
             player.CardsInHands = Deck.DealTheCards(deck);
             player.GameRule();
         }
@@ -39,12 +38,12 @@ namespace ConsoleApp1
             {
                 if (p.PointMark()<=21)
                 {
-                   p.Win();
+                   p.GameRule();
                    WinPoints();
                 }
                 else
                 {
-                    p.GameOver();
+                    p.GameRule();
                 }
             }
 
@@ -52,8 +51,6 @@ namespace ConsoleApp1
 
         }
 
-       // public Stack<Card> ShowCard(Player player) => player.CardsInHands;
-        
         public int WinPoints() => Point += 1;
 
         public bool DeckIsEmpty() => deck.Count >= 1;
