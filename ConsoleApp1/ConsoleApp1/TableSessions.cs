@@ -6,10 +6,13 @@ namespace ConsoleApp1
 {
     public class TableSessions
     {
+        private IGameRuleState gameRuleState;
         public Stack<Card> deck = Deck.CreateCards().ShuffleDeck();
         public List<Player> players = new List<Player>();
         public int Point { get; set; }
 
+        public TableSessions() => this.gameRuleState = new GameCleanWin();
+            
         public void GetACard(Player player)
         {
             if (deck.Count >= 1)
@@ -38,12 +41,12 @@ namespace ConsoleApp1
             {
                 if (p.PointMark()<=21)
                 {
-                   p.GameRule();
+                   gameRuleState.Win();
                    WinPoints();
                 }
                 else
                 {
-                    p.GameRule();
+                   gameRuleState.GameOver();
                 }
             }
 
