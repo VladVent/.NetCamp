@@ -10,7 +10,8 @@ namespace ConsoleApp1
         private IGameRuleState gameRuleState;
         public Stack<Card> deck = Deck.CreateCards().ShuffleDeck();
         public List<Player> players = new List<Player>();
-        public int Point { get; set; }
+        public int Point;
+
         public TableSessions() => this.gameRuleState = new GameRule();
 
         public void Join(Player player)
@@ -40,43 +41,50 @@ namespace ConsoleApp1
         private string WarningMassage() => "DeckIsEmpty";
 
 
-        public void GameRule()
+        public void GameRules()
         {
+            //var player = players.OrderBy(x => x.SumPoint > 21 ? 0: x.SumPoint).LastOrDefault();
+
+            //if (player.SumPoint != 0)
+            //    gameRuleState.Win();
+
+            var MaxPoint = players.Max(t => t.SumPoint);
             foreach (var p in players)
             {
+                var _sumpoint = p.SumPoint;
 
-
-                if (p.SumPoint == 21)
+                if (_sumpoint == 21)
+                {
                     gameRuleState.CleanWin();
+                }
                 else
                 {
-                    if (players.Max(t => t.SumPoint) < 21 && players.Max(t => t.SumPoint) == p.SumPoint || players.Max(t => t.PointMark()) > 21 && players.Max(t => t.SumPoint) > p.SumPoint)/// Майже працює
+                    if (MaxPoint < 21 && MaxPoint == _sumpoint || MaxPoint > 21 && MaxPoint > _sumpoint)
                     {
                         gameRuleState.Win();
+                        Point = WinPoints() + 1;
                     }
                     else
                     {
                         gameRuleState.GameOver();
+                        Point = WinPoints();
                     }
                 }
             }
         }
 
-        public int CheckRound()
+        public void CheckRound()
         {
             foreach (var p in players)
             {
-                if (p.SumPoint == players.Max(t => t.SumPoint))
-                {
-                    GameRule();
-                    WinPoints();
-                }
+                GameRules();
+                Console.WriteLine($"{p.Name}: {Point}");
             }
-            return Point;
         }
 
-        public int WinPoints() => Point += 1;
 
+        public int WinPoints() => Point = 0;
+        
         public bool DeckIsEmpty() => deck.Count >= 1;
     }
 }

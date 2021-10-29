@@ -38,18 +38,16 @@ namespace ConsoleApp1
                 session.DealCard(p1);
                 session.DealCard(p2);
 
-                session.GetACard(p2);
+               // session.GetACard(p2);
 
                 PName(p1);
             Dump(p1.CardsInHands);
             PPower(p1);
             PName(p2);
             Dump(p2.CardsInHands);
-                PPower(p2);
-                session.CheckRound();
+            PPower(p2);
+            session.CheckRound();
             }
-               session.WinPoints();
-
             Console.ReadKey();
         }
     }
