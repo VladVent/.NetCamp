@@ -5,5 +5,6 @@
         void CleanWin();
         void GameOver();
         void Win();
+        void Draw();
     }
 }

@@ -49,37 +49,41 @@ namespace ConsoleApp1
             //    gameRuleState.Win();
 
             var MaxPoint = players.Max(t => t.SumPoint);
+            var MinPoint = players.Min(t => t.SumPoint);
             foreach (var p in players)
             {
                 var _sumpoint = p.SumPoint;
-
                 if (_sumpoint == 21)
                 {
                     gameRuleState.CleanWin();
+                    break;
                 }
                 else
                 {
-                    if (MaxPoint < 21 && MaxPoint == _sumpoint || MaxPoint > 21 && MaxPoint > _sumpoint)
+                    if (MaxPoint < 21 && _sumpoint.Equals(MaxPoint) || MaxPoint > 21 && MaxPoint > _sumpoint)
                     {
+                        if (MinPoint.Equals(MaxPoint))
+                        {
+                            gameRuleState.Draw();
+                            break;
+                        }
+                        else
+                        {
                         gameRuleState.Win();
-                        Point = WinPoints() + 1;
+                        }
                     }
                     else
                     {
                         gameRuleState.GameOver();
-                        Point = WinPoints();
                     }
-                }
+                } //костиль Не впевнений чи зможу це спростити.
             }
         }
 
         public void CheckRound()
         {
-            foreach (var p in players)
-            {
-                GameRules();
-                Console.WriteLine($"{p.Name}: {Point}");
-            }
+            GameRules();
+              //  Console.WriteLine($"{p.Name}: {Point}");
         }
 
 

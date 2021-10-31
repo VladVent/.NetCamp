@@ -19,5 +19,11 @@ namespace ConsoleApp1
             Console.WriteLine($"Win!");
         }
 
+        public void Draw()
+
+        {
+            Console.WriteLine($"Draw");
+        }
+
     }
 }
