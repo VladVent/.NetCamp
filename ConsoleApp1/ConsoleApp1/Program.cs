@@ -30,15 +30,16 @@ namespace ConsoleApp1
             
             var session = new TableSessions();
 
-
                 session.Join(p1);
+                Console.WriteLine($"Hello {p1.Name}.");
                 session.Join(p2);
+                Console.WriteLine($"Hello {p2.Name}.");
             while (session.DeckIsEmpty())
             {
                 session.DealCard(p1);
                 session.DealCard(p2);
 
-               // session.GetACard(p2);
+                session.GetACard(p2); //Не знімати карти. Вийде нескінченний цикл гри самої з собою
 
                 PName(p1);
             Dump(p1.CardsInHands);

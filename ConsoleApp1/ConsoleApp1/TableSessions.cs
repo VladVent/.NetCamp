@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace ConsoleApp1
 {
@@ -10,7 +11,6 @@ namespace ConsoleApp1
         private IGameRuleState gameRuleState;
         public Stack<Card> deck = Deck.CreateCards().ShuffleDeck();
         public List<Player> players = new List<Player>();
-        public int Point;
 
         public TableSessions() => this.gameRuleState = new GameRule();
 
@@ -23,23 +23,12 @@ namespace ConsoleApp1
         {
             player.CardsInHands = Deck.DealTheCards(deck);
             player.PointMark();
-            //GameRule();
         }
         public void GetACard(Player player)
         {
-            if (deck.Count >= 1)
-            {
-                player.CardsInHands.Push(Deck.GetACard(deck));
-            }
-            else
-            {
-                WarningMassage();
-            }
-            player.PointMark();
+            player.CardsInHands.Push(Deck.GetACard(deck));
+                player.PointMark();
         }
-
-        private string WarningMassage() => "DeckIsEmpty";
-
 
         public void GameRules()
         {
@@ -50,6 +39,7 @@ namespace ConsoleApp1
 
             var MaxPoint = players.Max(t => t.SumPoint);
             var MinPoint = players.Min(t => t.SumPoint);
+
             foreach (var p in players)
             {
                 var _sumpoint = p.SumPoint;
@@ -69,26 +59,31 @@ namespace ConsoleApp1
                         }
                         else
                         {
-                        gameRuleState.Win();
+                            gameRuleState.Win();
                         }
                     }
                     else
                     {
                         gameRuleState.GameOver();
                     }
-                } //костиль Не впевнений чи зможу це спростити.
-            }
-        }
+                }
+            }//Костиль виграв-програв.
+        }//КОСТИЛЬ!!!!
 
         public void CheckRound()
         {
+            
             GameRules();
-              //  Console.WriteLine($"{p.Name}: {Point}");
+            foreach (var p in players)
+            {
+                while (p.CardsInHands.Count != 0)
+                {
+                deck.Push(p.CardsInHands.Pop());
+                }
+                Console.WriteLine($"COUNT: {deck.Count}");
+            }
+            deck.ShuffleDeck();
         }
-
-
-        public int WinPoints() => Point = 0;
-        
         public bool DeckIsEmpty() => deck.Count >= 1;
     }
 }

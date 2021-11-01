@@ -17,6 +17,5 @@ namespace ConsoleApp1
             return SumPoint = CardsInHands.Sum(x => x.Power);
         }
 
-       
     }
 }
