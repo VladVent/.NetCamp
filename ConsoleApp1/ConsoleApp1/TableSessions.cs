@@ -17,6 +17,7 @@ namespace ConsoleApp1
         public void Join(Player player)
         {
             players.Add(player);
+            
         }
 
         public void DealCard(Player player)
@@ -28,6 +29,7 @@ namespace ConsoleApp1
         {
             player.CardsInHands.Push(Deck.GetACard(deck));
                 player.PointMark();
+             GameRules();
         }
 
         public void GameRules()
@@ -80,7 +82,6 @@ namespace ConsoleApp1
                 {
                 deck.Push(p.CardsInHands.Pop());
                 }
-                Console.WriteLine($"COUNT: {deck.Count}");
             }
             deck.ShuffleDeck();
         }
