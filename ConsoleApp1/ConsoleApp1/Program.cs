@@ -43,7 +43,7 @@ namespace ConsoleApp1
                 PPower(p1);
                 session.DealCard(p2);
                 session.DealCard(p3);
-                Console.WriteLine("Chose 0 if wanna take card, Choise 1 if wanna skip");
+                Console.WriteLine("Choise 0 if wanna take card, Choise 1 if wanna skip");
                 choise = Convert.ToInt32(Console.ReadLine());
                 switch (choise)
                 {
