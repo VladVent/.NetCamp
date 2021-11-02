@@ -1,90 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace ConsoleApp1
 {
-    public class TableSessions
-    {
-        private IGameRuleState gameRuleState;
-        public Stack<Card> deck = Deck.CreateCards().ShuffleDeck();
-        public List<Player> players = new List<Player>();
+	public class TableSessions
+	{
+		private IGameRuleState gameRuleState;
+		public Stack<Card> deck = Deck.CreateCards().ShuffleDeck();
+		public List<Player> players = new List<Player>();
 
-        public TableSessions() => this.gameRuleState = new GameRule();
+		public TableSessions() => this.gameRuleState = new ConsoleStatePrinter();
 
-        public void Join(Player player)
-        {
-            players.Add(player);
-            
-        }
+		public void Join(Player player)
+		{
+			players.Add(player);
+		}
 
-        public void DealCard(Player player)
-        {
-            player.CardsInHands = Deck.DealTheCards(deck);
-            player.PointMark();
-        }
-        public void GetACard(Player player)
-        {
-            player.CardsInHands.Push(Deck.GetACard(deck));
-                player.PointMark();
-             GameRules();
-        }
+		public void DealCard(Player player)
+		{
+			player.CardsInHands = deck.DealTheCards();
+			player.Skip = false;
+		}
 
-        public void GameRules()
-        {
-            //var player = players.OrderBy(x => x.SumPoint > 21 ? 0: x.SumPoint).LastOrDefault();
 
-            //if (player.SumPoint != 0)
-            //    gameRuleState.Win();
+		public void IWillSkipSuslik(Player player)
+		{
+			player.Skip = true;
+		}
 
-            var MaxPoint = players.Max(t => t.SumPoint);
-            var MinPoint = players.Min(t => t.SumPoint);
+		public void GetACard(Player player)
+		{
+			if(player.Lost)
+				return;
+			
 
-            foreach (var p in players)
-            {
-                var _sumpoint = p.SumPoint;
-                if (_sumpoint == 21)
-                {
-                    gameRuleState.CleanWin();
-                    break;
-                }
-                else
-                {
-                    if (MaxPoint < 21 && _sumpoint.Equals(MaxPoint) || MaxPoint > 21 && MaxPoint > _sumpoint)
-                    {
-                        if (MinPoint.Equals(MaxPoint))
-                        {
-                            gameRuleState.Draw();
-                            break;
-                        }
-                        else
-                        {
-                            gameRuleState.Win();
-                        }
-                    }
-                    else
-                    {
-                        gameRuleState.GameOver();
-                    }
-                }
-            }//Костиль виграв-програв.
-        }//КОСТИЛЬ!!!!
+			player.CardsInHands.Push(deck.GetACard());
+			CheckGameRules();
+		}
 
-        public void CheckRound()
-        {
-            
-            GameRules();
-            foreach (var p in players)
-            {
-                while (p.CardsInHands.Count != 0)
-                {
-                deck.Push(p.CardsInHands.Pop());
-                }
-            }
-            deck.ShuffleDeck();
-        }
-        public bool DeckIsEmpty() => deck.Count >= 1;
-    }
+		public void CheckGameRules()
+		{
+			var sorted = players
+				.Where(x => x.SumPoint <= 21)
+				.OrderBy(x => x.SumPoint);
+
+			var last = sorted.Last();
+
+			var loosers = players.Where(x => x.SumPoint > 21);
+			var allWinners = sorted.Where(x => x.SumPoint == last.SumPoint);
+
+
+			gameRuleState.Win(allWinners);
+			gameRuleState.GameOver(loosers);
+
+
+			if (allWinners.Count() == players.Count)
+				gameRuleState.Draw(allWinners);
+		}
+
+
+		public void RestartRound()
+		{
+			deck = Deck.CreateCards().ShuffleDeck();
+
+			foreach (var p in players)
+			{
+				DealCard(p);
+			}
+		}
+
+		public bool DeckIsEmpty() => deck.Count > 0;
+	}
 }
