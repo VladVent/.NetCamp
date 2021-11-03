@@ -9,6 +9,6 @@ namespace ConsoleApp1
         public Stack<Card> CardsInHands = new Stack<Card>();
         public int SumPoint => CardsInHands.Sum(x => x.Power);
 
-       public bool Continiue = false;
+       public bool IsContiniue = false;
     }
 }

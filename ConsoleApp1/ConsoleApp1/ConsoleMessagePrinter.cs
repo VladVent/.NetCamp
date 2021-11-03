@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ConsoleApp1
 {
@@ -17,7 +18,12 @@ namespace ConsoleApp1
 
         public void PlayerLoseMessage(IEnumerable<Player> enumerable)
         {
+           
+            foreach (var p in enumerable)
+            {
+                p.IsContiniue = true;
             Console.WriteLine("Loosers:" + NamesToSingleString(enumerable));
+            }
         }
 
         public void PlayerWinMessage(IEnumerable<Player> allWinners)

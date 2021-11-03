@@ -34,6 +34,7 @@ namespace ConsoleApp1
         public void PlayerChoiseCard(Player play)
         {
             play.CardsInHands.Push(deck.GetACard());
+            //CheckGameRules();
         }
 
         public void CheckGameRules()
@@ -53,8 +54,8 @@ namespace ConsoleApp1
             _gameRuleMessage.PlayerLoseMessage(loosers);
 
 
-            if (allWinners.Count() == players.Count)
-                _gameRuleMessage.PlayersDrawMessage(allWinners);
+            //if (allWinners.Count() == players.Count)
+            //    _gameRuleMessage.PlayersDrawMessage(allWinners);
 
         }
 

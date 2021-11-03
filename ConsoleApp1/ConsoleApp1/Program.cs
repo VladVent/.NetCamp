@@ -42,29 +42,30 @@ namespace ConsoleApp1
 
             session.Join(players);
             GreetingPlayers(players);
+                session.DealCard();
             while (session.DeckIsEmpty())
             {
-                session.DealCard();
                 PlayerCardPrinter(players);
                 foreach (var p in players)
                 {
-                    while (!p.Continiue)
+                    while (!p.IsContiniue)
                     {
-                    Console.WriteLine($"{p.Name} Choise 0 if wanna take card, Choise 1 if wanna skip");
-                choise = Convert.ToInt32(Console.ReadLine());
-                switch (choise)
-                {
+                        Console.WriteLine($"{p.Name} Choise 0 if wanna take card, Choise 1 if wanna skip");
+                        choise = Convert.ToInt32(Console.ReadLine());
+                        switch (choise)
+                        {
                             case 0:
-                session.PlayerChoiseCard(p);
-                PlayerCardPrinter(players);
+                                session.PlayerChoiseCard(p);
+                                PlayerCardPrinter(players);
+                                session.CheckGameRules();
                                 continue;
                             case 1:
-                                p.Continiue = true;
+                                p.IsContiniue = true;
                                 break;
                         }
                     }
                 }
-                session.CheckGameRules();
+               // session.CheckGameRules();
                 Console.WriteLine("Choise 0 if wanna continue game, Choise 1 if wanna  end game");
                 choise = Convert.ToInt32(Console.ReadLine());
                 switch (choise)
@@ -72,6 +73,10 @@ namespace ConsoleApp1
                     case 0:
                         session.DealCard();
                         Console.Clear();
+                        foreach (var p in players)
+                        {
+                            p.IsContiniue = false;
+                        }
                         continue;
                     case 1:
                         break;
