@@ -3,14 +3,12 @@ using System.Linq;
 
 namespace ConsoleApp1
 {
-	public class Player
-	{
-		public string Name { get; set; }
-		public Stack<Card> CardsInHands = new Stack<Card>();
-		public int SumPoint => CardsInHands.Sum(x => x.Power);
+    public class Player
+    {
+        public string Name { get; set; }
+        public Stack<Card> CardsInHands = new Stack<Card>();
+        public int SumPoint => CardsInHands.Sum(x => x.Power);
 
-
-		public bool Skip;
-		public bool Lost;
-	}
+       public bool Continiue = false;
+    }
 }

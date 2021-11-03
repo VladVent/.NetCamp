@@ -9,4 +9,4 @@ namespace ConsoleApp1
 		void PlayerWinMessage(IEnumerable<Player> allWinners);
 		void PlayersDrawMessage(IEnumerable<Player> allWinners);
 	}
-}
+}   

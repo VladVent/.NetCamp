@@ -48,14 +48,37 @@ namespace ConsoleApp1
                 PlayerCardPrinter(players);
                 foreach (var p in players)
                 {
+                    while (!p.Continiue)
+                    {
                     Console.WriteLine($"{p.Name} Choise 0 if wanna take card, Choise 1 if wanna skip");
-                    choise = Convert.ToInt32(Console.ReadLine());
-                    session.PlayerChoiseCard(choise);
-                    PlayerCardPrinter(players);
+                choise = Convert.ToInt32(Console.ReadLine());
+                switch (choise)
+                {
+                            case 0:
+                session.PlayerChoiseCard(p);
+                PlayerCardPrinter(players);
+                                continue;
+                            case 1:
+                                p.Continiue = true;
+                                break;
+                        }
+                    }
+                }
+                session.CheckGameRules();
+                Console.WriteLine("Choise 0 if wanna continue game, Choise 1 if wanna  end game");
+                choise = Convert.ToInt32(Console.ReadLine());
+                switch (choise)
+                {
+                    case 0:
+                        session.DealCard();
+                        Console.Clear();
+                        continue;
+                    case 1:
+                        break;
                 }
                 break;
             }
-
+            Console.WriteLine("See u next time");
             Console.ReadKey();
         }
     }

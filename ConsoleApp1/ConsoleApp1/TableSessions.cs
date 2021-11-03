@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ConsoleApp1
 {
@@ -26,29 +27,13 @@ namespace ConsoleApp1
             foreach (var p in players)
             {
                 p.CardsInHands = deck.DealTheCards();
-                p.Skip = false;
+
             }
         }
 
-        public void PlayerChoiseCard(int choise)
+        public void PlayerChoiseCard(Player play)
         {
-            foreach (var p in players)
-            {
-                if (p.Lost)
-                    return;
-
-                switch (choise)
-                {
-                    case 0:
-                        p.CardsInHands.Push(deck.GetACard());
-                        p.Skip = true;
-                        break;
-                    case 1:
-                        p.Skip = true;
-                        break;
-                }
-                CheckGameRules();
-            }
+            play.CardsInHands.Push(deck.GetACard());
         }
 
         public void CheckGameRules()
@@ -72,29 +57,6 @@ namespace ConsoleApp1
                 _gameRuleMessage.PlayersDrawMessage(allWinners);
 
         }
-
-        //public void ContinueOrExitGame(int choise, Player player)
-        //{
-        //    switch (choise)
-        //    {
-        //        case 0:
-        //            DealCard(player);
-        //            Console.Clear();
-        //            break;
-        //        case 1:
-        //            break;
-        //    }
-        //}
-
-        //public void RestartRound()
-        //{
-        //	deck = Deck.CreateCards().ShuffleDeck();
-
-        //	foreach (var p in players)
-        //	{
-        //		DealCard(p);
-        //	}
-        //}
 
         public bool DeckIsEmpty() => deck.Count > 0;
     }
