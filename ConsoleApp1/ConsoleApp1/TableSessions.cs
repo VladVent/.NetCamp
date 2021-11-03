@@ -30,12 +30,6 @@ namespace ConsoleApp1
             }
         }
 
-
-        public void SkipPlayersTurn(Player player)
-        {
-            player.Skip = true;
-        }
-
         public void PlayerChoiseCard(int choise)
         {
             foreach (var p in players)
@@ -47,9 +41,10 @@ namespace ConsoleApp1
                 {
                     case 0:
                         p.CardsInHands.Push(deck.GetACard());
+                        p.Skip = true;
                         break;
                     case 1:
-                        SkipPlayersTurn(p);
+                        p.Skip = true;
                         break;
                 }
                 CheckGameRules();
@@ -62,10 +57,11 @@ namespace ConsoleApp1
                 .Where(x => x.SumPoint <= 21)
                 .OrderBy(x => x.SumPoint);
 
-            var last = sorted.Last();
+
+            //var last = sorted.Last();
 
             var loosers = players.Where(x => x.SumPoint > 21);
-            var allWinners = sorted.Where(x => x.SumPoint == last.SumPoint);
+            var allWinners = sorted.Where(x => x.SumPoint <= 21);
 
 
             _gameRuleMessage.PlayerWinMessage(allWinners);
@@ -74,8 +70,8 @@ namespace ConsoleApp1
 
             if (allWinners.Count() == players.Count)
                 _gameRuleMessage.PlayersDrawMessage(allWinners);
-        }
 
+        }
 
         //public void ContinueOrExitGame(int choise, Player player)
         //{

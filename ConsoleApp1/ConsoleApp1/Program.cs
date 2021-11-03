@@ -21,14 +21,6 @@ namespace ConsoleApp1
             }
         }
 
-        public static void PlayerNamePrinter(List<Player> players)
-        {
-            foreach (var p in players)
-            {
-                Console.WriteLine(p.Name);
-            }
-        }
-
         public static void GreetingPlayers(List<Player> players)
         {
             foreach (var p in players)
@@ -37,7 +29,6 @@ namespace ConsoleApp1
             }
 
         }
-
 
         static void Main(string[] args)
         {
@@ -48,6 +39,7 @@ namespace ConsoleApp1
 
             var session = new TableSessions();
             int choise;
+
             session.Join(players);
             GreetingPlayers(players);
             while (session.DeckIsEmpty())
@@ -59,11 +51,11 @@ namespace ConsoleApp1
                     Console.WriteLine($"{p.Name} Choise 0 if wanna take card, Choise 1 if wanna skip");
                     choise = Convert.ToInt32(Console.ReadLine());
                     session.PlayerChoiseCard(choise);
-                    break;
+                    PlayerCardPrinter(players);
                 }
-                PlayerCardPrinter(players);
                 break;
             }
+
             Console.ReadKey();
         }
     }
