@@ -22,13 +22,24 @@ namespace ConsoleApp1
             foreach (var p in enumerable)
             {
                 p.IsContiniue = true;
-            Console.WriteLine("Loosers:" + NamesToSingleString(enumerable));
             }
+            Console.WriteLine("Loosers:" + NamesToSingleString(enumerable));
         }
 
         public void PlayerWinMessage(IEnumerable<Player> allWinners)
         {
-            Console.WriteLine("Winners:" + NamesToSingleString(allWinners));
+            foreach (var p in allWinners)
+            {
+                if (!p.IsContiniue)
+                {
+                Console.WriteLine("Winners:" + NamesToSingleString(allWinners));
+                p.IsContiniue = false;
+                }
+                else
+                {
+                    p.IsContiniue = true;
+                }
+            }
         }
 
         public void PlayersDrawMessage(IEnumerable<Player> allWinners)

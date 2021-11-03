@@ -65,7 +65,6 @@ namespace ConsoleApp1
                         }
                     }
                 }
-               // session.CheckGameRules();
                 Console.WriteLine("Choise 0 if wanna continue game, Choise 1 if wanna  end game");
                 choise = Convert.ToInt32(Console.ReadLine());
                 switch (choise)
