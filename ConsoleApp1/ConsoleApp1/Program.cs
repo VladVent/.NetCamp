@@ -5,10 +5,10 @@ using System.Xml.Serialization;
 
 namespace ConsoleApp1
 {
-	class Program
-	{
-		public static void PlayerCardPrinter(List<Player> players)
-		{
+    class Program
+    {
+        public static void PlayerCardPrinter(List<Player> players)
+        {
             foreach (var p in players)
             {
                 Console.WriteLine($"{p.Name}");
@@ -19,7 +19,7 @@ namespace ConsoleApp1
                 }
                 Console.WriteLine($"Ur Points: {p.SumPoint}");
             }
-		}
+        }
 
         public static void PlayerNamePrinter(List<Player> players)
         {
@@ -40,13 +40,14 @@ namespace ConsoleApp1
 
 
         static void Main(string[] args)
-		{
+        {
             List<Player> players = new List<Player>();
 
-            players.Add(new Player() { Name = "Vent"});
-            players.Add(new Player() {Name = "Zest"});
+            players.Add(new Player() { Name = "Vent" });
+            players.Add(new Player() { Name = "Zest" });
+
             var session = new TableSessions();
-			int choise;
+            int choise;
             session.Join(players);
             GreetingPlayers(players);
             while (session.DeckIsEmpty())
@@ -55,15 +56,15 @@ namespace ConsoleApp1
                 PlayerCardPrinter(players);
                 foreach (var p in players)
                 {
-                Console.WriteLine($"{p.Name} Choise 0 if wanna take card, Choise 1 if wanna skip");
-                choise = Convert.ToInt32(Console.ReadLine());
-                session.PlayerChoiseCard(choise);
-                break;
+                    Console.WriteLine($"{p.Name} Choise 0 if wanna take card, Choise 1 if wanna skip");
+                    choise = Convert.ToInt32(Console.ReadLine());
+                    session.PlayerChoiseCard(choise);
+                    break;
                 }
                 PlayerCardPrinter(players);
                 break;
             }
             Console.ReadKey();
-		}
-	}
+        }
+    }
 }
