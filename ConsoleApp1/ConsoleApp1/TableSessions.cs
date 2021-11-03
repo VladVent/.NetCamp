@@ -1,41 +1,59 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace ConsoleApp1
 {
 	public class TableSessions
 	{
-		private IGameRuleState gameRuleState;
+		private IGameRuleMessage _gameRuleMessage;
 		public Stack<Card> deck = Deck.CreateCards().ShuffleDeck();
 		public List<Player> players = new List<Player>();
 
-		public TableSessions() => this.gameRuleState = new ConsoleStatePrinter();
+		public TableSessions() => this._gameRuleMessage = new ConsoleMessagePrinter();
 
-		public void Join(Player player)
+		public void Join(List<Player> a)
 		{
-			players.Add(player);
+            foreach (var VARIABLE in a)
+            {
+            players.Add(VARIABLE);
+            }
+        }
+
+		public void DealCard()
+		{
+            foreach (var p in players)
+            {
+			p.CardsInHands = deck.DealTheCards();
+			p.Skip = false;
+            }
 		}
 
-		public void DealCard(Player player)
-		{
-			player.CardsInHands = deck.DealTheCards();
-			player.Skip = false;
-		}
 
-
-		public void IWillSkipSuslik(Player player)
+		public void SkipPlayersTurn(Player player)
 		{
 			player.Skip = true;
 		}
 
-		public void GetACard(Player player)
+		public void PlayerChoiseCard(int choise)
 		{
-			if(player.Lost)
+            foreach (var p in players)
+            {
+            if(p.Lost)
 				return;
-			
 
-			player.CardsInHands.Push(deck.GetACard());
+            switch (choise)
+                {
+                    case 0:
+                    p.CardsInHands.Push(deck.GetACard());
+                    break;
+                   case 1:
+                        SkipPlayersTurn(p);
+                        break;
+               }
 			CheckGameRules();
+            }
 		}
 
 		public void CheckGameRules()
@@ -50,24 +68,37 @@ namespace ConsoleApp1
 			var allWinners = sorted.Where(x => x.SumPoint == last.SumPoint);
 
 
-			gameRuleState.Win(allWinners);
-			gameRuleState.GameOver(loosers);
+			_gameRuleMessage.PlayerWinMessage(allWinners);
+			_gameRuleMessage.PlayerLoseMessage(loosers);
 
 
 			if (allWinners.Count() == players.Count)
-				gameRuleState.Draw(allWinners);
+				_gameRuleMessage.PlayersDrawMessage(allWinners);
 		}
 
 
-		public void RestartRound()
-		{
-			deck = Deck.CreateCards().ShuffleDeck();
+        //public void ContinueOrExitGame(int choise, Player player)
+        //{
+        //    switch (choise)
+        //    {
+        //        case 0:
+        //            DealCard(player);
+        //            Console.Clear();
+        //            break;
+        //        case 1:
+        //            break;
+        //    }
+        //}
 
-			foreach (var p in players)
-			{
-				DealCard(p);
-			}
-		}
+		//public void RestartRound()
+		//{
+		//	deck = Deck.CreateCards().ShuffleDeck();
+
+		//	foreach (var p in players)
+		//	{
+		//		DealCard(p);
+		//	}
+		//}
 
 		public bool DeckIsEmpty() => deck.Count > 0;
 	}

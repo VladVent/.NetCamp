@@ -1,96 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using System.Xml.Serialization;
 
 namespace ConsoleApp1
 {
 	class Program
 	{
-		public static void Dump(Stack<Card> cards)
+		public static void PlayerCardPrinter(List<Player> players)
 		{
-			foreach (var c in cards)
-			{
-				Console.WriteLine($"{c.Name} {c.CardSuit} {c.Power}");
-			}
+            foreach (var p in players)
+            {
+                Console.WriteLine($"{p.Name}");
+                foreach (var c in p.CardsInHands)
+                {
+                    Console.WriteLine($"{c.Name} {c.CardSuit} {c.Power}");
+
+                }
+                Console.WriteLine($"Ur Points: {p.SumPoint}");
+            }
 		}
 
-		public static void PName(Player players)
+        public static void PlayerNamePrinter(List<Player> players)
+        {
+            foreach (var p in players)
+            {
+                Console.WriteLine(p.Name);
+            }
+        }
+
+        public static void GreetingPlayers(List<Player> players)
+        {
+            foreach (var p in players)
+            {
+                Console.WriteLine($"Hello {p.Name}.");
+            }
+
+        }
+
+
+        static void Main(string[] args)
 		{
-			Console.WriteLine(players.Name);
-		}
+            List<Player> players = new List<Player>();
 
-		public static void PPower(Player players)
-		{
-			Console.WriteLine(players.SumPoint);
-		}
-
-		static void Main(string[] args)
-		{
-			var p1 = new Player { Name = "TempName", };
-
-
-			var p2 = new Player { Name = "TempName2" };
-			var p3 = new Player { Name = "TempName3" };
-			var session = new TableSessions();
+            players.Add(new Player() { Name = "Vent"});
+            players.Add(new Player() {Name = "Zest"});
+            var session = new TableSessions();
 			int choise;
-			session.Join(p1);
-			Console.WriteLine($"Hello {p1.Name}.");
-			session.Join(p2);
-			Console.WriteLine($"Hello {p2.Name}.");
-			session.Join(p3);
-			session.DealCard(p1);
-			while (session.DeckIsEmpty())
-			{
-				PName(p1);
-				Dump(p1.CardsInHands);
-				PPower(p1);
-				session.DealCard(p2);
-				session.DealCard(p3);
-				Console.WriteLine("Choise 0 if wanna take card, Choise 1 if wanna skip");
-				choise = Convert.ToInt32(Console.ReadLine());
-				switch (choise)
-				{
-					case 0:
-						session.GetACard(p1);
-						continue;
-					case 1:
-						
-						
-						session.IWillSkipSuslik(p1);
-						break;
-				}
-
-				session.GetACard(p2);
-				PName(p1);
-				Dump(p1.CardsInHands);
-				PPower(p1);
-
-				PName(p2);
-				Dump(p2.CardsInHands);
-				PPower(p2);
-
-				PName(p3);
-				Dump(p3.CardsInHands);
-				PPower(p3);
-
-				//session.CheckRound();
-				Console.WriteLine("Choise 0 if wanna continue game, Choise 1 if wanna  end game");
-				choise = Convert.ToInt32(Console.ReadLine());
-				switch (choise)
-				{
-					case 0:
-						session.DealCard(p1);
-						Console.Clear();
-						continue;
-					case 1:
-						break;
-				}
-
-				break;
-			}
-
-			Console.Clear();
-			Console.ReadKey();
+            session.Join(players);
+            GreetingPlayers(players);
+            while (session.DeckIsEmpty())
+            {
+                session.DealCard();
+                PlayerCardPrinter(players);
+                foreach (var p in players)
+                {
+                Console.WriteLine($"{p.Name} Choise 0 if wanna take card, Choise 1 if wanna skip");
+                choise = Convert.ToInt32(Console.ReadLine());
+                session.PlayerChoiseCard(choise);
+                break;
+                }
+                PlayerCardPrinter(players);
+                break;
+            }
+            Console.ReadKey();
 		}
 	}
 }

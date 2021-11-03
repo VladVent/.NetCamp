@@ -4,14 +4,14 @@ using System.Linq;
 
 namespace ConsoleApp1
 {
-	public class ConsoleStatePrinter : IGameRuleState
+	public class ConsoleMessagePrinter : IGameRuleMessage
 	{
 		public void CleanWin()
 		{
 			Console.WriteLine("GG EZ!!!!");
 		}
 
-		public void GameOver(IEnumerable<Player> enumerable)
+		public void PlayerLoseMessage(IEnumerable<Player> enumerable)
 		{
 			Console.WriteLine("Loosers:" + NamesToSingleString(enumerable));
 		}
@@ -21,15 +21,15 @@ namespace ConsoleApp1
 			return string.Join(",", enumerable.Select(x => x.Name));
 		}
 
-		public void Win(IEnumerable<Player> allWinners)
+		public void PlayerWinMessage(IEnumerable<Player> allWinners)
 		{
 			Console.WriteLine("Winners:" + NamesToSingleString(allWinners));
 		}
 
-		public void Draw(IEnumerable<Player> allWinners)
+		public void PlayersDrawMessage(IEnumerable<Player> allWinners)
 
 		{
-			Console.WriteLine("Draw players:" + NamesToSingleString(allWinners));
+			Console.WriteLine("PlayersDrawMessage players:" + NamesToSingleString(allWinners));
 		}
 	}
 }
