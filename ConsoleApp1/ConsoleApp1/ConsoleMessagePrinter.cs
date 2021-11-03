@@ -19,11 +19,11 @@ namespace ConsoleApp1
         public void PlayerLoseMessage(IEnumerable<Player> enumerable)
         {
            
-            Console.WriteLine("Loosers:" + NamesToSingleString(enumerable));
             foreach (var p in enumerable)
             {
                 p.IsContiniue = true;
             }
+            Console.WriteLine("Loosers:" + NamesToSingleString(enumerable));
         }
 
         public void PlayerWinMessage(IEnumerable<Player> allWinners)
@@ -33,11 +33,11 @@ namespace ConsoleApp1
                 if (p.IsContiniue)
                 {
                 Console.WriteLine("Winners:" + NamesToSingleString(allWinners));
-                p.IsContiniue = false;
+                p.IsContiniue = true;
                 }
                 else
                 {
-                    p.IsContiniue = true;
+                    p.IsContiniue = false;
                 }
             }
         }

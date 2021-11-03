@@ -48,15 +48,13 @@ namespace ConsoleApp1
 
             var loosers = players.Where(x => x.SumPoint > 21);
             var allWinners = sorted.Where(x => x.SumPoint == last.SumPoint);
-            var LowerWin = sorted.Where(x => x.SumPoint < last.SumPoint);
 
-            //_gameRuleMessage.PlayerWinMessage(allWinners);
-            _gameRuleMessage.PlayerWinMessage(LowerWin);
+            _gameRuleMessage.PlayerWinMessage(allWinners);
             _gameRuleMessage.PlayerLoseMessage(loosers);
 
 
-            //if (allWinners.Count() == players.Count)
-            //   _gameRuleMessage.PlayersDrawMessage(allWinners);
+            if (allWinners.Count() == players.Count)
+               _gameRuleMessage.PlayersDrawMessage(allWinners);
 
         }
 
