@@ -8,7 +8,6 @@ namespace ConsoleApp1
         public string Name { get; set; }
         public Stack<Card> CardsInHands = new Stack<Card>();
         public int SumPoint => CardsInHands.Sum(x => x.Power);
-
-       public bool IsContiniueTurn = false;
+        public SuslikState state;
     }
 }

@@ -1,63 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 
 namespace ConsoleApp1
 {
     public class TableSessions
     {
-        private IGameRuleMessage _gameRuleMessage;
-        public Stack<Card> deck = Deck.CreateCards().ShuffleDeck();
-        public List<Player> players = new List<Player>();
+        private readonly int _seed;
+        private readonly Stack<Card> deck;
+        private List<Player> players = new List<Player>();
 
-        public TableSessions() => this._gameRuleMessage = new ConsoleMessagePrinter();
 
-        public void Join(List<Player> a)
+        public TableSessions(int seed)
         {
-            foreach (var VARIABLE in a)
+            _seed = seed;
+            deck = Deck.CreateCards().ShuffleDeck(_seed);
+        }
+
+        public TableSessions()
+        {
+            deck = Deck.CreateCards().ShuffleDeck(Environment.TickCount);
+        }
+
+
+
+        public Player Join(string p)
+        {
+            var player = new Player
             {
-                players.Add(VARIABLE);
-            }
+                Name = p,
+                CardsInHands = deck.DealTheCards(),
+            };
+
+            player.state = ComputeState(player);
+            players.Add(player);
+            return player;
         }
 
-        public void DealCard()
+        private static SuslikState ComputeState(Player p)
         {
-            foreach (var p in players)
+            if (p.SumPoint > 21)
+                return SuslikState.IamLost;
+
+            if (p.SumPoint == 21)
+                return SuslikState.IamWon;
+
+            return SuslikState.IamThinking;
+        }
+
+        public void PlayerTakeCard(Player player)
+        {
+            if (player.state == SuslikState.IamThinking)
             {
-                p.CardsInHands = deck.DealTheCards();
-
+                player.CardsInHands.Push(deck.GetACard());
+                player.state = ComputeState(player);
             }
+
         }
 
-        public void PlayerChoiseCard(Player play)
+
+        public void PlayerWouldLikeStop(Player player)
         {
-            play.CardsInHands.Push(deck.GetACard());
-            //CheckGameRules();
+            if (player.state == SuslikState.IamThinking)
+                player.state = SuslikState.IamDoneTakingCards;
         }
 
-        public void CheckGameRules()
+
+
+        public VisibleState GetState()
         {
-            var sorted = players
-                .Where(x => x.SumPoint <= 21)
-                .OrderBy(x => x.SumPoint);
-
-
-            var last = sorted.Last();
-
-            var loosers = players.Where(x => x.SumPoint > 21);
-            var allWinners = sorted.Where(x => x.SumPoint == last.SumPoint);
-
-            _gameRuleMessage.PlayerWinMessage(allWinners);
-            _gameRuleMessage.PlayerLoseMessage(loosers);
-
-
-            if (allWinners.Count() == players.Count)
-               _gameRuleMessage.PlayersDrawMessage(allWinners);
-
+            var p = new List<Suslik>();
+            foreach (var d in players)
+            {
+                p.Add(new Suslik() { playerName = d.Name, state = d.state, cardCount = d.CardsInHands.Count });
+            }
+            return new VisibleState() { Players = p };
         }
-
-        public bool DeckIsEmpty() => deck.Count > 0;
     }
 }

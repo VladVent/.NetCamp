@@ -33,61 +33,61 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
-            List<Player> players = new List<Player>();
+            //List<Player> players = new List<Player>();
 
-            players.Add(new Player() { Name = "Vent" });
-            players.Add(new Player() { Name = "Zest" });
-            players.Add(new Player() {Name = "Zed"});
+            //players.Add(new Player() { Name = "Vent" });
+            //players.Add(new Player() { Name = "Zest" });
+            //players.Add(new Player() {Name = "Zed"});
 
-            var session = new TableSessions();
-            int choise;
+            //var session = new TableSessions();
+            //int choise;
 
-            session.Join(players);
-            GreetingPlayers(players);
-                session.DealCard();
-            while (session.DeckIsEmpty())
-            {
-                PlayerCardPrinter(players);
-                foreach (var p in players)
-                {
-                    while (!p.IsContiniueTurn)
-                    {
-                        Console.WriteLine($"{p.Name} Choise 0 if wanna take card, Choise 1 if wanna skip");
-                        choise = Convert.ToInt32(Console.ReadLine());
-                        switch (choise)
-                        {
-                            case 0:
-                                session.PlayerChoiseCard(p);
-                                PlayerCardPrinter(players);
-                                session.CheckGameRules();
-                                continue;
-                            case 1:
-                                p.IsContiniueTurn = true;
-                                break;
-                        }
-                    }
-                }
-                PlayerCardPrinter(players);
-                session.CheckGameRules();
-                Console.WriteLine("Choise 0 if wanna continue game, Choise 1 if wanna  end game");
-                choise = Convert.ToInt32(Console.ReadLine());
-                switch (choise)
-                {
-                    case 0:
-                        session.DealCard();
-                        Console.Clear();
-                        foreach (var p in players)
-                        {
-                            p.IsContiniueTurn = false;
-                        }
-                        continue;
-                    case 1:
-                        break;
-                }
-                break;
-            }
-            Console.WriteLine("See u next time");
-            Console.ReadKey();
+            //session.Join(players);
+            //GreetingPlayers(players);
+            //    session.DealCards();
+            //while (session.DeckIsEmpty())
+            //{
+            //    PlayerCardPrinter(players);
+            //    foreach (var p in players)
+            //    {
+            //        while (!p.IsDoneTakingCards)
+            //        {
+            //            Console.WriteLine($"{p.Name} Choise 0 if wanna take card, Choise 1 if wanna skip");
+            //            choise = Convert.ToInt32(Console.ReadLine());
+            //            switch (choise)
+            //            {
+            //                case 0:
+            //                    session.PlayerTakeCard(p);
+            //                    PlayerCardPrinter(players);
+            //                    session.CheckGameRules();
+            //                    continue;
+            //                case 1:
+            //                    p.IsDoneTakingCards = true;
+            //                    break;
+            //            }
+            //        }
+            //    }
+            //    PlayerCardPrinter(players);
+            //    session.CheckGameRules();
+            //    Console.WriteLine("Choise 0 if wanna continue game, Choise 1 if wanna  end game");
+            //    choise = Convert.ToInt32(Console.ReadLine());
+            //    switch (choise)
+            //    {
+            //        case 0:
+            //            session.DealCards();
+            //            Console.Clear();
+            //            foreach (var p in players)
+            //            {
+            //                p.IsDoneTakingCards = false;
+            //            }
+            //            continue;
+            //        case 1:
+            //            break;
+            //    }
+            //    break;
+            //}
+            //Console.WriteLine("See u next time");
+            //Console.ReadKey();
         }
     }
 }

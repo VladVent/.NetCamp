@@ -18,9 +18,9 @@ namespace ConsoleApp1
 			return card;
 		}
 
-		public static Stack<Card> ShuffleDeck(this Stack<Card> cards)
+		public static Stack<Card> ShuffleDeck(this Stack<Card> cards, int seed)
 		{
-			var rand = new Random();
+			var rand = new Random(seed);
 			var values = cards.ToArray();
 			cards.Clear();
 			foreach (var value in values.OrderBy(x => rand.Next()))
@@ -28,16 +28,15 @@ namespace ConsoleApp1
 			return new Stack<Card>(cards.OrderBy(x => rand.Next()));
 		}
 
-
-		public static Stack<Card> DealTheCards(this Stack<Card> deck)
+        public static Stack<Card> DealTheCards(this Stack<Card> deck)
 		{
-			var cardinhand = new Stack<Card>();
+			var cardsinhand = new Stack<Card>();
 			for (var i = 0; i < 2 && deck.Count > 0; i++)
 			{
-				cardinhand.Push(deck.Pop());
+                cardsinhand.Push(deck.Pop());
 			}
 
-			return cardinhand;
+			return cardsinhand;
 		}
 
 		public static Card GetACard(this Stack<Card> deck)

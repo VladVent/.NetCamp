@@ -47,6 +47,7 @@
     <Compile Include="CardName.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="ConsoleMessagePrinter.cs" />
+    <Compile Include="VisibleState.cs" />
     <Compile Include="IGameRuleMessage.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
