@@ -9,6 +9,7 @@ namespace ConsoleApp1
     {
         public static void PlayerCardPrinter(List<Player> players)
         {
+
             foreach (var p in players)
             {
                 Console.WriteLine($"{p.Name}");
@@ -36,6 +37,7 @@ namespace ConsoleApp1
 
             players.Add(new Player() { Name = "Vent" });
             players.Add(new Player() { Name = "Zest" });
+            players.Add(new Player() {Name = "Zed"});
 
             var session = new TableSessions();
             int choise;
@@ -48,7 +50,7 @@ namespace ConsoleApp1
                 PlayerCardPrinter(players);
                 foreach (var p in players)
                 {
-                    while (!p.IsContiniue)
+                    while (!p.IsContiniueTurn)
                     {
                         Console.WriteLine($"{p.Name} Choise 0 if wanna take card, Choise 1 if wanna skip");
                         choise = Convert.ToInt32(Console.ReadLine());
@@ -60,7 +62,7 @@ namespace ConsoleApp1
                                 session.CheckGameRules();
                                 continue;
                             case 1:
-                                p.IsContiniue = true;
+                                p.IsContiniueTurn = true;
                                 break;
                         }
                     }
@@ -76,7 +78,7 @@ namespace ConsoleApp1
                         Console.Clear();
                         foreach (var p in players)
                         {
-                            p.IsContiniue = false;
+                            p.IsContiniueTurn = false;
                         }
                         continue;
                     case 1:

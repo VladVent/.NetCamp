@@ -21,23 +21,23 @@ namespace ConsoleApp1
            
             foreach (var p in enumerable)
             {
-                p.IsContiniue = true;
-            }
             Console.WriteLine("Loosers:" + NamesToSingleString(enumerable));
+                p.IsContiniueTurn = true;
+            }
         }
 
         public void PlayerWinMessage(IEnumerable<Player> allWinners)
         {
             foreach (var p in allWinners)
             {
-                if (p.IsContiniue)
+                if (p.IsContiniueTurn)
                 {
                 Console.WriteLine("Winners:" + NamesToSingleString(allWinners));
-                p.IsContiniue = true;
+                p.IsContiniueTurn = true;
                 }
                 else
                 {
-                    p.IsContiniue = false;
+                    p.IsContiniueTurn = false;
                 }
             }
         }
@@ -45,7 +45,7 @@ namespace ConsoleApp1
         public void PlayersDrawMessage(IEnumerable<Player> allWinners)
 
         {
-            Console.WriteLine("PlayersDrawMessage players:" + NamesToSingleString(allWinners));
+            Console.WriteLine("Draw:" + NamesToSingleString(allWinners));
         }
     }
 }
