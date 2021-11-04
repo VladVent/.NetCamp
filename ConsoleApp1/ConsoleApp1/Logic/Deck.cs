@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConsoleApp1.Types;
 
-namespace ConsoleApp1
+namespace ConsoleApp1.Logic
 {
 	public static class Deck
 	{
@@ -12,7 +13,7 @@ namespace ConsoleApp1
 			foreach (var suit in Enum.GetValues(typeof(CardSuit)))
 			{
 				foreach (var name in Enum.GetNames(typeof(CardName)))
-					card.Push(new Card((CardSuit)suit, name, (int)Enum.Parse(typeof(CardName), name)));
+					card.Push(new Card((CardSuit)suit, (CardName)Enum.Parse(typeof(CardName),name)));
 			}
 
 			return card;
