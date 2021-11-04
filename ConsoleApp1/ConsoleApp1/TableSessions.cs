@@ -18,7 +18,7 @@ namespace ConsoleApp1
 
         public TableSessions()
         {
-            deck = Deck.CreateCards().ShuffleDeck(Environment.TickCount);
+            deck = Deck.CreateCards();
         }
 
 

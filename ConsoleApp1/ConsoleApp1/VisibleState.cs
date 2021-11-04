@@ -28,5 +28,6 @@ namespace ConsoleApp1
         IamThinking,
         IamLost,
         IamWon,
+        GameIsDone
     }
 }
