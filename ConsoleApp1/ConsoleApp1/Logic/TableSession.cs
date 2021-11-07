@@ -48,38 +48,44 @@ namespace ConsoleApp1.Logic
 
         private static SuslikState ComputeState(PlayerState p)
         {
+
             if (p.SumPoint > 21)
                 return SuslikState.IamLost;
 
             if (p.SumPoint == 21)
                 return SuslikState.IamWon;
-
             return SuslikState.IamThinking;
         }
 
         public void PlayerTakeCard(PlayerState playerState)
         {
-            if (WeHaveWinners)
-                return;
 
+            if (WeHaveWinners)
+            {
+                OnePlayerWin(playerState);
+                return;
+            }
             if (playerState.state == SuslikState.IamThinking)
             {
                 playerState.CardsInHands.Push(deck.GetACard());
                 playerState.state = ComputeState(playerState);
-
-
                 CheckFlawlessWin(playerState);
-
             }
         }
+      
 
-        private void CheckFlawlessWin(PlayerState playerState)
+            private void CheckFlawlessWin(PlayerState playerState)
         {
             if (playerState.state == SuslikState.IamWon)
             {
-                MakeAllPlayersLost();
-                playerState.state = SuslikState.IamWon;
+                OnePlayerWin(playerState);
             }
+        }
+
+        private void OnePlayerWin(PlayerState playerState)
+        {
+            MakeAllPlayersLost();
+            playerState.state = SuslikState.IamWon;
         }
 
         public void PlayerWouldLikeStop(PlayerState playerState)
@@ -98,11 +104,11 @@ namespace ConsoleApp1.Logic
                 .Where(x => x.SumPoint <= 21)
                 .OrderBy(x => x.SumPoint);
 
-            MakeAllPlayersLost();
+            
 
             if (sorted.Any())
             {
-
+                MakeAllPlayersLost();
                 var last = sorted.Last();
                 var allWinners = sorted.Where(x => x.SumPoint == last.SumPoint);
                 foreach (var w in allWinners)

@@ -113,7 +113,7 @@ namespace Tests
             session.PlayerTakeCard(vent);
             vent.SumPoint.Should().Be(21);
             vent.state.Should().Be(SuslikState.IamWon);
-
+            patric.state.Should().Be(SuslikState.IamLost);
             session.PlayerTakeCard(patric);
             patric.CardsInHands.Count.Should().Be(2);
         }
