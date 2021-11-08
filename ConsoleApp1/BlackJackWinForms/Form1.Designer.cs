@@ -35,6 +35,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,6 +67,7 @@
             this.label1.Size = new System.Drawing.Size(45, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Score";
+        
             // 
             // score
             // 
@@ -104,11 +106,22 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(36, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 17);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Score";
+            
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.score);
             this.Controls.Add(this.label1);
@@ -134,6 +147,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label2;
     }
 }
 

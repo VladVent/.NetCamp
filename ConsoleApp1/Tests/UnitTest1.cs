@@ -27,16 +27,16 @@ namespace Tests
             var p2 = session.Join("P2");
             var p3 = session.Join("P3");
             var p4 = session.Join("P4");
-            
+
             session.PlayerWouldLikeStop(p1);
             session.PlayerTakeCard(p2);
             session.PlayerWouldLikeStop(p3);
             session.PlayerTakeCard(p4);
             session.PlayerWouldLikeStop(p2);
             session.PlayerWouldLikeStop(p4);
-            
+
             session.GetState().Players.Should().Contain(x => x.state == SuslikState.IamWon);
-            
+
 
         }
 
@@ -98,14 +98,14 @@ namespace Tests
             session.PlayerTakeCard(vent);
             vent.SumPoint.Should().Be(24);
             session.GetState().Players.Single().cardCount.Should().Be(3);
-            Assert.True(session.GetState().Players.Single().state == SuslikState.IamLost);
+            vent.state.Should().Be(SuslikState.IamLost);
         }
 
         [Fact]
         public void FlawlessVictoryEndRound()
         {
             var session = GetSessionWithCards(
-                new[] {CardName.Five, CardName.Five, CardName.Five, CardName.Ace, CardName.Ten});
+                new[] { CardName.Five, CardName.Five, CardName.Five, CardName.Ace, CardName.Ten });
 
             var vent = session.Join("Vent");
             var patric = session.Join("Patric");
@@ -130,8 +130,10 @@ namespace Tests
 
             session.PlayerWouldLikeStop(patrick);
             session.PlayerWouldLikeStop(vent);
-
-            session.GetState().Players.Should().OnlyContain(x => x.state == SuslikState.IamWon);
+            patrick.CardsInHands.Count.Should().Be(2);
+            patrick.SumPoint.Should().Be(10);
+            vent.SumPoint.Should().Be(10);
+            patrick.state.Should().Be(SuslikState.IamWon);
         }
 
         [Fact]
@@ -156,7 +158,18 @@ namespace Tests
                 {CardName.Five, CardName.Five, CardName.Seven, CardName.Five, CardName.Six});
             var vent = session.Join("Vent");
             
-            //throw new NotImplementedException();
+            session.RoundNumber.Should().Be(1);
+            vent.SumPoint.Should().Be(11);
+            session.RestartSession();
+            vent.CardsInHands.Count.Should().Be(2);
+            vent.state.Should().Be(SuslikState.IamThinking);
+            session.PlayerWouldLikeStop(vent);
+            session.RoundNumber.Should().Be(2);
+            session.PlayerWouldLikeStop(vent);
+            session.RestartSession();
+            session.RoundNumber.Should().Be(3);
+            session.PlayerWouldLikeStop(vent);
+          
         }
 
 

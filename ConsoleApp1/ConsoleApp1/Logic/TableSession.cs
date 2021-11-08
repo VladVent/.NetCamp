@@ -40,7 +40,7 @@ namespace ConsoleApp1.Logic
                 CardsInHands = deck.DealTheCards(),
             };
             player.state = ComputeState(player);
-            
+
             players.Add(player);
             CheckFlawlessWin(player);
             return player;
@@ -69,12 +69,11 @@ namespace ConsoleApp1.Logic
             {
                 playerState.CardsInHands.Push(deck.GetACard());
                 playerState.state = ComputeState(playerState);
-                CheckFlawlessWin(playerState);
             }
         }
-      
 
-            private void CheckFlawlessWin(PlayerState playerState)
+
+        private void CheckFlawlessWin(PlayerState playerState)
         {
             if (playerState.state == SuslikState.IamWon)
             {
@@ -104,20 +103,19 @@ namespace ConsoleApp1.Logic
                 .Where(x => x.SumPoint <= 21)
                 .OrderBy(x => x.SumPoint);
 
-            
 
+            MakeAllPlayersLost();
             if (sorted.Any())
             {
-                MakeAllPlayersLost();
+                
                 var last = sorted.Last();
                 var allWinners = sorted.Where(x => x.SumPoint == last.SumPoint);
                 foreach (var w in allWinners)
                     w.state = SuslikState.IamWon;
             }
-            
 
-            //RestartSession();
         }
+
 
         private void MakeAllPlayersLost()
         {
@@ -125,15 +123,17 @@ namespace ConsoleApp1.Logic
                 player.state = SuslikState.IamLost;
         }
 
-        private void RestartSession()
+        public void RestartSession()
         {
             RoundNumber++;
-            deck = Deck.CreateCards().ShuffleDeck(_seed);
+            deck = Deck.CreateCards().ShuffleDeck(Environment.TickCount);
             foreach (var p in players)
             {
-                p.state = SuslikState.IamThinking;
                 p.CardsInHands = deck.DealTheCards();
+                p.state = SuslikState.IamThinking;
+                p.state = ComputeState(p);
             }
+
         }
 
 
@@ -141,8 +141,8 @@ namespace ConsoleApp1.Logic
         {
             var p = new List<Suslik>();
             foreach (var d in players)
-                p.Add(new Suslik() {playerName = d.Name, state = d.state, cardCount = d.CardsInHands.Count});
-            return new VisibleSessionState() {Players = p};
+                p.Add(new Suslik() { playerName = d.Name, state = d.state, cardCount = d.CardsInHands.Count });
+            return new VisibleSessionState() { Players = p };
         }
     }
 }
