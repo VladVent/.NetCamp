@@ -8,7 +8,7 @@
 
         public override string ToString()
         {
-            return $"{Name} {CardSuit}: {Power}";
+            return $"{Name} {CardSuit}";
         }
         public Card(CardSuit cardSuit, CardName name)
         {

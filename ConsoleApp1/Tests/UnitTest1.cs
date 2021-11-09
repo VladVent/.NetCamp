@@ -105,7 +105,7 @@ namespace Tests
         public void FlawlessVictoryEndRound()
         {
             var session = GetSessionWithCards(
-                new[] { CardName.Five, CardName.Five, CardName.Five, CardName.Ace, CardName.Ten });
+                new[] { CardName.FIVE, CardName.FIVE, CardName.FIVE, CardName.ACE, CardName.TEN });
 
             var vent = session.Join("Vent");
             var patric = session.Join("Patric");
@@ -123,7 +123,7 @@ namespace Tests
         public void BothPlayersShouldBeWinnersIfDraw()
         {
             var session = GetSessionWithCards(new[]
-                {CardName.Five, CardName.Five, CardName.Five, CardName.Five, CardName.Five});
+                {CardName.FIVE, CardName.FIVE, CardName.FIVE, CardName.FIVE, CardName.FIVE});
 
             var patrick = session.Join("Patrick");
             var vent = session.Join("Vent");
@@ -140,7 +140,7 @@ namespace Tests
         public void PlayerLostWhenHeHasLessPoints()
         {
             var session = GetSessionWithCards(new[]
-                {CardName.Five, CardName.Five, CardName.Seven, CardName.Five, CardName.Six});
+                {CardName.FIVE, CardName.FIVE, CardName.SEVEN, CardName.FIVE, CardName.SIX});
             var vent = session.Join("Vent");
             var patrick = session.Join("Patrick");
 
@@ -155,7 +155,7 @@ namespace Tests
         public void SessionRestartShouldHappenAfterSomebodyWon()
         {
             var session = GetSessionWithCards(new[]
-                {CardName.Five, CardName.Five, CardName.Seven, CardName.Five, CardName.Six});
+                {CardName.FIVE, CardName.FIVE, CardName.SEVEN, CardName.FIVE, CardName.SIX});
             var vent = session.Join("Vent");
             
             session.RoundNumber.Should().Be(1);

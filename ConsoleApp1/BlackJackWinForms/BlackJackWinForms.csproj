@@ -33,8 +33,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.Compatibility" />
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.IO.Ports, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Ports.6.0.0\lib\net461\System.IO.Ports.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,7 +75,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -84,6 +96,63 @@
       <Project>{d4534cc8-c960-4c4c-97ee-ded43b1b3ff3}</Project>
       <Name>ConsoleApp1</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CardBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ACE Clubs.png" />
+    <Content Include="Resources\ACE Diamonds.png" />
+    <Content Include="Resources\ACE Hearts.png" />
+    <Content Include="Resources\ACE Spades.png" />
+    <Content Include="Resources\EIGHT Clubs.png" />
+    <Content Include="Resources\EIGHT Diamonds.png" />
+    <Content Include="Resources\EIGHT Hearts.png" />
+    <Content Include="Resources\EIGHT Spades.png" />
+    <Content Include="Resources\FIVE Clubs.png" />
+    <Content Include="Resources\FIVE Diamonds.png" />
+    <Content Include="Resources\FIVE Hearts.png" />
+    <Content Include="Resources\FIVE Spades.png" />
+    <Content Include="Resources\FOUR Clubs.png" />
+    <Content Include="Resources\FOUR Diamonds.png" />
+    <Content Include="Resources\FOUR Hearts.png" />
+    <Content Include="Resources\FOUR Spades.png" />
+    <Content Include="Resources\JACK Clubs.png" />
+    <Content Include="Resources\JACK Diamonds.png" />
+    <Content Include="Resources\JACK Hearts.png" />
+    <Content Include="Resources\JACK Spades.png" />
+    <Content Include="Resources\KING Clubs.png" />
+    <Content Include="Resources\KING Diamonds.png" />
+    <Content Include="Resources\KING Hearts.png" />
+    <Content Include="Resources\KING Spades.png" />
+    <Content Include="Resources\NINE Clubs.png" />
+    <Content Include="Resources\NINE Diamonds.png" />
+    <Content Include="Resources\NINE Hearts.png" />
+    <Content Include="Resources\NINE Spades.png" />
+    <Content Include="Resources\QUEEN Clubs.png" />
+    <Content Include="Resources\QUEEN Diamonds.png" />
+    <Content Include="Resources\QUEEN Hearts.png" />
+    <Content Include="Resources\QUEEN Spades.png" />
+    <Content Include="Resources\SEVEN Clubs.png" />
+    <Content Include="Resources\SEVEN Diamonds.png" />
+    <Content Include="Resources\SEVEN Hearts.png" />
+    <Content Include="Resources\SEVEN Spades.png" />
+    <Content Include="Resources\SIX Clubs.png" />
+    <Content Include="Resources\SIX Diamonds.png" />
+    <Content Include="Resources\SIX Hearts.png" />
+    <Content Include="Resources\SIX Spades.png" />
+    <Content Include="Resources\TEN Clubs.png" />
+    <Content Include="Resources\TEN Diamonds.png" />
+    <Content Include="Resources\TEN Hearts.png" />
+    <Content Include="Resources\TEN Spades.png" />
+    <Content Include="Resources\THREE Clubs.png" />
+    <Content Include="Resources\THREE Diamonds.png" />
+    <Content Include="Resources\THREE Hearts.png" />
+    <Content Include="Resources\THREE Spades.png" />
+    <Content Include="Resources\TWO Clubs.png" />
+    <Content Include="Resources\TWO Diamonds.png" />
+    <Content Include="Resources\TWO Hearts.png" />
+    <Content Include="Resources\TWO Spades.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
