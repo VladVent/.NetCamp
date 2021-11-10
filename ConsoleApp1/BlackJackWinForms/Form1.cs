@@ -14,7 +14,7 @@ namespace BlackJackWinForms
         private TableSession session;
         private PlayerState human;
         private PictureBox pictureBox;
-        private List<PictureBox> listPictureBoxes;
+        private List<PictureBox> listPictureBoxes = new List<PictureBox>();
         private DirectoryInfo di = new DirectoryInfo(@"../../Resources");
 
 
@@ -26,7 +26,6 @@ namespace BlackJackWinForms
         private List<PictureBox> ShowCardsAfterEndRound(PlayerState player)
         {
             FileInfo[] fileInfo = di.GetFiles("*.png");
-            listPictureBoxes = new List<PictureBox>();
             foreach (var p in fileInfo)
             {
                 var result = Path.GetFileNameWithoutExtension(p.Name);
@@ -86,12 +85,13 @@ namespace BlackJackWinForms
 
             if (human.state != PlayerInGameState.IamThinking)
                 ShowCardsAfterEndRound(human);
+
             if (bot.state != PlayerInGameState.IamThinking)
             {
                 pointX = 400;
+                CleanCardFace();
                 ShowCardsAfterEndRound(bot);
             }
-
         }
         private void PlayerWouldLikeStopClick(object sender, EventArgs e)
         {
@@ -101,24 +101,26 @@ namespace BlackJackWinForms
 
         private void RestartClick(object sender, EventArgs e)
         {
-
+            pointX = -50;
             label2.Text = session.RoundNumber.ToString();
             session.RestartSession();
-            CleanCardFace(human);
-            CleanCardFace(bot);
             RefreshButtons();
+            CleanCardFace();
         }
 
-        private void CleanCardFace(PlayerState playerState)
+        private void CleanCardFace()
         {
+            if (listPictureBoxes != null)
+            {
                 foreach (var l in listPictureBoxes)
                 {
                     l.Dispose();
                     pictureBox.Dispose();
                 }
                 listPictureBoxes.Clear();
-
+            }
         }
+
 
         private PlayerState bot;
         private void Restart()
