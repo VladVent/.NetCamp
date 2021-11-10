@@ -13,6 +13,7 @@ namespace BlackJackWinForms
         private int pointX = -50;
         private TableSession session;
         private PlayerState human;
+        private PictureBox pictureBox;
         private List<PictureBox> listPictureBoxes;
         private DirectoryInfo di = new DirectoryInfo(@"../../Resources");
 
@@ -33,17 +34,17 @@ namespace BlackJackWinForms
                 {
                     if (result == c.ToString())
                     {
-                        PictureBox pictureBox = new PictureBox();
+                        pictureBox = new PictureBox();
                         pictureBox.Image = Image.FromFile(p.FullName);
-                        CreateDynamicPictureBox(pictureBox);
+                        CreateDynamicPictureBoxView(pictureBox);
                     }
                 }
             }
-            PictureBoxSizes(pointX);
+            PictureBoxViewSizes(pointX);
             return listPictureBoxes;
         }
 
-        private List<PictureBox> PictureBoxSizes(int pointX)
+        private List<PictureBox> PictureBoxViewSizes(int pointX)
         {
             foreach (var d in listPictureBoxes)
             {
@@ -56,7 +57,7 @@ namespace BlackJackWinForms
             return listPictureBoxes;
         }
 
-        private List<PictureBox> CreateDynamicPictureBox(PictureBox picBox)
+        private List<PictureBox> CreateDynamicPictureBoxView(PictureBox picBox)
         {
             Controls.Add(picBox);
             listPictureBoxes.Add(picBox);
@@ -64,49 +65,60 @@ namespace BlackJackWinForms
             return listPictureBoxes;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void StartWinForm(object sender, EventArgs e)
         {
             Restart();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void PlayerTakeCardClick(object sender, EventArgs e)
         {
             session.PlayerTakeCard(human);
-            RefreshButttons();
+            RefreshButtons();
         }
 
-        private void RefreshButttons()
+        private void RefreshButtons()
         {
-            button1.Enabled = human.state == PlayerThinksState.IamThinking;
-            var winnersAvailable = session.GetState().Players.Any(x => x.state == PlayerThinksState.IamWon);
-            bool iAmLost = human.state == PlayerThinksState.IamLost;
+            button1.Enabled = human.state == PlayerInGameState.IamThinking;
+            var winnersAvailable = session.GetState().Players.Any(x => x.state == PlayerInGameState.IamWon);
+            bool iAmLost = human.state == PlayerInGameState.IamLost;
             this.score.Text = $"{human.SumPoint} {human.state} \r\n Bot Score:" + bot.SumPoint + " " + bot.state;
             button2.Enabled = !iAmLost && !winnersAvailable;
 
-            if (human.state == PlayerThinksState.IamDoneTakingCards || human.state == PlayerThinksState.IamWon || human.state == PlayerThinksState.IamLost)
+            if (human.state != PlayerInGameState.IamThinking)
                 ShowCardsAfterEndRound(human);
-            if (bot.state == PlayerThinksState.IamDoneTakingCards || bot.state == PlayerThinksState.IamWon || bot.state == PlayerThinksState.IamLost)
+            if (bot.state != PlayerInGameState.IamThinking)
             {
                 pointX = 400;
                 ShowCardsAfterEndRound(bot);
             }
 
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void PlayerWouldLikeStopClick(object sender, EventArgs e)
         {
             session.PlayerWouldLikeStop(human);
-            RefreshButttons();
+            RefreshButtons();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void RestartClick(object sender, EventArgs e)
         {
 
             label2.Text = session.RoundNumber.ToString();
             session.RestartSession();
-            RefreshButttons();
-            //Restart();
+            CleanCardFace(human);
+            CleanCardFace(bot);
+            RefreshButtons();
         }
 
+        private void CleanCardFace(PlayerState playerState)
+        {
+                foreach (var l in listPictureBoxes)
+                {
+                    l.Dispose();
+                    pictureBox.Dispose();
+                }
+                listPictureBoxes.Clear();
+
+        }
 
         private PlayerState bot;
         private void Restart()
@@ -115,27 +127,14 @@ namespace BlackJackWinForms
             session = new TableSession(Environment.TickCount);
             human = session.Join("Human");
             bot = session.Join("BOT");
-            RefreshButttons();
+            RefreshButtons();
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void TestBotIsReadyClick(object sender, EventArgs e)
         {
             session.PlayerWouldLikeStop(bot);
-            RefreshButttons();
-
-        }
-
-
-
-        private void fileInfo1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void fileInfo4_Click(object sender, EventArgs e)
-        {
-
+            RefreshButtons();
         }
     }
 }

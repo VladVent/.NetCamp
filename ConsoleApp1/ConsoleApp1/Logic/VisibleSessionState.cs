@@ -4,17 +4,17 @@ namespace ConsoleApp1.Logic
 {
     public class VisibleSessionState
     {
-        public List<Suslik> Players = new List<Suslik>();
+        public List<SessionsState> Players = new List<SessionsState>();
     }
 
-    public class Suslik
+    public class SessionsState
     {
         public string playerName;
         public int cardCount;
-        public PlayerThinksState state;
+        public PlayerInGameState state;
     }
 
-    public enum PlayerThinksState
+    public enum PlayerInGameState
     {
         IamDoneTakingCards,
         IamThinking,

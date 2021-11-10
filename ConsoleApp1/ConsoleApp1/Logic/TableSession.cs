@@ -13,9 +13,9 @@ namespace ConsoleApp1.Logic
         public int RoundNumber { get; private set; } = 1;
 
         public bool AllPlayersDoneTakingCards => players.All(x =>
-            x.state == PlayerThinksState.IamDoneTakingCards || x.state == PlayerThinksState.IamLost);
+            x.state == PlayerInGameState.IamDoneTakingCards || x.state == PlayerInGameState.IamLost);
 
-        public bool WeHaveWinners => players.Any(x => x.state == PlayerThinksState.IamWon);
+        public bool WeHaveWinners => players.Any(x => x.state == PlayerInGameState.IamWon);
 
 
         public TableSession(int seed)
@@ -46,15 +46,15 @@ namespace ConsoleApp1.Logic
             return player;
         }
 
-        private static PlayerThinksState ComputeState(PlayerState p)
+        private static PlayerInGameState ComputeState(PlayerState p)
         {
 
             if (p.SumPoint > 21)
-                return PlayerThinksState.IamLost;
+                return PlayerInGameState.IamLost;
 
             if (p.SumPoint == 21)
-                return PlayerThinksState.IamWon;
-            return PlayerThinksState.IamThinking;
+                return PlayerInGameState.IamWon;
+            return PlayerInGameState.IamThinking;
         }
 
         public void PlayerTakeCard(PlayerState playerState)
@@ -65,7 +65,7 @@ namespace ConsoleApp1.Logic
                 OnePlayerWin(playerState);
                 return;
             }
-            if (playerState.state == PlayerThinksState.IamThinking)
+            if (playerState.state == PlayerInGameState.IamThinking)
             {
                 playerState.CardsInHands.Push(deck.GetACard());
                 playerState.state = ComputeState(playerState);
@@ -75,7 +75,7 @@ namespace ConsoleApp1.Logic
 
         private void CheckFlawlessWin(PlayerState playerState)
         {
-            if (playerState.state == PlayerThinksState.IamWon)
+            if (playerState.state == PlayerInGameState.IamWon)
             {
                 OnePlayerWin(playerState);
             }
@@ -84,7 +84,7 @@ namespace ConsoleApp1.Logic
         private void OnePlayerWin(PlayerState playerState)
         {
             MakeAllPlayersLost();
-            playerState.state = PlayerThinksState.IamWon;
+            playerState.state = PlayerInGameState.IamWon;
         }
 
         public void PlayerWouldLikeStop(PlayerState playerState)
@@ -92,8 +92,8 @@ namespace ConsoleApp1.Logic
             if (WeHaveWinners)
                 return;
 
-            if (playerState.state == PlayerThinksState.IamThinking)
-                playerState.state = PlayerThinksState.IamDoneTakingCards;
+            if (playerState.state == PlayerInGameState.IamThinking)
+                playerState.state = PlayerInGameState.IamDoneTakingCards;
 
             if (!AllPlayersDoneTakingCards)
                 return;
@@ -111,7 +111,7 @@ namespace ConsoleApp1.Logic
                 var last = sorted.Last();
                 var allWinners = sorted.Where(x => x.SumPoint == last.SumPoint);
                 foreach (var w in allWinners)
-                    w.state = PlayerThinksState.IamWon;
+                    w.state = PlayerInGameState.IamWon;
             }
 
         }
@@ -120,7 +120,7 @@ namespace ConsoleApp1.Logic
         private void MakeAllPlayersLost()
         {
             foreach (var player in players)
-                player.state = PlayerThinksState.IamLost;
+                player.state = PlayerInGameState.IamLost;
         }
 
         public void RestartSession()
@@ -130,7 +130,7 @@ namespace ConsoleApp1.Logic
             foreach (var p in players)
             {
                 p.CardsInHands = deck.DealTheCards();
-                p.state = PlayerThinksState.IamThinking;
+                p.state = PlayerInGameState.IamThinking;
                 p.state = ComputeState(p);
             }
 
@@ -139,9 +139,9 @@ namespace ConsoleApp1.Logic
 
         public VisibleSessionState GetState()
         {
-            var p = new List<Suslik>();
+            var p = new List<SessionsState>();
             foreach (var d in players)
-                p.Add(new Suslik() { playerName = d.Name, state = d.state, cardCount = d.CardsInHands.Count });
+                p.Add(new SessionsState() { playerName = d.Name, state = d.state, cardCount = d.CardsInHands.Count });
             return new VisibleSessionState() { Players = p };
         }
     }
