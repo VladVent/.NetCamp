@@ -35,7 +35,7 @@ namespace Tests
             session.PlayerWouldLikeStop(p2);
             session.PlayerWouldLikeStop(p4);
 
-            session.GetState().Players.Should().Contain(x => x.state == SuslikState.IamWon);
+            session.GetState().Players.Should().Contain(x => x.state == PlayerThinksState.IamWon);
 
 
         }
@@ -53,12 +53,12 @@ namespace Tests
 
 
             vent.SumPoint.Should().Be(14);
-            Assert.True(session.GetState().Players.Single().state == SuslikState.IamThinking);
+            Assert.True(session.GetState().Players.Single().state == PlayerThinksState.IamThinking);
 
             var petro = session.Join("Petro");
             session.GetState().Players.Count.Should().Be(2);
             petro.SumPoint.Should().Be(17);
-            Assert.True(petro.state == SuslikState.IamThinking);
+            Assert.True(petro.state == PlayerThinksState.IamThinking);
         }
 
 
@@ -80,7 +80,7 @@ namespace Tests
             var session = GetFirstCombination();
 
             var vent = session.Join("Vent");
-            vent.state.Should().Be(SuslikState.IamThinking);
+            vent.state.Should().Be(PlayerThinksState.IamThinking);
 
             session.PlayerTakeCard(vent);
             session.PlayerTakeCard(vent);
@@ -98,7 +98,7 @@ namespace Tests
             session.PlayerTakeCard(vent);
             vent.SumPoint.Should().Be(24);
             session.GetState().Players.Single().cardCount.Should().Be(3);
-            vent.state.Should().Be(SuslikState.IamLost);
+            vent.state.Should().Be(PlayerThinksState.IamLost);
         }
 
         [Fact]
@@ -112,8 +112,8 @@ namespace Tests
 
             session.PlayerTakeCard(vent);
             vent.SumPoint.Should().Be(21);
-            vent.state.Should().Be(SuslikState.IamWon);
-            patric.state.Should().Be(SuslikState.IamLost);
+            vent.state.Should().Be(PlayerThinksState.IamWon);
+            patric.state.Should().Be(PlayerThinksState.IamLost);
             session.PlayerTakeCard(patric);
             patric.CardsInHands.Count.Should().Be(2);
         }
@@ -133,7 +133,7 @@ namespace Tests
             patrick.CardsInHands.Count.Should().Be(2);
             patrick.SumPoint.Should().Be(10);
             vent.SumPoint.Should().Be(10);
-            patrick.state.Should().Be(SuslikState.IamWon);
+            patrick.state.Should().Be(PlayerThinksState.IamWon);
         }
 
         [Fact]
@@ -146,8 +146,8 @@ namespace Tests
 
             session.PlayerWouldLikeStop(vent);
             session.PlayerWouldLikeStop(patrick);
-            vent.state.Should().Be(SuslikState.IamLost);
-            patrick.state.Should().Be(SuslikState.IamWon);
+            vent.state.Should().Be(PlayerThinksState.IamLost);
+            patrick.state.Should().Be(PlayerThinksState.IamWon);
         }
 
 
@@ -162,7 +162,7 @@ namespace Tests
             vent.SumPoint.Should().Be(11);
             session.RestartSession();
             vent.CardsInHands.Count.Should().Be(2);
-            vent.state.Should().Be(SuslikState.IamThinking);
+            vent.state.Should().Be(PlayerThinksState.IamThinking);
             session.PlayerWouldLikeStop(vent);
             session.RoundNumber.Should().Be(2);
             session.PlayerWouldLikeStop(vent);

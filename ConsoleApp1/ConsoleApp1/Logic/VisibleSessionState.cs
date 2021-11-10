@@ -11,10 +11,10 @@ namespace ConsoleApp1.Logic
     {
         public string playerName;
         public int cardCount;
-        public SuslikState state;
+        public PlayerThinksState state;
     }
 
-    public enum SuslikState
+    public enum PlayerThinksState
     {
         IamDoneTakingCards,
         IamThinking,

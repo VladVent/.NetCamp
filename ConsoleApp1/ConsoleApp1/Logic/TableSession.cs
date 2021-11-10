@@ -13,9 +13,9 @@ namespace ConsoleApp1.Logic
         public int RoundNumber { get; private set; } = 1;
 
         public bool AllPlayersDoneTakingCards => players.All(x =>
-            x.state == SuslikState.IamDoneTakingCards || x.state == SuslikState.IamLost);
+            x.state == PlayerThinksState.IamDoneTakingCards || x.state == PlayerThinksState.IamLost);
 
-        public bool WeHaveWinners => players.Any(x => x.state == SuslikState.IamWon);
+        public bool WeHaveWinners => players.Any(x => x.state == PlayerThinksState.IamWon);
 
 
         public TableSession(int seed)
@@ -46,15 +46,15 @@ namespace ConsoleApp1.Logic
             return player;
         }
 
-        private static SuslikState ComputeState(PlayerState p)
+        private static PlayerThinksState ComputeState(PlayerState p)
         {
 
             if (p.SumPoint > 21)
-                return SuslikState.IamLost;
+                return PlayerThinksState.IamLost;
 
             if (p.SumPoint == 21)
-                return SuslikState.IamWon;
-            return SuslikState.IamThinking;
+                return PlayerThinksState.IamWon;
+            return PlayerThinksState.IamThinking;
         }
 
         public void PlayerTakeCard(PlayerState playerState)
@@ -65,7 +65,7 @@ namespace ConsoleApp1.Logic
                 OnePlayerWin(playerState);
                 return;
             }
-            if (playerState.state == SuslikState.IamThinking)
+            if (playerState.state == PlayerThinksState.IamThinking)
             {
                 playerState.CardsInHands.Push(deck.GetACard());
                 playerState.state = ComputeState(playerState);
@@ -75,7 +75,7 @@ namespace ConsoleApp1.Logic
 
         private void CheckFlawlessWin(PlayerState playerState)
         {
-            if (playerState.state == SuslikState.IamWon)
+            if (playerState.state == PlayerThinksState.IamWon)
             {
                 OnePlayerWin(playerState);
             }
@@ -84,7 +84,7 @@ namespace ConsoleApp1.Logic
         private void OnePlayerWin(PlayerState playerState)
         {
             MakeAllPlayersLost();
-            playerState.state = SuslikState.IamWon;
+            playerState.state = PlayerThinksState.IamWon;
         }
 
         public void PlayerWouldLikeStop(PlayerState playerState)
@@ -92,8 +92,8 @@ namespace ConsoleApp1.Logic
             if (WeHaveWinners)
                 return;
 
-            if (playerState.state == SuslikState.IamThinking)
-                playerState.state = SuslikState.IamDoneTakingCards;
+            if (playerState.state == PlayerThinksState.IamThinking)
+                playerState.state = PlayerThinksState.IamDoneTakingCards;
 
             if (!AllPlayersDoneTakingCards)
                 return;
@@ -111,7 +111,7 @@ namespace ConsoleApp1.Logic
                 var last = sorted.Last();
                 var allWinners = sorted.Where(x => x.SumPoint == last.SumPoint);
                 foreach (var w in allWinners)
-                    w.state = SuslikState.IamWon;
+                    w.state = PlayerThinksState.IamWon;
             }
 
         }
@@ -120,7 +120,7 @@ namespace ConsoleApp1.Logic
         private void MakeAllPlayersLost()
         {
             foreach (var player in players)
-                player.state = SuslikState.IamLost;
+                player.state = PlayerThinksState.IamLost;
         }
 
         public void RestartSession()
@@ -130,7 +130,7 @@ namespace ConsoleApp1.Logic
             foreach (var p in players)
             {
                 p.CardsInHands = deck.DealTheCards();
-                p.state = SuslikState.IamThinking;
+                p.state = PlayerThinksState.IamThinking;
                 p.state = ComputeState(p);
             }
 

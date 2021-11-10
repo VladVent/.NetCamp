@@ -13,7 +13,6 @@ namespace BlackJackWinForms
         private int pointX = -50;
         private TableSession session;
         private PlayerState human;
-        private PictureBox pictureBox;
         private List<PictureBox> listPictureBoxes;
         private DirectoryInfo di = new DirectoryInfo(@"../../Resources");
 
@@ -23,40 +22,28 @@ namespace BlackJackWinForms
             InitializeComponent();
         }
 
-        private void CardsFace()
+        private List<PictureBox> ShowCardsAfterEndRound(PlayerState player)
         {
             FileInfo[] fileInfo = di.GetFiles("*.png");
-
             listPictureBoxes = new List<PictureBox>();
-            pictureBox = new PictureBox();
-
-            CreateDynamicPictureBox(pictureBox);
-            PictureBoxSizes(pointX);
-            ShowCardsAfterEndRound(fileInfo);
-        }
-
-        private void ShowCardsAfterEndRound(FileInfo[] fileInfo)
-        {
             foreach (var p in fileInfo)
             {
                 var result = Path.GetFileNameWithoutExtension(p.Name);
-                foreach (var c in human.CardsInHands)
+                foreach (var c in player.CardsInHands)
                 {
                     if (result == c.ToString())
                     {
-                        result.Count();
-                        foreach (var pi in listPictureBoxes)
-                        {
-                            pi.Image = Image.FromFile(p.FullName);
-                        }
+                        PictureBox pictureBox = new PictureBox();
+                        pictureBox.Image = Image.FromFile(p.FullName);
+                        CreateDynamicPictureBox(pictureBox);
                     }
-
                 }
-
             }
+            PictureBoxSizes(pointX);
+            return listPictureBoxes;
         }
 
-        private int PictureBoxSizes(int pointX)
+        private List<PictureBox> PictureBoxSizes(int pointX)
         {
             foreach (var d in listPictureBoxes)
             {
@@ -66,17 +53,15 @@ namespace BlackJackWinForms
                 d.Location = new Point(pointX, 100);
             }
 
-            return pointX;
+            return listPictureBoxes;
         }
 
-        private void CreateDynamicPictureBox(PictureBox picBox)
+        private List<PictureBox> CreateDynamicPictureBox(PictureBox picBox)
         {
-            for (var i = 0; i < human.CardsInHands.Count(); i++)
-            {
-                Controls.Add(picBox);
-                listPictureBoxes.Add(picBox);
+            Controls.Add(picBox);
+            listPictureBoxes.Add(picBox);
 
-            }
+            return listPictureBoxes;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -92,14 +77,20 @@ namespace BlackJackWinForms
 
         private void RefreshButttons()
         {
-            button1.Enabled = human.state == SuslikState.IamThinking;
-            var winnersAvailable = session.GetState().Players.Any(x => x.state == SuslikState.IamWon);
-            bool iAmLost = human.state == SuslikState.IamLost;
+            button1.Enabled = human.state == PlayerThinksState.IamThinking;
+            var winnersAvailable = session.GetState().Players.Any(x => x.state == PlayerThinksState.IamWon);
+            bool iAmLost = human.state == PlayerThinksState.IamLost;
             this.score.Text = $"{human.SumPoint} {human.state} \r\n Bot Score:" + bot.SumPoint + " " + bot.state;
             button2.Enabled = !iAmLost && !winnersAvailable;
 
-            if (human.state == SuslikState.IamDoneTakingCards || human.state == SuslikState.IamWon)
-                CardsFace();
+            if (human.state == PlayerThinksState.IamDoneTakingCards || human.state == PlayerThinksState.IamWon || human.state == PlayerThinksState.IamLost)
+                ShowCardsAfterEndRound(human);
+            if (bot.state == PlayerThinksState.IamDoneTakingCards || bot.state == PlayerThinksState.IamWon || bot.state == PlayerThinksState.IamLost)
+            {
+                pointX = 400;
+                ShowCardsAfterEndRound(bot);
+            }
+
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -111,7 +102,6 @@ namespace BlackJackWinForms
         {
 
             label2.Text = session.RoundNumber.ToString();
-
             session.RestartSession();
             RefreshButttons();
             //Restart();

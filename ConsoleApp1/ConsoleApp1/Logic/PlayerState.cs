@@ -9,6 +9,6 @@ namespace ConsoleApp1.Logic
         public string Name { get; set; }
         public Stack<Card> CardsInHands = new Stack<Card>();
         public int SumPoint => CardsInHands.Sum(x => x.Power);
-        public SuslikState state { get; set; }
+        public PlayerThinksState state { get; set; }
     }
 }
