@@ -4,14 +4,19 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using ConsoleApp1.Logic;
+using System.Collections.Generic;
 
 namespace BlackJackWinForms
 {
     public partial class Form1 : Form
     {
+        private int pointX = -50;
         private TableSession session;
         private PlayerState human;
         private PictureBox pictureBox;
+        private List<PictureBox> listPictureBoxes;
+        private DirectoryInfo di = new DirectoryInfo(@"../../Resources");
+
 
         public Form1()
         {
@@ -20,23 +25,57 @@ namespace BlackJackWinForms
 
         private void CardsFace()
         {
-            DirectoryInfo di = new DirectoryInfo(@"D:\.NetCamp\ConsoleApp1\BlackJackWinForms\Resources\");
             FileInfo[] fileInfo = di.GetFiles("*.png");
+
+            listPictureBoxes = new List<PictureBox>();
             pictureBox = new PictureBox();
-            pictureBox1.Image = null;
-            foreach (var c in human.CardsInHands)
+
+            CreateDynamicPictureBox(pictureBox);
+            PictureBoxSizes(pointX);
+            ShowCardsAfterEndRound(fileInfo);
+        }
+
+        private void ShowCardsAfterEndRound(FileInfo[] fileInfo)
+        {
+            foreach (var p in fileInfo)
             {
-                foreach (var p in fileInfo)
+                var result = Path.GetFileNameWithoutExtension(p.Name);
+                foreach (var c in human.CardsInHands)
                 {
-                    var result = Path.GetFileNameWithoutExtension(p.Name);
                     if (result == c.ToString())
                     {
-                        if(pictureBox1.Image == null)
-                            pictureBox1.Image = Image.FromFile(p.FullName);
-                        else
-                            pictureBox2.Image = Image.FromFile(p.FullName);
+                        result.Count();
+                        foreach (var pi in listPictureBoxes)
+                        {
+                            pi.Image = Image.FromFile(p.FullName);
+                        }
                     }
+
                 }
+
+            }
+        }
+
+        private int PictureBoxSizes(int pointX)
+        {
+            foreach (var d in listPictureBoxes)
+            {
+                pointX = pointX + 100;
+                d.Size = new System.Drawing.Size(164, 298);
+                d.SizeMode = PictureBoxSizeMode.StretchImage;
+                d.Location = new Point(pointX, 100);
+            }
+
+            return pointX;
+        }
+
+        private void CreateDynamicPictureBox(PictureBox picBox)
+        {
+            for (var i = 0; i < human.CardsInHands.Count(); i++)
+            {
+                Controls.Add(picBox);
+                listPictureBoxes.Add(picBox);
+
             }
         }
 
