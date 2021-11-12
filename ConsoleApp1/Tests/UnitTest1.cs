@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using ConsoleApp1.Logic;
-using ConsoleApp1.Types;
+using BlackJack.Logic;
+using BlackJack.Types;
 using FluentAssertions;
 using Xunit;
 
@@ -12,6 +12,17 @@ namespace Tests
         private static TableSession GetFirstCombination()
         {
             return new TableSession(1);
+        }
+
+
+        [Fact]
+        public void Only4_JacksInDeckAllowed()
+        {
+
+            var deck = Deck.CreateCards();
+            deck.Where(x => x.Name == nameof(CardName.JACK).ToUpper()).Should().HaveCount(4);
+
+
         }
 
         [Fact]
@@ -179,7 +190,7 @@ namespace Tests
         {
             var cards = new Stack<Card>();
             foreach (var name in array)
-                cards.Push(new Card(CardSuit.Hearts, name));
+                cards.Push(new Card(CardSuit.Hearts,name.ToString(), name));
             return cards;
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp1.Types
+﻿namespace BlackJack.Types
 {
     public class Card
     {

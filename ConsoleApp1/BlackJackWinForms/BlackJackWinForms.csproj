@@ -92,12 +92,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConsoleApp1\ConsoleApp1.csproj">
-      <Project>{d4534cc8-c960-4c4c-97ee-ded43b1b3ff3}</Project>
-      <Name>ConsoleApp1</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\CardBack.png" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +147,12 @@
     <Content Include="Resources\TWO Diamonds.png" />
     <Content Include="Resources\TWO Hearts.png" />
     <Content Include="Resources\TWO Spades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlackJack.Domain\BlackJack.Domain.csproj">
+      <Project>{691813dd-a152-4d40-b758-e9174a477d65}</Project>
+      <Name>BlackJack.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

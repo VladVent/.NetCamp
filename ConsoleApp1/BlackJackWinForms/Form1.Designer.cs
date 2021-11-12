@@ -29,36 +29,37 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.HumanDecideTakeACard = new System.Windows.Forms.Button();
+            this.HumanDecideToStop = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.score = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBoxArray1 = new Microsoft.VisualBasic.Compatibility.VB6.PictureBoxArray(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArray1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // HumanDecideTakeACard
             // 
-            this.button1.Location = new System.Drawing.Point(77, 531);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 70);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "TAKE MORE";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.PlayerTakeCardClick);
+            this.HumanDecideTakeACard.Location = new System.Drawing.Point(77, 531);
+            this.HumanDecideTakeACard.Name = "HumanDecideTakeACard";
+            this.HumanDecideTakeACard.Size = new System.Drawing.Size(107, 70);
+            this.HumanDecideTakeACard.TabIndex = 0;
+            this.HumanDecideTakeACard.Text = "TAKE MORE";
+            this.HumanDecideTakeACard.UseVisualStyleBackColor = true;
+            this.HumanDecideTakeACard.Click += new System.EventHandler(this.PlayerTakeCardClick);
             // 
-            // button2
+            // HumanDecideToStop
             // 
-            this.button2.Location = new System.Drawing.Point(301, 531);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 70);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "STOP";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.PlayerWouldLikeStopClick);
+            this.HumanDecideToStop.Location = new System.Drawing.Point(301, 531);
+            this.HumanDecideToStop.Name = "HumanDecideToStop";
+            this.HumanDecideToStop.Size = new System.Drawing.Size(107, 70);
+            this.HumanDecideToStop.TabIndex = 0;
+            this.HumanDecideToStop.Text = "STOP";
+            this.HumanDecideToStop.UseVisualStyleBackColor = true;
+            this.HumanDecideToStop.Click += new System.EventHandler(this.PlayerWouldLikeStopClick);
             // 
             // label1
             // 
@@ -107,6 +108,13 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Score";
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(54, 113);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1247, 384);
+            this.panel1.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -117,11 +125,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.HumanDecideToStop);
+            this.Controls.Add(this.HumanDecideTakeACard);
+            this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.StartWinForm);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArray1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -130,14 +138,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button HumanDecideTakeACard;
+        private System.Windows.Forms.Button HumanDecideToStop;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label score;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label2;
         private Microsoft.VisualBasic.Compatibility.VB6.PictureBoxArray pictureBoxArray1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConsoleApp1.Types;
+using BlackJack.Types;
 
-namespace ConsoleApp1.Logic
+namespace BlackJack.Logic
 {
     public class TableSession
     {

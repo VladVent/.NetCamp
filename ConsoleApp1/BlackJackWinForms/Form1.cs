@@ -3,140 +3,136 @@ using System.IO;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using ConsoleApp1.Logic;
+using BlackJack.Logic;
 using System.Collections.Generic;
 
 namespace BlackJackWinForms
 {
     public partial class Form1 : Form
     {
-        private int pointX = -50;
+
         private TableSession session;
         private PlayerState human;
-        private PictureBox pictureBox;
-        private List<PictureBox> listPictureBoxes = new List<PictureBox>();
-        private DirectoryInfo di = new DirectoryInfo(@"../../Resources");
+        private PlayerState bot;
+        Dictionary<string, Stream> cardToStream;
+
 
 
         public Form1()
         {
             InitializeComponent();
+            cardToStream = CreateCardsCache();           
+           
+            CreateDemoSession();            
         }
 
-        private List<PictureBox> ShowCardsAfterEndRound(PlayerState player)
+        private void CreateDemoSession()
         {
-            FileInfo[] fileInfo = di.GetFiles("*.png");
-            foreach (var p in fileInfo)
+            session = new TableSession(Environment.TickCount);
+            human = session.Join("Human");
+            bot = session.Join("BOT");
+        }
+
+        private static Dictionary<string, Stream> CreateCardsCache()
+        {
+            var files = new DirectoryInfo(@"../../Resources").GetFiles();
+            var cache =  new Dictionary<string, Stream>(StringComparer.OrdinalIgnoreCase);
+            foreach (var file in files)
             {
-                var result = Path.GetFileNameWithoutExtension(p.Name);
-                foreach (var c in player.CardsInHands)
+                var fileWithoutExtension = Path.GetFileNameWithoutExtension(file.Name);
+                var memStream = new MemoryStream(File.ReadAllBytes(file.FullName));
+                cache[fileWithoutExtension] = memStream;
+            }
+            return cache;
+        }
+
+
+
+        private void DrawSessionCards()
+        {
+
+            ClearVisibleCards();
+
+
+            const int CardWidth = 100;
+
+            int margin = 50;
+
+            DrawCards(human);
+            margin = 650;
+            DrawCards(bot);
+
+            void DrawCards(PlayerState state)
+            {
+                foreach (var c in state.CardsInHands)
                 {
-                    if (result == c.ToString())
+                    string key = "CardBack";
+                    if (state == bot && state.state != PlayerInGameState.IamThinking || state == human)
+                        key = c.ToString();
+
+
+                    var pictureBox = new PictureBox
                     {
-                        pictureBox = new PictureBox();
-                        pictureBox.Image = Image.FromFile(p.FullName);
-                        CreateDynamicPictureBoxView(pictureBox);
-                    }
+                        Image = Image.FromStream(cardToStream[key]),
+                        Size = new Size(164, 298),
+                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        Location = new Point(margin, 0),
+                        Parent = panel1,
+                    };
+                    margin += CardWidth;
+
                 }
             }
-            PictureBoxViewSizes(pointX);
-            return listPictureBoxes;
         }
 
-        private List<PictureBox> PictureBoxViewSizes(int pointX)
-        {
-            foreach (var d in listPictureBoxes)
-            {
-                pointX = pointX + 100;
-                d.Size = new System.Drawing.Size(164, 298);
-                d.SizeMode = PictureBoxSizeMode.StretchImage;
-                d.Location = new Point(pointX, 100);
-            }
 
-            return listPictureBoxes;
-        }
 
-        private List<PictureBox> CreateDynamicPictureBoxView(PictureBox picBox)
-        {
-            Controls.Add(picBox);
-            listPictureBoxes.Add(picBox);
 
-            return listPictureBoxes;
-        }
-
-        private void StartWinForm(object sender, EventArgs e)
-        {
-            Restart();
-        }
 
         private void PlayerTakeCardClick(object sender, EventArgs e)
         {
             session.PlayerTakeCard(human);
-            RefreshButtons();
+            RefreshButtonsStates();
+            DrawSessionCards();
         }
 
-        private void RefreshButtons()
+        private void RefreshButtonsStates()
         {
-            button1.Enabled = human.state == PlayerInGameState.IamThinking;
+            HumanDecideTakeACard.Enabled = human.state == PlayerInGameState.IamThinking;
             var winnersAvailable = session.GetState().Players.Any(x => x.state == PlayerInGameState.IamWon);
             bool iAmLost = human.state == PlayerInGameState.IamLost;
-            this.score.Text = $"{human.SumPoint} {human.state} \r\n Bot Score:" + bot.SumPoint + " " + bot.state;
-            button2.Enabled = !iAmLost && !winnersAvailable;
-
-            if (human.state != PlayerInGameState.IamThinking)
-                ShowCardsAfterEndRound(human);
-
-            if (bot.state != PlayerInGameState.IamThinking)
-            {
-                pointX = 400;
-                CleanCardFace();
-                ShowCardsAfterEndRound(bot);
-            }
+            score.Text = $"{human.SumPoint} {human.state} \r\n Bot Score:" + bot.SumPoint + " " + bot.state;
+            HumanDecideToStop.Enabled = !iAmLost && !winnersAvailable;
         }
         private void PlayerWouldLikeStopClick(object sender, EventArgs e)
         {
             session.PlayerWouldLikeStop(human);
-            RefreshButtons();
+            RefreshButtonsStates();
         }
 
         private void RestartClick(object sender, EventArgs e)
         {
-            pointX = -50;
             label2.Text = session.RoundNumber.ToString();
             session.RestartSession();
-            RefreshButtons();
-            CleanCardFace();
+            RefreshButtonsStates();
+            DrawSessionCards();
         }
 
-        private void CleanCardFace()
+
+
+        private void ClearVisibleCards()
         {
-            if (listPictureBoxes != null)
-            {
-                foreach (var l in listPictureBoxes)
-                {
-                    l.Dispose();
-                    pictureBox.Dispose();
-                }
-                listPictureBoxes.Clear();
-            }
+            panel1.Controls.Clear();
         }
 
 
-        private PlayerState bot;
-        private void Restart()
-        {
 
-            session = new TableSession(Environment.TickCount);
-            human = session.Join("Human");
-            bot = session.Join("BOT");
-            RefreshButtons();
-
-        }
-
+       
         private void TestBotIsReadyClick(object sender, EventArgs e)
         {
             session.PlayerWouldLikeStop(bot);
-            RefreshButtons();
+            RefreshButtonsStates();
+            DrawSessionCards();
         }
     }
 }
