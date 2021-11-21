@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackWinForms", "BlackJ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackJack.Domain", "BlackJack.Domain\BlackJack.Domain.csproj", "{691813DD-A152-4D40-B758-E9174A477D65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackJackBlazorApp", "WebApplication1\BlackJackBlazorApp.csproj", "{87EABC25-418E-4DF9-A340-EC042E71705A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEndBlazorTest", "BackEndBlazorTest\BackEndBlazorTest.csproj", "{2AA1D5F1-6F9A-49E1-B3E3-3CBAA119D402}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEndBlazorTest", "BackEndBlazorTest\BackEndBlazorTest.csproj", "{2AA1D5F1-6F9A-49E1-B3E3-3CBAA119D402}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackBlazor", "BlackJackBlazor\BlackJackBlazor.csproj", "{3AE90F46-AF1C-495C-B2B6-C521C5B7752B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +31,14 @@ Global
 		{691813DD-A152-4D40-B758-E9174A477D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{691813DD-A152-4D40-B758-E9174A477D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{691813DD-A152-4D40-B758-E9174A477D65}.Release|Any CPU.Build.0 = Release|Any CPU
-		{87EABC25-418E-4DF9-A340-EC042E71705A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87EABC25-418E-4DF9-A340-EC042E71705A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87EABC25-418E-4DF9-A340-EC042E71705A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87EABC25-418E-4DF9-A340-EC042E71705A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2AA1D5F1-6F9A-49E1-B3E3-3CBAA119D402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2AA1D5F1-6F9A-49E1-B3E3-3CBAA119D402}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AA1D5F1-6F9A-49E1-B3E3-3CBAA119D402}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AA1D5F1-6F9A-49E1-B3E3-3CBAA119D402}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AE90F46-AF1C-495C-B2B6-C521C5B7752B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AE90F46-AF1C-495C-B2B6-C521C5B7752B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AE90F46-AF1C-495C-B2B6-C521C5B7752B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AE90F46-AF1C-495C-B2B6-C521C5B7752B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

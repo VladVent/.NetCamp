@@ -9,7 +9,7 @@ namespace BlackJack.Logic
     {
         private readonly int _seed;
         private Stack<Card> deck;
-        private List<PlayerState> players = new List<PlayerState>();
+        public List<PlayerState> players = new List<PlayerState>();
         public int RoundNumber { get; private set; } = 1;
 
         public bool AllPlayersDoneTakingCards => players.All(x =>

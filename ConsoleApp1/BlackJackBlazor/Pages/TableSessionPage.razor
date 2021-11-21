@@ -1,0 +1,9 @@
+﻿@page "/TableSessionPage"
+@inherits TableSessionsPage
+<h3>TableSessionPage</h3>
+<EditForm Model = "@index">
+    @foreach(var p in index.blackJackSessions.tableSession.GetState().Players)
+    {
+        <p>p.playerName</p>
+    }
+</EditForm>
