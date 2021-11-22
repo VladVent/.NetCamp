@@ -11,4 +11,8 @@
     <ProjectReference Include="..\BlackJack.Domain\BlackJack.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controler\" />
+  </ItemGroup>
+
 </Project>

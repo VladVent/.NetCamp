@@ -9,14 +9,16 @@ using Microsoft.AspNetCore.Components;
 
 //Environment.TickCount
 
-namespace BlackJackWeb 
+namespace BlackJackWeb
 {
     public class BlackJackWebSessions
     {
-        public TableSession tableSession;
+        [Parameter]
+        public TableSession tableSession { get; set; }
+       
         public Queue<TableSession> sessions = new Queue<TableSession>();
 
-        public void AddPlayersInSessions(string identity)
+        public TableSession AddPlayersInSessions(string identity)
         {
             if (sessions.Count == 0)
             {
@@ -37,6 +39,7 @@ namespace BlackJackWeb
                 sessions.Enqueue(tableSession);
                 StartNewSessions(identity);
             }
+            return tableSession;
         }
 
         public void StartNewSessions(string identity)
@@ -48,12 +51,12 @@ namespace BlackJackWeb
 
         public void PlayerWouldLikeTakeCard(string identity)
         {
-            foreach(var sessionPlayers in sessions)
+            foreach (var sessionPlayers in sessions)
             {
                 var players = sessionPlayers.players;
-                foreach(var p in players)
+                foreach (var p in players)
                 {
-                    if(p.Name == identity)
+                    if (p.Name == identity)
                     {
                         sessionPlayers.PlayerTakeCard(p);
                     }
@@ -61,5 +64,30 @@ namespace BlackJackWeb
             }
 
         }
+
+        public void GetState(string identity)
+        {
+            var player = tableSession.GetState().Players;
+            foreach (var p in player)
+            {
+                identity = p.playerName;
+            }
+        }
+
+        public void PlayerWouldLikeStop(string identity)
+        {
+            foreach (var sessionPlayers in sessions)
+            {
+                var players = sessionPlayers.players;
+                foreach (var p in players)
+                {
+                    if (p.Name == identity)
+                    {
+                        sessionPlayers.PlayerWouldLikeStop(p);
+                    }
+                }
+            }
+        }
+
     }
 }

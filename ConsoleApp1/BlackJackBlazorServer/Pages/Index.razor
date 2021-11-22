@@ -2,7 +2,7 @@
 @using BlackJackBlazor.Pages
 @inherits IndexModel
 <h1>Welcome to the BlackJack</h1>
-<EditForm Model = "@blackJackSessions">
+<EditForm Model = "@NavigationManager">
     <InputText id = "name" @bind-Value = "@identity"></InputText> 
    <button  @onclick = "()=>Navigator(identity)">Connect</button>
 </EditForm>

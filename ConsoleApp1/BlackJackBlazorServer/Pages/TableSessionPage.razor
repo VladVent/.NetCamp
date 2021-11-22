@@ -2,4 +2,8 @@
 @using BlackJackBlazor.Pages
 @inherits TableSessionsPage
 <h3>TableSessionPage</h3>
-<p>@Identity</p>
+<EditForm Model = "@AddPlayersInSessions(Identity)">
+   <p>@TakePlayerName()</p>
+   <p>@TakePlayerState()</p>
+    <p>@TakeSumScore()</p>
+    </EditForm>

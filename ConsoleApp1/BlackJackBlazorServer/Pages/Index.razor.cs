@@ -21,13 +21,15 @@ namespace BlackJackBlazor.Pages
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
-        public BlackJackWebSessions blackJackSessions = new BlackJackWebSessions();
-        public string identity = string.Empty;
+        //public BlackJackWebSessions blackJackSessions = new BlackJackWebSessions();
+        //[Parameter]
+        //public TableSession session{ get; set; }
+
+        [Parameter]
+        public string identity{ get; set; }
 
         public void Navigator(string identity)
         {
-            identity = this.identity;
-            blackJackSessions.AddPlayersInSessions(identity);
             NavigationManager.NavigateTo(String.Format("TableSessionPage/{0}", identity));
         }
     }

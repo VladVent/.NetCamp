@@ -11,6 +11,13 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.JSInterop;
 using BlackJackBlazor;
+using BlackJack.Logic;
+using BlackJackWeb;
+
+//public string Name = string.Empty;
+//public string State = string.Empty;
+//public string Sum = string.Empty;
+//public string SumScore = string.Empty;
 
 namespace BlackJackBlazor.Pages
 {
@@ -18,32 +25,64 @@ namespace BlackJackBlazor.Pages
     {
         [Parameter]
         public string Identity { get; set; }
+        public TableSession tableSession { get; set; }
 
-        public IndexModel index = new IndexModel();
+        public Queue<TableSession> sessions = new Queue<TableSession>();
 
-
-        public string Name = string.Empty;
-        public string State = string.Empty;
-        public string Sum = string.Empty;
-        public string SumScore = string.Empty;
-
-        public string ShowStates()
+        public TableSession AddPlayersInSessions(string identity)
         {
-            var sessions = index.blackJackSessions.tableSession.GetState().Players;
-            foreach (var session in sessions)
+            if (sessions.Count == 0)
             {
-                Name = session.playerName;
-               
+                tableSession = new TableSession(Environment.TickCount);
+                sessions.Enqueue(tableSession);
             }
-            return Name;
+            var players = tableSession.players;
+            if (identity == "")
+            {
+                identity = "NoName";
+            }
+            if (players == null || players.Count < 6) // може пропустити 6 гравц€, €кщо нема йому супротивника. якщо знайдетьс€ його перекине в нову сес≥ю.
+            {
+                tableSession.Join(identity);
+            }
+            else
+            {
+                sessions.Enqueue(tableSession);
+                StartNewSessions(identity);
+            }
+            return tableSession;
         }
-        public void ShowSumScore()
+
+        public void StartNewSessions(string identity)
         {
-            var playersSum = index.blackJackSessions.tableSession.players;
-            foreach (var player in playersSum)
+            tableSession = new TableSession(Environment.TickCount);
+            tableSession.Join(identity);
+            AddPlayersInSessions(identity);
+        }
+        public string TakeStats = string.Empty;
+        public string TakeSumScore()
+        {
+            foreach(var p in tableSession.players)
             {
-                SumScore = player.SumPoint.ToString();
+                TakeStats = p.SumPoint.ToString();
             }
+            return TakeStats;
+        }
+        public string TakePlayerName()
+        {
+            foreach (var p in tableSession.GetState().Players)
+            {
+                TakeStats = p.playerName;
+            }
+            return TakeStats;
+        }
+        public string TakePlayerState()
+        {
+            foreach (var p in tableSession.GetState().Players)
+            {
+                TakeStats = p.state.ToString();
+            }
+            return TakeStats;
         }
     }
 }
