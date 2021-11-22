@@ -11,16 +11,15 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.JSInterop;
 using BlackJackBlazor;
-using BlackJackBlazor.Shared;
 
 namespace BlackJackBlazor.Pages
 {
-    public partial class TableSessionsPage : ComponentBase
+    public class TableSessionsPage : ComponentBase
     {
         [Parameter]
         public string Identity { get; set; }
 
-        public Index index = new Index();
+        public IndexModel index = new IndexModel();
 
 
         public string Name = string.Empty;

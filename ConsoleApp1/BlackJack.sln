@@ -11,7 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackJack.Domain", "BlackJa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEndBlazorTest", "BackEndBlazorTest\BackEndBlazorTest.csproj", "{2AA1D5F1-6F9A-49E1-B3E3-3CBAA119D402}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackBlazor", "BlackJackBlazor\BlackJackBlazor.csproj", "{3AE90F46-AF1C-495C-B2B6-C521C5B7752B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackJackBlazor", "BlackJackBlazor\BlackJackBlazor.csproj", "{3AE90F46-AF1C-495C-B2B6-C521C5B7752B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.DAL", "BlackJack.DAL\BlackJack.DAL.csproj", "{6B1246F3-CCAE-4D15-9D1C-9134299BC675}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.BLL", "BlackJack.BLL\BlackJack.BLL.csproj", "{687253BA-1BDD-42A4-8188-DAC5E82F6AA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackBlazorServer", "BlackJackBlazorServer\BlackJackBlazorServer.csproj", "{6C93BD8F-2710-4735-8091-DFDAFC9A8AEC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Old", "Old", "{0DE2626C-21FF-4A19-805E-6909563E4CCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +47,25 @@ Global
 		{3AE90F46-AF1C-495C-B2B6-C521C5B7752B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AE90F46-AF1C-495C-B2B6-C521C5B7752B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AE90F46-AF1C-495C-B2B6-C521C5B7752B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B1246F3-CCAE-4D15-9D1C-9134299BC675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B1246F3-CCAE-4D15-9D1C-9134299BC675}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B1246F3-CCAE-4D15-9D1C-9134299BC675}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B1246F3-CCAE-4D15-9D1C-9134299BC675}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687253BA-1BDD-42A4-8188-DAC5E82F6AA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687253BA-1BDD-42A4-8188-DAC5E82F6AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687253BA-1BDD-42A4-8188-DAC5E82F6AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687253BA-1BDD-42A4-8188-DAC5E82F6AA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C93BD8F-2710-4735-8091-DFDAFC9A8AEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C93BD8F-2710-4735-8091-DFDAFC9A8AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C93BD8F-2710-4735-8091-DFDAFC9A8AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C93BD8F-2710-4735-8091-DFDAFC9A8AEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B91D581A-A858-46FF-A19B-454D00A62C8A} = {0DE2626C-21FF-4A19-805E-6909563E4CCD}
+		{E28B9793-5673-41B8-9A57-3E47B6A8403F} = {0DE2626C-21FF-4A19-805E-6909563E4CCD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7E0C9E26-3335-4BED-8BCE-C4C958C9E380}

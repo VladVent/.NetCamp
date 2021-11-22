@@ -11,29 +11,24 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.JSInterop;
 using BlackJackBlazor;
-using BlackJackBlazor.Shared;
 using BlackJack.Logic;
 using Microsoft.AspNetCore.Http.Extensions;
 using BlackJackWeb;
 
 namespace BlackJackBlazor.Pages
 {
-    public partial class IndexModel : ComponentBase
+    public class IndexModel : ComponentBase
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
         public BlackJackWebSessions blackJackSessions = new BlackJackWebSessions();
         public string identity = string.Empty;
-      
+
         public void Navigator(string identity)
         {
             identity = this.identity;
             blackJackSessions.AddPlayersInSessions(identity);
             NavigationManager.NavigateTo(String.Format("TableSessionPage/{0}", identity));
-        }
-        protected override void OnAfterRender(bool firstRender)
-        {
-            base.OnAfterRender(firstRender);
         }
     }
 }

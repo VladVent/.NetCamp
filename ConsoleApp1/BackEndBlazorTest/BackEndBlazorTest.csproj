@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlackJackBlazor\BlackJackBlazor.csproj" />
+    <ProjectReference Include="..\BlackJackBlazorServer\BlackJackBlazorServer.csproj" />
   </ItemGroup>
 
 </Project>
