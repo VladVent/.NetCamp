@@ -88,21 +88,38 @@ namespace BlackJack.BLL.Services
 
         public void PlayerTakeCard(TableSession tableSession, string identity)
         {
-
-            var playerName = tableSession.players.Where(x => x.Name == identity).FirstOrDefault();
+            PlayerState? playerName = TakeSessions(tableSession, identity);
             tableSession.PlayerTakeCard(playerName);
-
-            var session = _mapper.Map<Sessions>(tableSession);
-            _sessionRepository.Update(session);
+            SessionUpdate(tableSession);
 
         }
+
+       
+
         public void PlayerWouldStop(TableSession tableSession, string identity)
         {
-            var playerName = tableSession.players.Where(x => x.Name == identity).FirstOrDefault();
+            PlayerState? playerName = TakeSessions(tableSession, identity);
             tableSession.PlayerWouldLikeStop(playerName);
+            SessionUpdate(tableSession);
+        }
+
+        public void RestartTable(TableSession tableSession, string identity)
+        {
+            tableSession.RestartSession();
 
             var session = _mapper.Map<Sessions>(tableSession);
             _sessionRepository.Update(session);
+        }
+
+        private void SessionUpdate(TableSession tableSession)
+        {
+            var session = _mapper.Map<Sessions>(tableSession);
+            _sessionRepository.Update(session);
+        }
+
+        private static PlayerState? TakeSessions(TableSession tableSession, string identity)
+        {
+            return tableSession.players.Where(x => x.Name == identity).FirstOrDefault();
         }
     }
 }

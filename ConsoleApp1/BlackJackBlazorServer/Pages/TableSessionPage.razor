@@ -1,4 +1,5 @@
 ﻿@page "/TableSessionPage/{Identity}"
+@using BlackJack.Logic
 @using BlackJackBlazor.Pages
 @inherits TableSessionsPage
 <h3>TableSessionPage</h3>
@@ -24,11 +25,17 @@
                     <p>@card.Name</p>
                 }
             }
-
-            <button @onclick="()=>TakeCardClick()">Take Card</button>
-            <button @onclick = "()=>StopClick()">Stop Take Cards</button>
-            <button>Restart Round</button>
+            if(player.State == PlayerInGameState.IamThinking)
+            {
+                <button @onclick="()=>TakeCardClick()">Take Card</button>
+                <button @onclick = "()=>StopClick()">Stop Take Cards</button>
+            }
+            else
+            {       
+                <button @onclick = "()=>StopClick()">Stop Take Cards</button>
+            }
         }
+        <button @onclick = "()=>Restart()">Restart</button>
     }
 }
 

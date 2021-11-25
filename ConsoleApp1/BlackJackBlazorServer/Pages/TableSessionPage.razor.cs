@@ -86,6 +86,12 @@ namespace BlackJackBlazor.Pages
             sessionService.PlayerWouldStop(Session, Identity);
             HubContext.Clients.Group(SessionId.ToString()).SendAsync(SignalMethods.Session.SessionRecieve, SessionId);
         }
+
+        public void Restart()
+        {
+            sessionService.RestartTable(Session, Identity);
+            HubContext.Clients.Group(SessionId.ToString()).SendAsync(SignalMethods.Session.SessionRecieve, SessionId);
+        }
         #region no need
         public TableSession tableSession { get; set; }
 

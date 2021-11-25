@@ -18,6 +18,7 @@ namespace BlackJack.BLL.Services
         void PlayerTakeCard(TableSession tableSession, string identity);
         void PlayerWouldStop(TableSession tableSession, string identity);
         int RemoveUserFromSession(string userId);
+        void RestartTable(TableSession tableSession, string identity);
         void UpdateSession(TableSession tableSession);
     }
 }
