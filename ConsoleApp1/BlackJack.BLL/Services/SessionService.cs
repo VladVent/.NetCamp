@@ -73,11 +73,7 @@ namespace BlackJack.BLL.Services
             _sessionRepository.RemoveRange(sessions);
         }
 
-        public int GetPlayerSesion(string userId)
-        {
-            var sessionId = _playerSessionRepository.Get(x => x.ConectionId == userId).FirstOrDefault()?.SessionId;
-            return sessionId.GetValueOrDefault();
-        }
+
         public int RemoveUserFromSession(string userId)
         {
             var ps = _playerSessionRepository.Get(x => x.ConectionId == userId).FirstOrDefault();
@@ -90,8 +86,7 @@ namespace BlackJack.BLL.Services
         {
             PlayerState? playerName = TakeSessions(tableSession, identity);
             tableSession.PlayerTakeCard(playerName);
-            SessionUpdate(tableSession);
-
+            UpdateSession(tableSession);
         }
 
        
@@ -100,23 +95,14 @@ namespace BlackJack.BLL.Services
         {
             PlayerState? playerName = TakeSessions(tableSession, identity);
             tableSession.PlayerWouldLikeStop(playerName);
-            SessionUpdate(tableSession);
+            UpdateSession(tableSession);
         }
 
-        public void RestartTable(TableSession tableSession, string identity)
+        public void RestartTable(TableSession tableSession)
         {
             tableSession.RestartSession();
-
-            var session = _mapper.Map<Sessions>(tableSession);
-            _sessionRepository.Update(session);
+            UpdateSession(tableSession);
         }
-
-        private void SessionUpdate(TableSession tableSession)
-        {
-            var session = _mapper.Map<Sessions>(tableSession);
-            _sessionRepository.Update(session);
-        }
-
         private static PlayerState? TakeSessions(TableSession tableSession, string identity)
         {
             return tableSession.players.Where(x => x.Name == identity).FirstOrDefault();

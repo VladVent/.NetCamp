@@ -78,18 +78,23 @@ namespace BlackJackBlazor.Pages
         public void TakeCardClick()
         {
             sessionService.PlayerTakeCard(Session, Identity);
-            HubContext.Clients.Group(SessionId.ToString()).SendAsync(SignalMethods.Session.SessionRecieve, SessionId);
+            SaveHub();
         }
 
         public void StopClick()
         {
             sessionService.PlayerWouldStop(Session, Identity);
-            HubContext.Clients.Group(SessionId.ToString()).SendAsync(SignalMethods.Session.SessionRecieve, SessionId);
+            SaveHub();
         }
 
         public void Restart()
         {
-            sessionService.RestartTable(Session, Identity);
+            sessionService.RestartTable(Session);
+            SaveHub();
+        }
+
+        private void SaveHub()
+        {
             HubContext.Clients.Group(SessionId.ToString()).SendAsync(SignalMethods.Session.SessionRecieve, SessionId);
         }
         #region no need

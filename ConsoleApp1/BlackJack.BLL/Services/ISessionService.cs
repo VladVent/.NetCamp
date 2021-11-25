@@ -13,12 +13,12 @@ namespace BlackJack.BLL.Services
         void CleanEmptySessions();
         void CleanSessions();
         int FindSession(string userId, string userName);
-        int GetPlayerSesion(string userId);
+       
         TableSession GetSessionById(int sessionId);
         void PlayerTakeCard(TableSession tableSession, string identity);
         void PlayerWouldStop(TableSession tableSession, string identity);
         int RemoveUserFromSession(string userId);
-        void RestartTable(TableSession tableSession, string identity);
         void UpdateSession(TableSession tableSession);
+        void RestartTable(TableSession session);
     }
 }
