@@ -89,7 +89,7 @@ namespace BlackJack.BLL.Services
             UpdateSession(tableSession);
         }
 
-       
+
 
         public void PlayerWouldStop(TableSession tableSession, string identity)
         {

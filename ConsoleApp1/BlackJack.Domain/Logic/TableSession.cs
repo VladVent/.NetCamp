@@ -18,7 +18,7 @@ namespace BlackJack.Logic
 
         public bool WeHaveWinners => players.Any(x => x.State == PlayerInGameState.IamWon);
 
-        public TableSession() { }
+      //  public TableSession() { }
 
         public TableSession(int seed)
         {

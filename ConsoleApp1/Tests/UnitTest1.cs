@@ -165,6 +165,7 @@ namespace Tests
                 {CardName.FIVE, CardName.FIVE, CardName.SEVEN, CardName.FIVE, CardName.SIX});
             var vent = session.Join("Vent");
             
+
             session.RoundNumber.Should().Be(1);
             vent.SumPoint.Should().Be(11);
             session.RestartSession();

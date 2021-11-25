@@ -25,17 +25,17 @@
                     <p>@card.Name</p>
                 }
             }
-            if(player.State == PlayerInGameState.IamThinking)
+            if (player.State == PlayerInGameState.IamThinking)
             {
                 <button @onclick="()=>TakeCardClick()">Take Card</button>
-                <button @onclick = "()=>StopClick()">Stop Take Cards</button>
+                <button @onclick="()=>StopClick()">Stop Take Cards</button>
             }
             else
-            {       
-                <button @onclick = "()=>StopClick()">Stop Take Cards</button>
+            {
+                <button @onclick="()=>StopClick()">Stop Take Cards</button>
             }
         }
-        <button @onclick = "()=>Restart()">Restart</button>
+        <button @onclick="()=>Restart()">Restart</button>
     }
 }
 

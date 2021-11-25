@@ -1,27 +1,9 @@
 ﻿@page "/"
 @inherits IndexModel
 <h1>Welcome to the BlackJack</h1>
-<EditForm Model="@blackJack">
+<EditForm Model="@NavigationManager">
     <InputText id="name" @bind-Value="@identity"></InputText>
-    <button @onclick="()=>AddPlayers(identity)">Connect</button>
-    @* <p>@name</p>
-        <p>@state</p>
-        <p>@sumscore</p>*@
-    @if (blackJack.tableSession != null)
-    {
-        foreach (var p in blackJack.tableSession.players)
-        {
-            <p>@p.Name</p>
-            <p>@p.State</p>
-            <p>@p.SumPoint</p>
-         
-            <button @onclick="()=>PlayerTakeCardClick(identity)">Take Card</button>
-            <button @onclick="()=>StopTakeCardClick(identity)">Stop Take Cards</button>
-            <button @onclick="()=>RestartRound(identity)">Restart Round</button>
-
-        }
-    }
-
+    <button @onclick="()=>Navigator(identity)">Connect</button>
 </EditForm>
 
 

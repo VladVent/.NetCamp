@@ -21,8 +21,17 @@ namespace BlackJackBlazor.Pages
     public class TableSessionsPage : ComponentBase
     {
         [Parameter]
-        public string Identity { get; set; }
+        public string? Identity { get; set; }
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        public NavigationManager? NavigationManager { get; set; }
+        public String RouteName = "";
+
+        public BlackJackMultSessions? BlackJack { get; set; }
+
+        public BlackJackMultSessions GetPlayers()
+        {
+            BlackJack.GetPlayerAndSession(Identity);
+            return BlackJack;
+        }
     }
 }

@@ -1,5 +1,27 @@
 ﻿@page "/TableSessionPage/{Identity}"
 @using BlackJackBlazor.Pages
 @inherits TableSessionsPage
- <h3>TableSessionPage</h3>
+<h3>TableSessionPage</h3>
 
+<EditForm Model="@GetPlayers()">
+     @foreach (var player in BlackJack.tableSession.players)
+    {
+        <p>@player.Name</p>
+        <p>@player.SumPoint</p>
+        <p>@player.State</p>
+
+        if (player.Name == Identity)
+        {
+            @foreach (var card in player.CardsInHands)
+            {
+                if (player.Name == Identity)
+                {
+                    <p>@card.CardSuit</p>
+                    <p>@card.Name</p>
+                }
+            }
+        }
+    }
+        </EditForm>
+   
+    

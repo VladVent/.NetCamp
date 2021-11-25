@@ -3,72 +3,35 @@ using Microsoft.AspNetCore.Components;
 
 namespace SingleBlazorBlackJack
 {
-    public class BlackJackMultSessions 
+    public class BlackJackMultSessions
     {
-        [Parameter]
         public TableSession tableSession { get; set; }
 
-        public Queue<TableSession> sessions = new Queue<TableSession>();
-        public void AddPlayersInSessions(string identity)
+
+        private static List<TableSession> allAvailableSessions = new();
+
+
+       public (TableSession, PlayerState) GetPlayerAndSession(string identity)
         {
-            if (sessions.Count == 0)
+
+            tableSession =  GetOrCreateSession(identity);
+            return (tableSession, tableSession.players.FirstOrDefault(x => x.Name == identity));
+        }
+
+        public TableSession GetOrCreateSession(string identity)
+        {
+            var s = allAvailableSessions.FirstOrDefault(x => x.players.Any(p => p.Name != null) && x.players.Count < 2);
+            if (s == null)
             {
-                tableSession = new TableSession(Environment.TickCount);
-                sessions.Enqueue(tableSession);
-            }
-            var players = tableSession.players;
-            if (identity == "")
-            {
-                identity = "NoName";
-            }
-            if (players == null || players.Count < 6) // може пропустити 6 гравця, якщо нема йому супротивника. Якщо знайдеться його перекине в нову сесію.
-            {
-               tableSession.Join(identity);
+                s =  new TableSession(Environment.TickCount);
+                s.Join(identity);
+                allAvailableSessions.Add(s);
             }
             else
             {
-                StartNewSessions(identity);
+                s.Join(identity);
             }
+            return s;
         }
-
-        public void StartNewSessions(string identity)
-        {
-            sessions.Enqueue(tableSession);
-            tableSession = new TableSession(Environment.TickCount);
-            tableSession.Join(identity);
-            AddPlayersInSessions(identity);
-        }
-
-        public void PlayerWouldLikeTakeCard(string identity)
-        {
-            foreach (var sessionPlayers in sessions)
-            {
-                var players = sessionPlayers.players;
-                foreach (var p in players)
-                {
-                    if (p.Name == identity)
-                    {
-                        sessionPlayers.PlayerTakeCard(p);
-                    }
-                }
-            }
-        }
-
-        public void RestartRound(string identity)
-        {
-            tableSession.RestartSession();
-        }
-
-        public void PlayerWouldLikeStop(string identity)
-        {
-                foreach (var p in tableSession.players)
-                {
-                    if (p.Name == identity)
-                    {
-                        tableSession.PlayerWouldLikeStop(p);
-                    }
-                }
-        }
-
     }
 }
