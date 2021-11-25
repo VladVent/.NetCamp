@@ -13,11 +13,11 @@ using Microsoft.JSInterop;
 using BlackJackBlazor;
 using BlackJack.Logic;
 using BlackJackWeb;
-
-//public string Name = string.Empty;
-//public string State = string.Empty;
-//public string Sum = string.Empty;
-//public string SumScore = string.Empty;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Client;
+using BlackJackBlazorServer.Models;
+using BlackJack.BLL.Services;
+using BlackJackBlazorServer.Hubs;
 
 namespace BlackJackBlazor.Pages
 {
@@ -25,44 +25,74 @@ namespace BlackJackBlazor.Pages
     {
         [Parameter]
         public string Identity { get; set; }
+        [Inject]
+        private ISessionService sessionService { get; set; }
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+        [Inject]
+        private IHubContext<BlackJackHub> HubContext { get; set; }
+
+        public string ErrorMessage { get; set; }
+        public int SessionId { get; set; }
+        public TableSession Session { get; set; }
+
+        private HubConnection connection;
+
+        protected override async Task OnInitializedAsync()
+        {
+            if (connection == null)
+            {
+                connection = new HubConnectionBuilder()
+                       .WithUrl(NavigationManager.ToAbsoluteUri($"/blackjackhub?username={Identity}"))
+                       .Build();
+
+                await connection.StartAsync();
+
+                connection.Closed += async (error) =>
+                {
+                    ErrorMessage = "Game Over";
+                    StateHasChanged();
+                };
+                connection.On<int>(SignalMethods.Session.SessionRecieve, (session) =>
+                {
+                    try
+                    {
+                        SessionId = session;
+                        Session = sessionService.GetSessionById(SessionId);
+                        StateHasChanged();
+                    }
+                    catch { }
+                });
+            }
+
+            await base.OnInitializedAsync();
+
+        }
+
+        public void Back()
+        {
+            NavigationManager.NavigateTo("/");
+            connection.StopAsync();
+        }
+
+        public void TakeCardClick()
+        {
+            sessionService.PlayerTakeCard(Session, Identity);
+            HubContext.Clients.Group(SessionId.ToString()).SendAsync(SignalMethods.Session.SessionRecieve, SessionId);
+        }
+
+        public void StopClick()
+        {
+            sessionService.PlayerWouldStop(Session, Identity);
+            HubContext.Clients.Group(SessionId.ToString()).SendAsync(SignalMethods.Session.SessionRecieve, SessionId);
+        }
+        #region no need
         public TableSession tableSession { get; set; }
 
-        public Queue<TableSession> sessions = new Queue<TableSession>();
-
-        public TableSession AddPlayersInSessions(string identity)
-        {
-            if (sessions.Count == 0)
-            {
-                tableSession = new TableSession(Environment.TickCount);
-                sessions.Enqueue(tableSession);
-            }
-            var players = tableSession.players;
-            if (identity == "")
-            {
-                identity = "NoName";
-            }
-            if (players == null || players.Count < 6) // може пропустити 6 гравц€, €кщо нема йому супротивника. якщо знайдетьс€ його перекине в нову сес≥ю.
-            {
-                tableSession.Join(identity);
-            }
-            else
-            {
-                sessions.Enqueue(tableSession);
-                StartNewSessions(identity);
-            }
-            return tableSession;
-        }
-
-        public void StartNewSessions(string identity)
-        {
-            tableSession = new TableSession(Environment.TickCount);
-            tableSession.Join(identity);
-            AddPlayersInSessions(identity);
-        }
         public string TakeStats = string.Empty;
         public string TakeSumScore()
         {
-            foreach(var p in tableSession.players)
+            foreach (var p in tableSession.players)
             {
                 TakeStats = p.SumPoint.ToString();
             }
@@ -84,5 +114,37 @@ namespace BlackJackBlazor.Pages
             }
             return TakeStats;
         }
+
+        public string TakeCardCount()
+        {
+            foreach (var p in tableSession.GetState().Players)
+            {
+                TakeStats = p.cardCount.ToString();
+            }
+            return TakeStats;
+        }
+        public void PlayerTakeCard()
+        {
+            var player = tableSession.players;
+            foreach (var p in player)
+            {
+                tableSession.PlayerTakeCard(p);
+            }
+            TakeSumScore();
+            TakeCardCount();
+        }
+
+        public void PlayerWouldLikeStop()
+        {
+            var player = tableSession.players;
+            foreach (var p in player)
+            {
+                tableSession.PlayerWouldLikeStop(p);
+            }
+            TakeSumScore();
+            TakeCardCount();
+            TakePlayerState();
+        }
+        #endregion
     }
 }

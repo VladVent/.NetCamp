@@ -1,4 +1,8 @@
-﻿using BlackJack.DAL.Repositories;
+﻿using AutoMapper;
+using BlackJack.DAL.Models;
+using BlackJack.DAL.Profiles;
+using BlackJack.DAL.Repositories;
+using BlackJack.Logic;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,6 +17,15 @@ namespace BlackJack.DAL
         public static IServiceCollection ConfigureDAL(this IServiceCollection services)
         {
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             return services;
         }
     }

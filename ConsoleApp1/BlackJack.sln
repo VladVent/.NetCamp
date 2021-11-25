@@ -13,13 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEndBlazorTest", "BackEn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackJackBlazor", "BlackJackBlazor\BlackJackBlazor.csproj", "{3AE90F46-AF1C-495C-B2B6-C521C5B7752B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.DAL", "BlackJack.DAL\BlackJack.DAL.csproj", "{6B1246F3-CCAE-4D15-9D1C-9134299BC675}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackJack.DAL", "BlackJack.DAL\BlackJack.DAL.csproj", "{6B1246F3-CCAE-4D15-9D1C-9134299BC675}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack.BLL", "BlackJack.BLL\BlackJack.BLL.csproj", "{687253BA-1BDD-42A4-8188-DAC5E82F6AA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackJack.BLL", "BlackJack.BLL\BlackJack.BLL.csproj", "{687253BA-1BDD-42A4-8188-DAC5E82F6AA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackBlazorServer", "BlackJackBlazorServer\BlackJackBlazorServer.csproj", "{6C93BD8F-2710-4735-8091-DFDAFC9A8AEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackJackBlazorServer", "BlackJackBlazorServer\BlackJackBlazorServer.csproj", "{6C93BD8F-2710-4735-8091-DFDAFC9A8AEC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Old", "Old", "{0DE2626C-21FF-4A19-805E-6909563E4CCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingleBlazorBlackJack", "SingleBlazorBlackJack\SingleBlazorBlackJack.csproj", "{CD001983-BC74-4B5C-96AF-3CB1702D5646}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{6C93BD8F-2710-4735-8091-DFDAFC9A8AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C93BD8F-2710-4735-8091-DFDAFC9A8AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C93BD8F-2710-4735-8091-DFDAFC9A8AEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD001983-BC74-4B5C-96AF-3CB1702D5646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD001983-BC74-4B5C-96AF-3CB1702D5646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD001983-BC74-4B5C-96AF-3CB1702D5646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD001983-BC74-4B5C-96AF-3CB1702D5646}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B91D581A-A858-46FF-A19B-454D00A62C8A} = {0DE2626C-21FF-4A19-805E-6909563E4CCD}
 		{E28B9793-5673-41B8-9A57-3E47B6A8403F} = {0DE2626C-21FF-4A19-805E-6909563E4CCD}
+		{2AA1D5F1-6F9A-49E1-B3E3-3CBAA119D402} = {0DE2626C-21FF-4A19-805E-6909563E4CCD}
 		{3AE90F46-AF1C-495C-B2B6-C521C5B7752B} = {0DE2626C-21FF-4A19-805E-6909563E4CCD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BlackJack.BLL.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace BlackJack.BLL
     {
         public static IServiceCollection ConfigureBLL(this IServiceCollection services)
         {
-            
+            services.AddTransient<ISessionService, SessionService>();
             return services;
         }
     }

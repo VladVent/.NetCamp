@@ -67,7 +67,7 @@ namespace BlackJackWinForms
                 foreach (var c in state.CardsInHands)
                 {
                     string key = "CardBack";
-                    if (state == bot && state.state != PlayerInGameState.IamThinking || state == human)
+                    if (state == bot && state.State != PlayerInGameState.IamThinking || state == human)
                         key = c.ToString();
 
 
@@ -98,10 +98,10 @@ namespace BlackJackWinForms
 
         private void RefreshButtonsStates()
         {
-            HumanDecideTakeACard.Enabled = human.state == PlayerInGameState.IamThinking;
+            HumanDecideTakeACard.Enabled = human.State == PlayerInGameState.IamThinking;
             var winnersAvailable = session.GetState().Players.Any(x => x.state == PlayerInGameState.IamWon);
-            bool iAmLost = human.state == PlayerInGameState.IamLost;
-            score.Text = $"{human.SumPoint} {human.state} \r\n Bot Score:" + bot.SumPoint + " " + bot.state;
+            bool iAmLost = human.State == PlayerInGameState.IamLost;
+            score.Text = $"{human.SumPoint} {human.State} \r\n Bot Score:" + bot.SumPoint + " " + bot.State;
             HumanDecideToStop.Enabled = !iAmLost && !winnersAvailable;
         }
         private void PlayerWouldLikeStopClick(object sender, EventArgs e)

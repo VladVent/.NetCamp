@@ -6,5 +6,5 @@
     <InputText id = "name" @bind-Value = "@identity"></InputText> 
    <button  @onclick = "()=>Navigator(identity)">Connect</button>
 </EditForm>
-  
+  <button @onclick="() => { SessionService.CleanSessions(); }">CleanSessions</button>
   

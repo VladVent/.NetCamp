@@ -10,6 +10,10 @@
         {
             return $"{Name} {CardSuit}";
         }
+        public Card()
+        {
+
+        }
         public Card(CardSuit cardSuit, string stName, CardName power)
         {
             Name = stName.ToUpper();

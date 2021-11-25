@@ -15,7 +15,6 @@ namespace BlackJack.DAL.Contexts
 
         public ApplicationContext()
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -30,11 +29,14 @@ namespace BlackJack.DAL.Contexts
 
             modelBuilder.Entity<PlayerSessions>(entity =>
             {
-                entity.HasKey(x => new { x.SessionId, x.PlayerId });
+                entity.HasKey(x => new { x.SessionId, x.ConectionId });
                 entity.HasOne(x => x.Sessions)
                       .WithMany(x => x.PlayerSessions)
                       .HasForeignKey(x => x.SessionId);
-                entity.HasIndex(x => x.PlayerId);
+                entity.HasIndex(x => x.ConectionId)
+                      .IsUnique();
+                entity.HasIndex(x => x.Name)
+                      .IsUnique(); ;
             });
                 
 

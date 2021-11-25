@@ -14,6 +14,7 @@ using BlackJackBlazor;
 using BlackJack.Logic;
 using Microsoft.AspNetCore.Http.Extensions;
 using BlackJackWeb;
+using BlackJack.BLL.Services;
 
 namespace BlackJackBlazor.Pages
 {
@@ -21,13 +22,9 @@ namespace BlackJackBlazor.Pages
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
-        //public BlackJackWebSessions blackJackSessions = new BlackJackWebSessions();
-        //[Parameter]
-        //public TableSession session{ get; set; }
-
-        [Parameter]
-        public string identity{ get; set; }
-
+        [Inject]
+        public ISessionService SessionService{ get; set; }
+        public string identity { get; set; }
         public void Navigator(string identity)
         {
             NavigationManager.NavigateTo(String.Format("TableSessionPage/{0}", identity));

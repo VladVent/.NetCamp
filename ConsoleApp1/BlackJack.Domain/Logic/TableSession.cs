@@ -7,16 +7,18 @@ namespace BlackJack.Logic
 {
     public class TableSession
     {
+        public int Id { get; set; }
         private readonly int _seed;
-        private Stack<Card> deck;
+        public Stack<Card> deck;
         public List<PlayerState> players = new List<PlayerState>();
-        public int RoundNumber { get; private set; } = 1;
+        public int RoundNumber { get; set; } = 1;
 
         public bool AllPlayersDoneTakingCards => players.All(x =>
-            x.state == PlayerInGameState.IamDoneTakingCards || x.state == PlayerInGameState.IamLost);
+            x.State == PlayerInGameState.IamDoneTakingCards || x.State == PlayerInGameState.IamLost);
 
-        public bool WeHaveWinners => players.Any(x => x.state == PlayerInGameState.IamWon);
+        public bool WeHaveWinners => players.Any(x => x.State == PlayerInGameState.IamWon);
 
+        public TableSession() { }
 
         public TableSession(int seed)
         {
@@ -39,7 +41,21 @@ namespace BlackJack.Logic
                 Name = p,
                 CardsInHands = deck.DealTheCards(),
             };
-            player.state = ComputeState(player);
+            player.State = ComputeState(player);
+
+            players.Add(player);
+            CheckFlawlessWin(player);
+            return player;
+        }
+        public PlayerState Join(string p, string connectionId)
+        {
+            var player = new PlayerState
+            {
+                Name = p,
+                ConectionId = connectionId,
+                CardsInHands = deck.DealTheCards(),
+            };
+            player.State = ComputeState(player);
 
             players.Add(player);
             CheckFlawlessWin(player);
@@ -64,26 +80,26 @@ namespace BlackJack.Logic
                 OnePlayerWin(playerState);
                 return;
             }
-            if (playerState.state == PlayerInGameState.IamThinking)
+            if (playerState.State == PlayerInGameState.IamThinking)
             {
                 playerState.CardsInHands.Push(deck.GetACard());
-                playerState.state = ComputeState(playerState);
+                playerState.State = ComputeState(playerState);
             }
         }
 
 
         private void CheckFlawlessWin(PlayerState playerState)
         {
-            if (playerState.state == PlayerInGameState.IamWon)
+            if (playerState.State == PlayerInGameState.IamWon)
             {
                 OnePlayerWin(playerState);
             }
         }
 
-        private void OnePlayerWin(PlayerState playerState)
+        public void OnePlayerWin(PlayerState playerState)
         {
             MakeAllPlayersLost();
-            playerState.state = PlayerInGameState.IamWon;
+            playerState.State = PlayerInGameState.IamWon;
         }
 
         public void PlayerWouldLikeStop(PlayerState playerState)
@@ -91,8 +107,8 @@ namespace BlackJack.Logic
             if (WeHaveWinners)
                 return;
 
-            if (playerState.state == PlayerInGameState.IamThinking)
-                playerState.state = PlayerInGameState.IamDoneTakingCards;
+            if (playerState.State == PlayerInGameState.IamThinking)
+                playerState.State = PlayerInGameState.IamDoneTakingCards;
 
             if (!AllPlayersDoneTakingCards)
                 return;
@@ -110,7 +126,7 @@ namespace BlackJack.Logic
                 var last = sorted.Last();
                 var allWinners = sorted.Where(x => x.SumPoint == last.SumPoint);
                 foreach (var w in allWinners)
-                    w.state = PlayerInGameState.IamWon;
+                    w.State = PlayerInGameState.IamWon;
             }
 
         }
@@ -119,7 +135,7 @@ namespace BlackJack.Logic
         private void MakeAllPlayersLost()
         {
             foreach (var player in players)
-                player.state = PlayerInGameState.IamLost;
+                player.State = PlayerInGameState.IamLost;
         }
 
         public void RestartSession()
@@ -129,8 +145,8 @@ namespace BlackJack.Logic
             foreach (var p in players)
             {
                 p.CardsInHands = deck.DealTheCards();
-                p.state = PlayerInGameState.IamThinking;
-                p.state = ComputeState(p);
+                p.State = PlayerInGameState.IamThinking;
+                p.State = ComputeState(p);
             }
 
         }
@@ -140,7 +156,7 @@ namespace BlackJack.Logic
         {
             var p = new List<SessionsState>();
             foreach (var d in players)
-                p.Add(new SessionsState() { playerName = d.Name, state = d.state, cardCount = d.CardsInHands.Count });
+                p.Add(new SessionsState() { playerName = d.Name, state = d.State, cardCount = d.CardsInHands.Count });
             return new VisibleSessionState() { Players = p };
         }
     }
