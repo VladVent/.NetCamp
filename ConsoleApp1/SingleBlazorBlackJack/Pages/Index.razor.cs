@@ -24,7 +24,7 @@ namespace SingleBlazorBlackJack.Pages
 		public string identity { get; set; }
 		public void Navigator(string identity)
 		{
-			
+			Container.BlackJack.GetPlayerAndSession(identity);
 			NavigationManager.NavigateTo(String.Format("TableSessionPage/{0}", identity));
 		}
 	}

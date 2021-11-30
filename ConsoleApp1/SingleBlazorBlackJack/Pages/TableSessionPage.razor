@@ -1,27 +1,35 @@
 ﻿@page "/TableSessionPage/{Identity}"
+@using BlackJack.Logic
 @using BlackJackBlazor.Pages
 @inherits TableSessionsPage
 <h3>TableSessionPage</h3>
 
-<EditForm Model="@GetPlayers()">
-     @foreach (var player in BlackJack.tableSession.players)
-    {
-        <p>@player.Name</p>
-        <p>@player.SumPoint</p>
-        <p>@player.State</p>
+     @foreach (var player in Container.BlackJack.tableSession.players)
+{
+    <p>@player.Name</p>
+    <p>@player.SumPoint</p>
+    <p>@player.State</p>
 
-        if (player.Name == Identity)
+    if (player.Name == Identity)
+    {
+        @foreach (var card in player.CardsInHands)
         {
-            @foreach (var card in player.CardsInHands)
+            if (player.Name == Identity)
             {
-                if (player.Name == Identity)
-                {
-                    <p>@card.CardSuit</p>
-                    <p>@card.Name</p>
-                }
+                <p>@card.CardSuit</p>
+                <p>@card.Name</p>
             }
         }
+        if (player.State != PlayerInGameState.IamThinking)
+        {
+            <button @onclick="()=>RestartRoundClick()">Restart Round</button>
+        }
+        else
+        {
+        <button @onclick="()=>TakeCardClick()">Take Card</button>
+        <button @onclick="()=>StopTakeClick()">Stop Take Cards</button>
+        }
     }
-        </EditForm>
-   
-    
+}
+
+

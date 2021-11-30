@@ -24,14 +24,22 @@ namespace BlackJackBlazor.Pages
         public string? Identity { get; set; }
         [Inject]
         public NavigationManager? NavigationManager { get; set; }
-        public String RouteName = "";
 
-        public BlackJackMultSessions? BlackJack { get; set; }
-
-        public BlackJackMultSessions GetPlayers()
+        public void TakeCardClick()
         {
-            BlackJack.GetPlayerAndSession(Identity);
-            return BlackJack;
+            Container.BlackJack.TakeCard(Identity);
         }
+        public void StopTakeClick()
+        {
+            Container.BlackJack.PlayerStop(Identity);
+        }
+
+        public void RestartRoundClick()
+        {
+            {
+                Container.BlackJack.RestartRound();
+            }
+        }
+
     }
 }
