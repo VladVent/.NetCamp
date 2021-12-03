@@ -1,18 +1,11 @@
 using SingleBlazorBlackJack;
-using SingleBlazorBlackJack.BlackJackHub;
-using SingleBlazorBlackJack.Data;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddSignalR(options => { options.EnableDetailedErrors = true; });
-
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
-builder.Services.AddSingleton<BlackJackMultSessions>();
 
 
 var app = builder.Build();
@@ -32,7 +25,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.MapBlazorHub();
-app.MapHub<BlackJackHub>("/blackjackhub");
 app.MapFallbackToPage("/_Host");
 
 app.Run();

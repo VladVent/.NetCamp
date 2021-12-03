@@ -164,7 +164,7 @@ namespace Tests
             var session = GetSessionWithCards(new[]
                 {CardName.FIVE, CardName.FIVE, CardName.SEVEN, CardName.FIVE, CardName.SIX});
             var vent = session.Join("Vent");
-            
+
 
             session.RoundNumber.Should().Be(1);
             vent.SumPoint.Should().Be(11);
@@ -177,7 +177,7 @@ namespace Tests
             session.RestartSession();
             session.RoundNumber.Should().Be(3);
             session.PlayerWouldLikeStop(vent);
-          
+
         }
 
 
@@ -191,7 +191,7 @@ namespace Tests
         {
             var cards = new Stack<Card>();
             foreach (var name in array)
-                cards.Push(new Card(CardSuit.Hearts,name.ToString(), name));
+                cards.Push(new Card(CardSuit.Hearts, name.ToString(), name));
             return cards;
         }
     }

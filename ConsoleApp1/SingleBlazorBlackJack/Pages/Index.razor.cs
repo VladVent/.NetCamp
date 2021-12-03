@@ -14,6 +14,7 @@ using Microsoft.JSInterop;
 using SingleBlazorBlackJack;
 using SingleBlazorBlackJack.Shared;
 using System.Drawing;
+using BlackJack.Domain.Logic;
 
 namespace SingleBlazorBlackJack.Pages
 {
@@ -22,12 +23,8 @@ namespace SingleBlazorBlackJack.Pages
         [Inject]
         public NavigationManager NavigationManager { get; set; }
         public string identity { get; set; }
-
-        [Inject]
-        public BlackJackMultSessions BlackJack { get; set; }
         public void Navigator(string identity)
         {
-            BlackJack.GetPlayerAndSession(identity);
             NavigationManager.NavigateTo(String.Format("TableSessionPage/{0}", identity));
         }
     }

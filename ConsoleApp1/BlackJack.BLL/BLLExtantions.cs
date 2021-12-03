@@ -11,7 +11,7 @@ namespace BlackJack.BLL
     public static class BLLExtantions
     {
         public static IServiceCollection ConfigureBLL(this IServiceCollection services)
-        {
+        {         
             services.AddTransient<ISessionService, SessionService>();
             return services;
         }

@@ -14,8 +14,8 @@ using BlackJackBlazor;
 using BlackJack.Logic;
 using SingleBlazorBlackJack;
 using Microsoft.AspNetCore.SignalR;
-using SingleBlazorBlackJack.BlackJackHub;
 using Microsoft.AspNetCore.SignalR.Client;
+using BlackJack.Domain.Logic;
 
 namespace BlackJackBlazor.Pages
 {
@@ -26,42 +26,26 @@ namespace BlackJackBlazor.Pages
         [Inject]
         public NavigationManager? NavigationManager { get; set; }
 
-        [Inject]
-        public BlackJackMultSessions? BlackJack { get; set; }
 
-        //protected override async Task OnInitializedAsync()
-        //{
-        //    if (connection == null)
-        //    {
-        //        connection = new HubConnectionBuilder()
-        //               .WithUrl(NavigationManager.ToAbsoluteUri($"/blackjackhub?Name={Identity}"))
-        //               .Build();
 
-        //        await connection.StartAsync();
+        public Desk desk { get; set; }
 
-        //        connection.On<string>(Identity, (session) =>
-        //        {
-        //            _ = BlackJack.tableSession;
-        //                StateHasChanged();
-        //        });
-        //    }
+        protected override async Task OnInitializedAsync()
+        {
 
-        //    await base.OnInitializedAsync();
+            desk = Casino.JoinPlayer(Identity);
+            desk.DeskStateUpdated += async (sender, a) => { await InvokeAsync(() => StateHasChanged()); };
+            await base.OnInitializedAsync();
 
-        //}
-        public List<PlayerState> State() => BlackJack.tableSession.players;
+        }
+        public List<PlayerState> State() => desk.tableSession.players;
         public void TakeCardClick()
         {
-            BlackJack.TakeCard(Identity);
+            desk.TakeCard(Identity);
         }
         public void StopTakeClick()
         {
-            BlackJack.PlayerStop(Identity);
-        }
-
-        public void RestartRoundClick()
-        {
-            BlackJack.RestartRound();
+            desk.PlayerStop(Identity);
         }
     }
 }

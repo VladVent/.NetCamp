@@ -18,7 +18,7 @@ namespace BlackJack.Logic
 
         public bool WeHaveWinners => players.Any(x => x.State == PlayerInGameState.IamWon);
 
-      //  public TableSession() { }
+        //  public TableSession() { }
 
         public TableSession(int seed)
         {
@@ -47,21 +47,6 @@ namespace BlackJack.Logic
             CheckFlawlessWin(player);
             return player;
         }
-        public PlayerState Join(string p, string connectionId)
-        {
-            var player = new PlayerState
-            {
-                Name = p,
-                ConectionId = connectionId,
-                CardsInHands = deck.DealTheCards(),
-            };
-            player.State = ComputeState(player);
-
-            players.Add(player);
-            CheckFlawlessWin(player);
-            return player;
-        }
-
         private static PlayerInGameState ComputeState(PlayerState p)
         {
 
@@ -122,7 +107,7 @@ namespace BlackJack.Logic
             MakeAllPlayersLost();
             if (sorted.Any())
             {
-                
+
                 var last = sorted.Last();
                 var allWinners = sorted.Where(x => x.SumPoint == last.SumPoint);
                 foreach (var w in allWinners)
@@ -148,7 +133,6 @@ namespace BlackJack.Logic
                 p.State = PlayerInGameState.IamThinking;
                 p.State = ComputeState(p);
             }
-
         }
 
 
