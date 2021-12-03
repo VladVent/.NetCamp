@@ -14,7 +14,8 @@ using BlackJackBlazor;
 using BlackJack.Logic;
 using SingleBlazorBlackJack;
 using Microsoft.AspNetCore.SignalR;
-
+using SingleBlazorBlackJack.BlackJackHub;
+using Microsoft.AspNetCore.SignalR.Client;
 
 namespace BlackJackBlazor.Pages
 {
@@ -25,21 +26,42 @@ namespace BlackJackBlazor.Pages
         [Inject]
         public NavigationManager? NavigationManager { get; set; }
 
+        [Inject]
+        public BlackJackMultSessions? BlackJack { get; set; }
+
+        //protected override async Task OnInitializedAsync()
+        //{
+        //    if (connection == null)
+        //    {
+        //        connection = new HubConnectionBuilder()
+        //               .WithUrl(NavigationManager.ToAbsoluteUri($"/blackjackhub?Name={Identity}"))
+        //               .Build();
+
+        //        await connection.StartAsync();
+
+        //        connection.On<string>(Identity, (session) =>
+        //        {
+        //            _ = BlackJack.tableSession;
+        //                StateHasChanged();
+        //        });
+        //    }
+
+        //    await base.OnInitializedAsync();
+
+        //}
+        public List<PlayerState> State() => BlackJack.tableSession.players;
         public void TakeCardClick()
         {
-            Container.BlackJack.TakeCard(Identity);
+            BlackJack.TakeCard(Identity);
         }
         public void StopTakeClick()
         {
-            Container.BlackJack.PlayerStop(Identity);
+            BlackJack.PlayerStop(Identity);
         }
 
         public void RestartRoundClick()
         {
-            {
-                Container.BlackJack.RestartRound();
-            }
+            BlackJack.RestartRound();
         }
-
     }
 }

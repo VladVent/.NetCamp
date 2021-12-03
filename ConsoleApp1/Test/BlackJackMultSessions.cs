@@ -5,6 +5,11 @@ namespace SingleBlazorBlackJack
 {
     public class BlackJackMultSessions
     {
+
+        public BlackJackMultSessions()
+        {
+
+        }
         public TableSession tableSession { get; set; }
 
 

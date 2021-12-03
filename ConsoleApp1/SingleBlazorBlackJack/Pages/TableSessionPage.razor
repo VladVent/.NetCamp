@@ -1,35 +1,38 @@
 ﻿@page "/TableSessionPage/{Identity}"
 @using BlackJack.Logic
 @using BlackJackBlazor.Pages
+@inject BlackJackMultSessions BlackJack
 @inherits TableSessionsPage
 <h3>TableSessionPage</h3>
-
-     @foreach (var player in Container.BlackJack.tableSession.players)
+@if (State() != null)
 {
-    <p>@player.Name</p>
-    <p>@player.SumPoint</p>
-    <p>@player.State</p>
-
-    if (player.Name == Identity)
+    foreach (var player in State())
     {
-        @foreach (var card in player.CardsInHands)
+        <p>@player.Name</p>
+        <p>@player.SumPoint</p>
+        <p>@player.State</p>
+
+        if (player.Name == Identity)
         {
-            if (player.Name == Identity)
+            @foreach (var card in player.CardsInHands)
             {
-                <p>@card.CardSuit</p>
-                <p>@card.Name</p>
+                if (player.Name == Identity)
+                {
+                    <p>@card.CardSuit</p>
+                    <p>@card.Name</p>
+                }
+            }
+            if (player.State != PlayerInGameState.IamThinking)
+            {
+                <button @onclick="()=>RestartRoundClick()">Restart Round</button>
+            }
+            else
+            {
+                <button @onclick="()=>TakeCardClick()">Take Card</button>
+                <button @onclick="()=>StopTakeClick()">Stop Take Cards</button>
             }
         }
-        if (player.State != PlayerInGameState.IamThinking)
-        {
-            <button @onclick="()=>RestartRoundClick()">Restart Round</button>
-        }
-        else
-        {
-        <button @onclick="()=>TakeCardClick()">Take Card</button>
-        <button @onclick="()=>StopTakeClick()">Stop Take Cards</button>
-        }
     }
-}
 
+}
 
