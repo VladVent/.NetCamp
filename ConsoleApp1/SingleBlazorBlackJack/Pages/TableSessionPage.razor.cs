@@ -16,6 +16,9 @@ using SingleBlazorBlackJack;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
 using BlackJack.Domain.Logic;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
+using System.Drawing;
 
 namespace BlackJackBlazor.Pages
 {
@@ -25,9 +28,6 @@ namespace BlackJackBlazor.Pages
         public string? Identity { get; set; }
         [Inject]
         public NavigationManager? NavigationManager { get; set; }
-
-
-
         public Desk desk { get; set; }
 
         protected override async Task OnInitializedAsync()
@@ -47,5 +47,7 @@ namespace BlackJackBlazor.Pages
         {
             desk.PlayerStop(Identity);
         }
+
+     
     }
 }

@@ -59,65 +59,278 @@
     <None Remove="Resources\TWO Diamonds.png" />
     <None Remove="Resources\TWO Hearts.png" />
     <None Remove="Resources\TWO Spades.png" />
+    <None Remove="wwwroot\Resources\ACE Clubs.png" />
+    <None Remove="wwwroot\Resources\ACE Diamonds.png" />
+    <None Remove="wwwroot\Resources\ACE Hearts.png" />
+    <None Remove="wwwroot\Resources\ACE Spades.png" />
+    <None Remove="wwwroot\Resources\EIGHT Clubs.png" />
+    <None Remove="wwwroot\Resources\EIGHT Diamonds.png" />
+    <None Remove="wwwroot\Resources\EIGHT Hearts.png" />
+    <None Remove="wwwroot\Resources\EIGHT Spades.png" />
+    <None Remove="wwwroot\Resources\FIVE Clubs.png" />
+    <None Remove="wwwroot\Resources\FIVE Diamonds.png" />
+    <None Remove="wwwroot\Resources\FIVE Hearts.png" />
+    <None Remove="wwwroot\Resources\FIVE Spades.png" />
+    <None Remove="wwwroot\Resources\FOUR Clubs.png" />
+    <None Remove="wwwroot\Resources\FOUR Diamonds.png" />
+    <None Remove="wwwroot\Resources\FOUR Hearts.png" />
+    <None Remove="wwwroot\Resources\FOUR Spades.png" />
+    <None Remove="wwwroot\Resources\JACK Clubs.png" />
+    <None Remove="wwwroot\Resources\JACK Diamonds.png" />
+    <None Remove="wwwroot\Resources\JACK Hearts.png" />
+    <None Remove="wwwroot\Resources\JACK Spades.png" />
+    <None Remove="wwwroot\Resources\KING Clubs.png" />
+    <None Remove="wwwroot\Resources\KING Diamonds.png" />
+    <None Remove="wwwroot\Resources\KING Hearts.png" />
+    <None Remove="wwwroot\Resources\KING Spades.png" />
+    <None Remove="wwwroot\Resources\NINE Clubs.png" />
+    <None Remove="wwwroot\Resources\NINE Diamonds.png" />
+    <None Remove="wwwroot\Resources\NINE Hearts.png" />
+    <None Remove="wwwroot\Resources\NINE Spades.png" />
+    <None Remove="wwwroot\Resources\QUEEN Clubs.png" />
+    <None Remove="wwwroot\Resources\QUEEN Diamonds.png" />
+    <None Remove="wwwroot\Resources\QUEEN Hearts.png" />
+    <None Remove="wwwroot\Resources\QUEEN Spades.png" />
+    <None Remove="wwwroot\Resources\SEVEN Clubs.png" />
+    <None Remove="wwwroot\Resources\SEVEN Diamonds.png" />
+    <None Remove="wwwroot\Resources\SEVEN Hearts.png" />
+    <None Remove="wwwroot\Resources\SEVEN Spades.png" />
+    <None Remove="wwwroot\Resources\SIX Clubs.png" />
+    <None Remove="wwwroot\Resources\SIX Diamonds.png" />
+    <None Remove="wwwroot\Resources\SIX Hearts.png" />
+    <None Remove="wwwroot\Resources\SIX Spades.png" />
+    <None Remove="wwwroot\Resources\TEN Clubs.png" />
+    <None Remove="wwwroot\Resources\TEN Diamonds.png" />
+    <None Remove="wwwroot\Resources\TEN Hearts.png" />
+    <None Remove="wwwroot\Resources\TEN Spades.png" />
+    <None Remove="wwwroot\Resources\THREE Clubs.png" />
+    <None Remove="wwwroot\Resources\THREE Diamonds.png" />
+    <None Remove="wwwroot\Resources\THREE Hearts.png" />
+    <None Remove="wwwroot\Resources\THREE Spades.png" />
+    <None Remove="wwwroot\Resources\TWO Clubs.png" />
+    <None Remove="wwwroot\Resources\TWO Diamonds.png" />
+    <None Remove="wwwroot\Resources\TWO Hearts.png" />
+    <None Remove="wwwroot\Resources\TWO Spades.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\ACE Clubs.png" />
-    <Content Include="Resources\ACE Diamonds.png" />
-    <Content Include="Resources\ACE Hearts.png" />
-    <Content Include="Resources\ACE Spades.png" />
-    <Content Include="Resources\EIGHT Clubs.png" />
-    <Content Include="Resources\EIGHT Diamonds.png" />
-    <Content Include="Resources\EIGHT Hearts.png" />
-    <Content Include="Resources\EIGHT Spades.png" />
-    <Content Include="Resources\FIVE Clubs.png" />
-    <Content Include="Resources\FIVE Diamonds.png" />
-    <Content Include="Resources\FIVE Hearts.png" />
-    <Content Include="Resources\FIVE Spades.png" />
-    <Content Include="Resources\FOUR Clubs.png" />
-    <Content Include="Resources\FOUR Diamonds.png" />
-    <Content Include="Resources\FOUR Hearts.png" />
-    <Content Include="Resources\FOUR Spades.png" />
-    <Content Include="Resources\JACK Clubs.png" />
-    <Content Include="Resources\JACK Diamonds.png" />
-    <Content Include="Resources\JACK Hearts.png" />
-    <Content Include="Resources\JACK Spades.png" />
-    <Content Include="Resources\KING Clubs.png" />
-    <Content Include="Resources\KING Diamonds.png" />
-    <Content Include="Resources\KING Hearts.png" />
-    <Content Include="Resources\KING Spades.png" />
-    <Content Include="Resources\NINE Clubs.png" />
-    <Content Include="Resources\NINE Diamonds.png" />
-    <Content Include="Resources\NINE Hearts.png" />
-    <Content Include="Resources\NINE Spades.png" />
-    <Content Include="Resources\QUEEN Clubs.png" />
-    <Content Include="Resources\QUEEN Diamonds.png" />
-    <Content Include="Resources\QUEEN Hearts.png" />
-    <Content Include="Resources\QUEEN Spades.png" />
-    <Content Include="Resources\SEVEN Clubs.png" />
-    <Content Include="Resources\SEVEN Diamonds.png" />
-    <Content Include="Resources\SEVEN Hearts.png" />
-    <Content Include="Resources\SEVEN Spades.png" />
-    <Content Include="Resources\SIX Clubs.png" />
-    <Content Include="Resources\SIX Diamonds.png" />
-    <Content Include="Resources\SIX Hearts.png" />
-    <Content Include="Resources\SIX Spades.png" />
-    <Content Include="Resources\TEN Clubs.png" />
-    <Content Include="Resources\TEN Diamonds.png" />
-    <Content Include="Resources\TEN Hearts.png" />
-    <Content Include="Resources\TEN Spades.png" />
-    <Content Include="Resources\THREE Clubs.png" />
-    <Content Include="Resources\THREE Diamonds.png" />
-    <Content Include="Resources\THREE Hearts.png" />
-    <Content Include="Resources\THREE Spades.png" />
-    <Content Include="Resources\TWO Clubs.png" />
-    <Content Include="Resources\TWO Diamonds.png" />
-    <Content Include="Resources\TWO Hearts.png" />
-    <Content Include="Resources\TWO Spades.png" />
+    <Content Include="Resources\ACE Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\ACE Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\ACE Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\ACE Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\EIGHT Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\EIGHT Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\EIGHT Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\EIGHT Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\FIVE Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\FIVE Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\FIVE Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\FIVE Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\FOUR Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\FOUR Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\FOUR Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\FOUR Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\JACK Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\JACK Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\JACK Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\JACK Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\KING Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\KING Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\KING Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\KING Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\NINE Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\NINE Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\NINE Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\NINE Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\QUEEN Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\QUEEN Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\QUEEN Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\QUEEN Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\SEVEN Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\SEVEN Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\SEVEN Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\SEVEN Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\SIX Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\SIX Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\SIX Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\SIX Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\TEN Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\TEN Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\TEN Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\TEN Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\THREE Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\THREE Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\THREE Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\THREE Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\TWO Clubs.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\TWO Diamonds.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\TWO Hearts.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Resources\TWO Spades.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Resources\CardBack.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

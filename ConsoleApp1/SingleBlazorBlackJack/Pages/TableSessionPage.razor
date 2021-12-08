@@ -16,11 +16,12 @@
         {
             @foreach (var card in player.CardsInHands)
             {
+                var key = card.ToString();
                 if (player.Name == Identity)
                 {
-                    <p>@card.CardSuit</p>
-                    <p>@card.Name</p>
+                    <img src="/Resources/@(key).png" height="150" />
                 }
+
             }
             if (player.State == PlayerInGameState.IamThinking)
             {
@@ -31,4 +32,3 @@
     }
 
 }
-

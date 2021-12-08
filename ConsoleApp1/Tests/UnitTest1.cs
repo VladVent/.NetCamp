@@ -167,7 +167,7 @@ namespace Tests
 
 
             session.RoundNumber.Should().Be(1);
-            vent.SumPoint.Should().Be(11);
+            vent.CardsInHands.Count.Should().Be(2);
             session.RestartSession();
             vent.CardsInHands.Count.Should().Be(2);
             vent.State.Should().Be(PlayerInGameState.IamThinking);
