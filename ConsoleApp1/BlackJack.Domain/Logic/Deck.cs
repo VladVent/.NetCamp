@@ -14,8 +14,6 @@ namespace BlackJack.Logic
             {
                 foreach (var name in Enum.GetNames(typeof(CardName)))
                     card.Push(new Card((CardSuit)suit, name, (CardName)Enum.Parse(typeof(CardName), name)));
-
-
             }
 
             return card;
@@ -28,7 +26,7 @@ namespace BlackJack.Logic
             cards.Clear();
             foreach (var value in values.OrderBy(x => rand.Next()))
                 cards.Push(value);
-            
+
             return new Stack<Card>(cards.OrderBy(x => rand.Next()));
         }
 

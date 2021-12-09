@@ -1,5 +1,6 @@
 ﻿using BlackJack.Logic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,13 +14,17 @@ namespace BlackJack.Domain.Logic
     {
         public TableSession tableSession { get; private set; }
         public event EventHandler DeskStateUpdated;
+        public event EventHandler ReloadRoundMessage;
 
         public Desk()
         {
             tableSession = new TableSession(Environment.TickCount);
         }
 
-
+        internal bool IsDeskPlayable()
+        {
+            return GetArrayPlayers().Count() < 2 ? true : false;
+        }
 
         public void TakeCard(string id)
         {
@@ -43,9 +48,10 @@ namespace BlackJack.Domain.Logic
 
         private async Task AllPlayersStop()
         {
-            var isAnyPlayerWinRound = tableSession.players.Any(x => x.State == PlayerInGameState.IamWon);
+            var isAnyPlayerWinRound = GetArrayPlayers().Any(x => x.State == PlayerInGameState.IamWon);
             if (isAnyPlayerWinRound)
             {
+                ReloadindRoundMessage();
                 await Task.Delay(5000);
                 RestartRound();
             }
@@ -58,7 +64,12 @@ namespace BlackJack.Domain.Logic
         }
         private PlayerState TakePlayer(string id)
         {
-            return tableSession.players.Where(x => x.Name == id).FirstOrDefault();
+            return GetArrayPlayers().FirstOrDefault(x => x.Name == id);
+        }
+
+        private List<PlayerState> GetArrayPlayers()
+        {
+            return tableSession.players;
         }
 
         private void DoSessionStateUpdated()
@@ -66,10 +77,11 @@ namespace BlackJack.Domain.Logic
             DeskStateUpdated?.Invoke(this, EventArgs.Empty);
         }
 
-        internal bool IsDeskPlayable()
+        private void ReloadindRoundMessage()
         {
-            return true;
+            ReloadRoundMessage?.Invoke(this, EventArgs.Empty);
         }
+
 
     }
 }

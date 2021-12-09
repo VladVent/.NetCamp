@@ -28,7 +28,7 @@ namespace BlackJackBlazor.Pages
         public string? Identity { get; set; }
         [Inject]
         public NavigationManager? NavigationManager { get; set; }
-        public Desk desk { get; set; }
+        public Desk? desk { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -46,8 +46,13 @@ namespace BlackJackBlazor.Pages
         public void StopTakeClick()
         {
             desk.PlayerStop(Identity);
+            desk.ReloadRoundMessage += async (sender, a) => { await InvokeAsync(() => StateHasChanged()); };
+            desk.ReloadRoundMessage += async (sender, a) => { await InvokeAsync(() => Message()); };
         }
 
-     
+        public void Message()
+        {
+            Console.WriteLine("text");
+        }
     }
 }

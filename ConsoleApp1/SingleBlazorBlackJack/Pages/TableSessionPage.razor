@@ -2,6 +2,7 @@
 @using BlackJack.Domain.Logic
 @using BlackJack.Logic
 @using BlackJackBlazor.Pages
+@inject IJSRuntime JsRuntime
 @inherits TableSessionsPage
 <h3>TableSessionPage</h3>
 @if (State() != null)
@@ -16,12 +17,11 @@
         {
             @foreach (var card in player.CardsInHands)
             {
-                var key = card.ToString();
+                var cardFace = card.ToString();
                 if (player.Name == Identity)
                 {
-                    <img src="/Resources/@(key).png" height="150" />
+                    <img src="/Resources/@(cardFace).png" height="150" />
                 }
-
             }
             if (player.State == PlayerInGameState.IamThinking)
             {
