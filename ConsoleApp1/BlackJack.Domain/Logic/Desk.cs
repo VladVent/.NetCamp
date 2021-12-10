@@ -61,7 +61,7 @@ namespace BlackJack.Domain.Logic
 
         private async Task AllPlayersStop()
         {
-            var isAnyPlayerWinRound = IsTakeWinner();
+            var isAnyPlayerWinRound = IsTakeWinnerOrLoser();
             if (isAnyPlayerWinRound)
             {
                 ReloadindRoundMessage();
@@ -70,9 +70,9 @@ namespace BlackJack.Domain.Logic
             }
         }
 
-        private bool IsTakeWinner()
+        private bool IsTakeWinnerOrLoser()
         {
-            return GetArrayPlayers().Any(x => x.State == PlayerInGameState.IamWon);
+            return GetArrayPlayers().Any(x => x.State == PlayerInGameState.IamWon || x.State == PlayerInGameState.IamLost);
         }
 
         private void RestartRound()
