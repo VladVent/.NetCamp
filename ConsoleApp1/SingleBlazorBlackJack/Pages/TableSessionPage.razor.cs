@@ -1,24 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
-using System.Net.Http;
-using System.Net.Http.Json;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.Web.Virtualization;
-using Microsoft.JSInterop;
-using BlackJackBlazor;
 using BlackJack.Logic;
-using SingleBlazorBlackJack;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.AspNetCore.SignalR.Client;
 using BlackJack.Domain.Logic;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileProviders;
-using System.Drawing;
 
 namespace BlackJackBlazor.Pages
 {
@@ -30,6 +12,7 @@ namespace BlackJackBlazor.Pages
         public NavigationManager? NavigationManager { get; set; }
         public Desk? desk { get; set; }
 
+        public int? counter = 5;
         protected override async Task OnInitializedAsync()
         {
 
@@ -38,7 +21,7 @@ namespace BlackJackBlazor.Pages
             await base.OnInitializedAsync();
 
         }
-        public List<PlayerState> State() => desk.tableSession.players;
+        public List<PlayerState> StateOfPlayers() => desk.GetArrayPlayers();
         public void TakeCardClick()
         {
             desk.TakeCard(Identity);
@@ -46,13 +29,6 @@ namespace BlackJackBlazor.Pages
         public void StopTakeClick()
         {
             desk.PlayerStop(Identity);
-            desk.ReloadRoundMessage += async (sender, a) => { await InvokeAsync(() => StateHasChanged()); };
-            desk.ReloadRoundMessage += async (sender, a) => { await InvokeAsync(() => Message()); };
-        }
-
-        public void Message()
-        {
-            Console.WriteLine("text");
         }
     }
 }

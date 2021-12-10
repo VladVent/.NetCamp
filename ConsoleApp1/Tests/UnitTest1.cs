@@ -14,6 +14,10 @@ namespace Tests
             return new TableSession(1);
         }
 
+        private static TableSession GetThirdCombination()
+        {
+            return new TableSession(6);
+        }
 
         [Fact]
         public void Only4_JacksInDeckAllowed()
@@ -60,7 +64,7 @@ namespace Tests
 
 
             vent.SumPoint.Should().Be(14);
-            Assert.True(session.GetState().Players.Single().state == PlayerInGameState.IamThinking);
+            vent.State.Should().Be(PlayerInGameState.IamThinking);
 
             var petro = session.Join("Petro");
             session.GetState().Players.Count.Should().Be(2);

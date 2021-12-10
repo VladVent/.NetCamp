@@ -32,11 +32,11 @@ namespace BlackJack.Domain.Logic
             DoSessionStateUpdated();
         }
 
-
-        public void JoinPlayer(string identity)
+        public async void JoinPlayer(string identity)
         {
             tableSession.Join(identity);
             DoSessionStateUpdated();
+            await AllPlayersStop();
         }
 
         public async void PlayerStop(string id)
@@ -46,15 +46,26 @@ namespace BlackJack.Domain.Logic
             await AllPlayersStop();
         }
 
+        public List<PlayerState> GetArrayPlayers()
+        {
+            return tableSession.players;
+        }
+
+
         private async Task AllPlayersStop()
         {
-            var isAnyPlayerWinRound = GetArrayPlayers().Any(x => x.State == PlayerInGameState.IamWon);
+            var isAnyPlayerWinRound = IsTakeWinner();
             if (isAnyPlayerWinRound)
             {
                 ReloadindRoundMessage();
                 await Task.Delay(5000);
                 RestartRound();
             }
+        }
+
+        private bool IsTakeWinner()
+        {
+            return GetArrayPlayers().Any(x => x.State == PlayerInGameState.IamWon);
         }
 
         private void RestartRound()
@@ -67,10 +78,6 @@ namespace BlackJack.Domain.Logic
             return GetArrayPlayers().FirstOrDefault(x => x.Name == id);
         }
 
-        private List<PlayerState> GetArrayPlayers()
-        {
-            return tableSession.players;
-        }
 
         private void DoSessionStateUpdated()
         {

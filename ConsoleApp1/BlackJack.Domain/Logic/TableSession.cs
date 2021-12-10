@@ -55,6 +55,7 @@ namespace BlackJack.Logic
 
             if (p.SumPoint == 21)
                 return PlayerInGameState.IamWon;
+
             return PlayerInGameState.IamThinking;
         }
 
@@ -71,7 +72,6 @@ namespace BlackJack.Logic
                 playerState.State = ComputeState(playerState);
             }
         }
-
 
         private void CheckFlawlessWin(PlayerState playerState)
         {

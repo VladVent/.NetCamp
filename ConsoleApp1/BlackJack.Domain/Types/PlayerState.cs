@@ -10,5 +10,10 @@ namespace BlackJack.Logic
         public Stack<Card> CardsInHands { get; set; } = new Stack<Card>();
         public int SumPoint => CardsInHands.Sum(x => x.Power);
         public PlayerInGameState State { get; set; }
+
+        public int SumEnemyPoint => CardsInHands.Skip(1).Sum(x => x.Power);
+
+        public List<Card> EnemyCards => CardsInHands.Skip(1).ToList();
+
     }
 }
