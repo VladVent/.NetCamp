@@ -10,8 +10,9 @@ namespace BlackJack.Domain.Logic
     /// <summary>
     /// Black jack desk with session and players.
     /// </summary>
-    public sealed class Desk
+    public  class Desk
     {
+        private readonly int _seed;
         public TableSession tableSession { get; private set; }
         public event EventHandler DeskStateUpdated;
         public event EventHandler ReloadRoundMessage;
@@ -19,6 +20,12 @@ namespace BlackJack.Domain.Logic
         public Desk()
         {
             tableSession = new TableSession(Environment.TickCount);
+        }
+
+        public Desk(int seed)
+        {
+            _seed = seed;
+            tableSession = new TableSession(_seed); ;
         }
 
         internal bool IsDeskPlayable()
@@ -88,7 +95,6 @@ namespace BlackJack.Domain.Logic
         {
             ReloadRoundMessage?.Invoke(this, EventArgs.Empty);
         }
-
 
     }
 }

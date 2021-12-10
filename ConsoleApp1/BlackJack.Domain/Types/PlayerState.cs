@@ -13,7 +13,7 @@ namespace BlackJack.Logic
 
         public int SumEnemyPoint => CardsInHands.Skip(1).Sum(x => x.Power);
 
-        public List<Card> EnemyCards => CardsInHands.Skip(1).ToList();
+        public List<Card> ShowCardsForEnemy => CardsInHands.Skip(1).ToList();
 
     }
 }

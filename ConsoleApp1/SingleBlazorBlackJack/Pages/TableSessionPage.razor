@@ -40,7 +40,7 @@
             {
                 <h4 class="mb-0">@("Enemy Point:" + player.SumEnemyPoint), @(player.State)</h4>
                 <img src="Resources/CardBack.png" height="150" />
-                @foreach (var card in player.EnemyCards)
+                @foreach (var card in player.ShowCardsForEnemy)
                 {
                     var cardFace = card.ToString();
                     <img src="/Resources/@(cardFace).png" height="150" />

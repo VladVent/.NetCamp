@@ -1,3 +1,4 @@
+using BlackJack.Domain.Logic;
 using SingleBlazorBlackJack;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +7,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.AddServerSideBlazor();
-
 
 var app = builder.Build();
 

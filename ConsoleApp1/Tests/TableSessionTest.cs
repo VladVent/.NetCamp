@@ -7,16 +7,11 @@ using Xunit;
 
 namespace Tests
 {
-    public class UnitTest1
+    public class TableSessionTest
     {
         private static TableSession GetFirstCombination()
         {
             return new TableSession(1);
-        }
-
-        private static TableSession GetThirdCombination()
-        {
-            return new TableSession(6);
         }
 
         [Fact]
@@ -124,7 +119,9 @@ namespace Tests
             session.PlayerTakeCard(vent);
             vent.SumPoint.Should().Be(21);
             vent.State.Should().Be(PlayerInGameState.IamWon);
+
             patric.State.Should().Be(PlayerInGameState.IamLost);
+
             session.PlayerTakeCard(patric);
             patric.CardsInHands.Count.Should().Be(2);
         }
@@ -141,9 +138,12 @@ namespace Tests
 
             session.PlayerWouldLikeStop(patrick);
             session.PlayerWouldLikeStop(vent);
+
             patrick.CardsInHands.Count.Should().Be(2);
             patrick.SumPoint.Should().Be(10);
+
             vent.SumPoint.Should().Be(10);
+
             patrick.State.Should().Be(PlayerInGameState.IamWon);
         }
 
@@ -157,6 +157,7 @@ namespace Tests
 
             session.PlayerWouldLikeStop(vent);
             session.PlayerWouldLikeStop(patrick);
+
             vent.State.Should().Be(PlayerInGameState.IamLost);
             patrick.State.Should().Be(PlayerInGameState.IamWon);
         }
@@ -173,18 +174,55 @@ namespace Tests
             session.RoundNumber.Should().Be(1);
             vent.CardsInHands.Count.Should().Be(2);
             session.RestartSession();
-            vent.CardsInHands.Count.Should().Be(2);
-            vent.State.Should().Be(PlayerInGameState.IamThinking);
-            session.PlayerWouldLikeStop(vent);
+
             session.RoundNumber.Should().Be(2);
+            vent.CardsInHands.Count.Should().Be(2);
             session.PlayerWouldLikeStop(vent);
             session.RestartSession();
+
             session.RoundNumber.Should().Be(3);
             session.PlayerWouldLikeStop(vent);
 
         }
 
+        [Fact]
+        public void ChackEnemyPoints()
+        {
+            var session = GetSessionWithCards(new[]
+                {CardName.KING, CardName.EIGHT, CardName.TWO, CardName.SIX, CardName.THREE});
 
+            var patrick = session.Join("Patrick");
+            var vent = session.Join("Vent");
+
+            session.PlayerWouldLikeStop(patrick);
+            session.PlayerWouldLikeStop(vent);
+
+            patrick.SumPoint.Should().Be(9);
+            patrick.SumEnemyPoint.Should().Be(3);
+
+            vent.SumPoint.Should().Be(10);
+            vent.SumEnemyPoint.Should().Be(2);
+        }
+
+        [Fact]
+        public void ChackEnemyCards()
+        {
+            var session = GetSessionWithCards(new[]
+                {CardName.TWO, CardName.TWO, CardName.TWO, CardName.TWO, CardName.TWO});
+
+            var patrick = session.Join("Patrick");
+            var vent = session.Join("Vent");
+
+
+            patrick.CardsInHands.Count.Should().Be(2);
+            patrick.ShowCardsForEnemy.Count.Should().Be(1);
+
+            session.PlayerTakeCard(vent);
+
+            vent.CardsInHands.Count.Should().Be(3);
+            vent.ShowCardsForEnemy.Count.Should().Be(2);
+
+        }
         private static TableSession GetSessionWithCards(CardName[] cards)
         {
             return new TableSession(false, GetCardStack(cards));
