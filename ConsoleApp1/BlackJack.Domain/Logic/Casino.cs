@@ -23,8 +23,6 @@ namespace BlackJack.Domain.Logic
         {
             return GetOrCreateDesk(identity);
         }
-
-        public static List<Desk> GetDesks => allAvailableTables.ToList();
     }
 
 

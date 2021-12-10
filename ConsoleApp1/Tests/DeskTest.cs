@@ -44,17 +44,18 @@ namespace Tests
         }
 
         [Fact]
-        public void TakeCardsCasino()
+        public void TakeCardsInDesk()
         {
             desk = Casino.JoinPlayer("Name");
             desk = Casino.JoinPlayer("Derek");
 
             var players = desk.tableSession.players.FirstOrDefault(x => x.Name == "Name");
             desk.TakeCard(players.Name);
+            desk.PlayerStop(players.Name);
             players.CardsInHands.Should().HaveCount(3);
         }
         [Fact]
-        public void StopTakeCard()
+        public void StopTakeCardInDesk()
         {
             desk = Casino.JoinPlayer("Name");
             desk = Casino.JoinPlayer("Derek");
@@ -66,7 +67,7 @@ namespace Tests
         }
 
         [Fact]
-        public void RestartRound()
+        public void RestartDeskRound()
         {
             desk = Casino.JoinPlayer("Name");
             desk = Casino.JoinPlayer("Derek");

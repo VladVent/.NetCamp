@@ -7,56 +7,51 @@
 @inject IJSRuntime JsRuntime
 @inherits TableSessionsPage
 
-<h3>TableSessionPage</h3>
-<label>Wait @counter sec</label>
+<h3>Your Table</h3>
 
 @if (StateOfPlayers() != null)
 {
-
-    foreach (var player in StateOfPlayers())
+    <div class="d-flex flex-row align-items-center">
+        <div>
+            <h4 class="mb-0">@GetPlayer().Name</h4>
+        </div>
+    </div>
+    <h4 class="mb-0">@("Your Point:" + GetPlayer().SumPoint) @(GetPlayer().State)</h4>
+    @foreach (var card in GetPlayer().CardsInHands)
+    {
+        var cardFace = card.ToString();
+        <img src="/Resources/@(cardFace).png" height="150" />
+    }
+    if (GetPlayer().State == PlayerInGameState.IamThinking)
+    {
+        <RadzenButton Click=@(args => TakeCardClick()) Text="Take Card" ButtonStyle="ButtonStyle.Light" />
+        <RadzenButton Click=@(args => StopTakeClick()) Text="Stop Take Cards" ButtonStyle="ButtonStyle.Light" />
+    }
+    if (GetEnemy() != null)
     {
         <div class="d-flex flex-row align-items-center">
             <div>
-                <h4 class="mb-0">@player.Name</h4>
+                <h4 class="mb-0">@GetEnemy().Name</h4>
             </div>
         </div>
-        if (player.Name == Identity)
+        if (!IsEnemyWin() && !IsEnemyLost())
         {
-            <div style="font-size: .8em">@("Your Point:" + player.SumPoint), @(player.State)</div>
-            @foreach (var card in player.CardsInHands)
+            <h4 class="mb-0">@("Enemy Point:" + GetEnemy().SumEnemyPoint) @(GetEnemy().State)</h4>
+            <img src="Resources/CardBack.png" height="150" />
+            @foreach (var card in GetEnemy().ShowCardsForEnemy)
             {
                 var cardFace = card.ToString();
                 <img src="/Resources/@(cardFace).png" height="150" />
             }
-            if (player.State == PlayerInGameState.IamThinking)
-            {
-                <RadzenButton Click=@(args => TakeCardClick()) Text="Take Card" ButtonStyle="ButtonStyle.Light" />
-                <RadzenButton Click=@(args => StopTakeClick()) Text="Stop Take Cards" ButtonStyle="ButtonStyle.Light" />
-            }
         }
         else
         {
-            if (player.State != PlayerInGameState.IamWon && player.State != PlayerInGameState.IamLost)
+            <h4 class="mb-0">@("Enemy Point:" + GetEnemy().SumPoint), @(GetEnemy().State)</h4>
+            @foreach (var card in GetEnemy().CardsInHands)
             {
-                <h4 class="mb-0">@("Enemy Point:" + player.SumEnemyPoint), @(player.State)</h4>
-                <img src="Resources/CardBack.png" height="150" />
-                @foreach (var card in player.ShowCardsForEnemy)
-                {
-                    var cardFace = card.ToString();
-                    <img src="/Resources/@(cardFace).png" height="150" />
-                }
-            }
-            else
-            {
-                <div style="font-size: .8em">@("Enemy Point:" + player.SumPoint), @(player.State)</div>
-                @foreach (var card in player.CardsInHands)
-                {
-                    var cardFace = card.ToString();
-                    <img src="/Resources/@(cardFace).png" height="150" />
-                }
+                var cardFace = card.ToString();
+                <img src="/Resources/@(cardFace).png" height="150" />
             }
         }
     }
-
 }
-
