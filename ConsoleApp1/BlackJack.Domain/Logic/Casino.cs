@@ -8,7 +8,7 @@ namespace BlackJack.Domain.Logic
         public static List<Desk> allAvailableTables = new List<Desk>();
         private static Desk GetOrCreateDesk(string identity)
         {
-            var desk = allAvailableTables.FirstOrDefault(x => x.IsDeskPlayable());
+            var desk = allAvailableTables.FirstOrDefault(x => x.IsDeskPlayable(identity));
             if (desk == null)
             {
                 desk = new Desk();
@@ -20,7 +20,7 @@ namespace BlackJack.Domain.Logic
 
         private static Desk GetOrCreateDesk(int id, string identity)
         {
-            var desk = allAvailableTables.FirstOrDefault(x => x.IsDeskPlayable());
+            var desk = allAvailableTables.FirstOrDefault(x => x.IsDeskPlayable(identity));
             if (desk == null)
             {
                 desk = new Desk();

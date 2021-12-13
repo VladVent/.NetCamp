@@ -10,13 +10,12 @@ namespace BlackJack.DAL.Models
     public class SessionDB
     {
         public int SessionId { get; set; }
-        public Stack<CardSDB> deck { get; set; }
-
-        public int IdCard { get; set; }
-        public CardSDB CardSDB { get; set; }
         public List<PlayerDB>? players { get; set; }
 
-        public int PlayerId { get; set; }
-        public PlayerDB PlayerDB { get; set; }  
+        //public int PlayerId { get; set; }
+        //public PlayerDB PlayerDB { get; set; }
+
+        public int DeskId { get; set; }
+        public DeskDB DeskDB { get; set; }
     }
 }

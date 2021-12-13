@@ -14,5 +14,6 @@ namespace BlackJack.DAL.Models
         public int Power { get; set; }
         public string Name { get; set; }
 
+        public SessionDB SessionDB { get; set; }
     }
 }

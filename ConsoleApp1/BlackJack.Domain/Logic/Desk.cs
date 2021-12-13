@@ -30,9 +30,9 @@ namespace BlackJack.Domain.Logic
             TableSession = new TableSession(_seed); ;
         }
 
-        public bool IsDeskPlayable()
+        public bool IsDeskPlayable(string id)
         {
-            return GetArrayPlayers().Count() < 2 ? true : false;
+            return GetArrayPlayers().Count() < 2 && !IsPlayerInSession(id) ? true : false;
         }
 
         public void TakeCard(string id)
@@ -88,6 +88,8 @@ namespace BlackJack.Domain.Logic
             TableSession.RestartSession();
             DoSessionStateUpdated();
         }
+
+        private bool IsPlayerInSession(string id) => GetArrayPlayers().Any(x => x.PlayerName == id);
         private PlayerState TakePlayer(string id)
         {
             return GetArrayPlayers().FirstOrDefault(x => x.PlayerName == id);

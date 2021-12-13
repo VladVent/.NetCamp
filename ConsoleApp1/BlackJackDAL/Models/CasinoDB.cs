@@ -9,7 +9,7 @@ namespace BlackJack.DAL.Models
 {
     public class CasinoDB
     {
-        public List<DeskDB>? AllTables { get; set; }
+        public IEnumerable<DeskDB>? AllTables { get; set; }
 
         public int DeskId { get; set; }
         public DeskDB Desk { get; set; }

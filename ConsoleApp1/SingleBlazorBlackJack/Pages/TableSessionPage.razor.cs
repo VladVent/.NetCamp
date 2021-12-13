@@ -30,21 +30,21 @@ namespace BlackJackBlazor.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            
+
             base.OnInitialized();
             desk = Casino.JoinPlayer(Identity);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<PlayerState, PlayerDB>());
-            var mapper = new Mapper(config);
-            var DeskDAL = mapper.Map<PlayerState, PlayerDB>(StateOfPlayers().FirstOrDefault(x=>x.PlayerName == Identity));
 
-            _service.Create(DeskDAL);
-            // _service.Update(DeskDAL);
-            application.SaveChanges();
+
+            _service.Create(DeskMapping());
+            SaveInDb();
 
             desk.DeskStateUpdated += async (sender, a) => { await InvokeAsync(() => StateHasChanged()); };
 
             await base.OnInitializedAsync();
         }
+
+        
+
         public List<PlayerState> StateOfPlayers() => desk.GetArrayPlayers();
         public void TakeCardClick()
         {
@@ -55,13 +55,35 @@ namespace BlackJackBlazor.Pages
             desk.PlayerStop(Identity);
         }
 
-       
+        public void LeaveSessionClick()
+        {
+            if(GetPlayer() != null)
+            {
+                StateOfPlayers().Remove(GetPlayer());
+            }
+            Navigator();
+        }
+
         public void GetCardName() => StateOfPlayers().ForEach(x => x.CardsInHands.ToString());
 
         public PlayerState GetPlayer() => StateOfPlayers().FirstOrDefault(x => x.PlayerName == Identity);
         public PlayerState GetEnemy() => StateOfPlayers().FirstOrDefault(x => x.PlayerName != Identity);
         public bool IsAnyPlayerWinOrLose() => StateOfPlayers().Any(x => x.State == PlayerInGameState.IamWon || x.State == PlayerInGameState.IamLost);
+        private PlayerDB DeskMapping()
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<PlayerState, PlayerDB>());
+            var mapper = new Mapper(config);
+            var DeskDAL = mapper.Map<PlayerState, PlayerDB>(GetPlayer());
+            return DeskDAL;
+        }
+        private void SaveInDb()
+        {
+            application.SaveChanges();
+        }
+        private void Navigator()
+        {
+            NavigationManager.NavigateTo(String.Format("/"));
+        }
 
-       
     }
 }

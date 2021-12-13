@@ -6,62 +6,79 @@
 @using Radzen.Blazor
 @inherits TableSessionsPage
 
-<h3>Your Table</h3>
-          
+
+<RadzenCard class="m-3">
+    <h3 align="center">Table Number 1</h3>
+</RadzenCard>
 @if (IsAnyPlayerWinOrLose())
 {
-    <div class="row">
-        <div class="col-xl-6">
-            <h3>Please wait @Count seconds game load new match!</h3>
-            <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
-            <br />
-        </div>
-    </div>
+    <RadzenCard class="m-3">
+
+                <h3 align="center">Please wait @Count seconds game load new match!</h3>
+                <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+                <br />
+    </RadzenCard>
 }
 @if (GetPlayer() != null)
 {
-    <div class="d-flex flex-row align-items-center">
-        <div>
-            <h4 class="mb-0">@GetPlayer().PlayerName</h4>
+
+    <RadzenCard Style="width: 40%;" class="m-3">
+        <div class="row">
+            <h4 class="mb-0" align="center">@GetPlayer().PlayerName</h4>
+            <div class="col-md-4">
+                <h3 class="h5" align="center">@("Your Point:" + GetPlayer().SumPoint)  @("State:" + GetPlayer().State)</h3>
+
+            </div>
         </div>
-    </div>
-    <h4 class="mb-0">@("Your Point:" + GetPlayer().SumPoint) @(GetPlayer().State)</h4>
+    </RadzenCard>
     @foreach (var card in GetPlayer().CardsInHands)
     {
         cardFace = card.ToString();
         <img src="/Resources/@(cardFace).png" height="150" />
     }
 
-    if (GetPlayer().State == PlayerInGameState.IamThinking || !IsAnyPlayerWinOrLose())
+    @if (GetPlayer().State == PlayerInGameState.IamThinking || !IsAnyPlayerWinOrLose())
     {
         <RadzenButton Click=@(args => TakeCardClick()) Text="Take Card" ButtonStyle="ButtonStyle.Light" />
         <RadzenButton Click=@(args => StopTakeClick()) Text="Stop Take Cards" ButtonStyle="ButtonStyle.Light" />
     }
+    @if(IsAnyPlayerWinOrLose())
+    {
+         <RadzenButton Click=@(args =>  LeaveSessionClick()) Text="Leave" ButtonStyle="ButtonStyle.Light" />
+    }
+   
+
 }
 @if (GetEnemy() != null)
 {
-    <div class="d-flex flex-row align-items-center">
-        <div>
-            <h4 class="mb-0">@GetEnemy().PlayerName</h4>
-        </div>
+
+    <div>
+
+        @if (!IsAnyPlayerWinOrLose())
+        {
+            <RadzenCard Style="width: 40%;" class="m-3">
+                <h4 class="mb-0" align="center">@GetEnemy().PlayerName</h4>
+                <h4 class="mb-0">@("Enemy Point:" + GetEnemy().ShowPointForEnemy) @("State:" + GetEnemy().State)</h4>
+            </RadzenCard>
+            <img src="Resources/CardBack.png" height="150" />
+            @foreach (var card in GetEnemy().ShowCardsForEnemy)
+            {
+                cardFace = card.ToString();
+                <img src="/Resources/@(cardFace).png" height="150" />
+            }
+        }
+        else
+        {
+            <RadzenCard Style="width: 40%;" class="m-3">
+                <h4 class="mb-0" align="center">@GetEnemy().PlayerName</h4>
+                <h4 class="mb-0">@("Enemy Point:" + GetEnemy().SumPoint), @("State:" + GetEnemy().State)</h4>
+            </RadzenCard>
+            @foreach (var card in GetEnemy().CardsInHands)
+            {
+                cardFace = card.ToString();
+                <img src="/Resources/@(cardFace).png" height="150" />
+            }
+        }
     </div>
-    if (!IsAnyPlayerWinOrLose())
-    {
-        <h4 class="mb-0">@("Enemy Point:" + GetEnemy().ShowPointForEnemy) @(GetEnemy().State)</h4>
-        <img src="Resources/CardBack.png" height="150" />
-        @foreach (var card in GetEnemy().ShowCardsForEnemy)
-        {
-            cardFace = card.ToString();
-            <img src="/Resources/@(cardFace).png" height="150" />
-        }
-    }
-    else
-    {
-        <h4 class="mb-0">@("Enemy Point:" + GetEnemy().SumPoint), @(GetEnemy().State)</h4>
-        @foreach (var card in GetEnemy().CardsInHands)
-        {
-            cardFace = card.ToString();
-            <img src="/Resources/@(cardFace).png" height="150" />
-        }
-    }
+
 }

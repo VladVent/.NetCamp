@@ -12,14 +12,7 @@ namespace BlackJack.DAL.Services
 {
     public interface ICasinoService
     {
-       // void Create(DeskDB player);
-
+        void Create(DeskDB player);
         void Create(PlayerDB player);
-        void Delete(int id);
-        IEnumerable<PlayerDB> Find(Func<PlayerDB, bool> predicate);
-        PlayerDB Get(int id);
-        IEnumerable<PlayerDB> GetAll();
-       // void Update(DeskDB player);
-        void Update(PlayerDB player);
     }
 }

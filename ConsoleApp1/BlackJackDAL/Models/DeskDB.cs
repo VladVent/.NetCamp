@@ -11,6 +11,7 @@ namespace BlackJack.DAL.Models
     public class DeskDB
     {
         public int DeskId { get; set; }
-        public SessionDB? TableSession { get;  set; }
+        public SessionDB? TableSession { get; set; }
+        // public CasinoDB? CasinoDB { get; set;}
     }
 }
