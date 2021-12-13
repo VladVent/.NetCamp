@@ -2,6 +2,7 @@
 {
     public class Card
     {
+        public int IdCard { get; set; }
         public CardSuit CardSuit;
         public int Power;
         public string Name;

@@ -198,10 +198,10 @@ namespace Tests
             session.PlayerWouldLikeStop(vent);
 
             patrick.SumPoint.Should().Be(9);
-            patrick.SumEnemyPoint.Should().Be(3);
+            patrick.ShowPointForEnemy.Should().Be(3);
 
             vent.SumPoint.Should().Be(10);
-            vent.SumEnemyPoint.Should().Be(2);
+            vent.ShowPointForEnemy.Should().Be(2);
         }
 
         [Fact]

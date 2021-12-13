@@ -37,7 +37,6 @@ namespace BlackJack.Logic
             {
                 cardsinhand.Push(deck.Pop());
             }
-
             return cardsinhand;
         }
 

@@ -7,8 +7,8 @@ namespace BlackJack.Logic
 {
     public class TableSession
     {
-        public int Id { get; set; }
         private readonly int _seed;
+        public int SessionId { get; set; }
         public Stack<Card> deck;
         public List<PlayerState> players = new List<PlayerState>();
         public int RoundNumber { get; set; } = 1;
@@ -38,7 +38,21 @@ namespace BlackJack.Logic
         {
             var player = new PlayerState
             {
-                Name = p,
+                PlayerName = p,
+                CardsInHands = deck.DealTheCards(),
+            };
+            player.State = ComputeState(player);
+
+            players.Add(player);
+            CheckFlawlessWin(player);
+            return player;
+        }
+
+        public PlayerState Join(int id, string p)
+        {
+            var player = new PlayerState
+            {
+                PlayerName = p,
                 CardsInHands = deck.DealTheCards(),
             };
             player.State = ComputeState(player);
@@ -140,7 +154,7 @@ namespace BlackJack.Logic
         {
             var p = new List<SessionsState>();
             foreach (var d in players)
-                p.Add(new SessionsState() { playerName = d.Name, state = d.State, cardCount = d.CardsInHands.Count });
+                p.Add(new SessionsState() { playerName = d.PlayerName, state = d.State, cardCount = d.CardsInHands.Count });
             return new VisibleSessionState() { Players = p };
         }
     }

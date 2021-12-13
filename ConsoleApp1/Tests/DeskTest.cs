@@ -18,7 +18,7 @@ namespace Tests
         {
             desk = Casino.JoinPlayer("Name");
             desk = Casino.JoinPlayer("Derek");
-            desk.tableSession.players.Should().HaveCount(2);
+            desk.TableSession.players.Should().HaveCount(2);
         }
 
         [Fact]
@@ -27,20 +27,20 @@ namespace Tests
             desk = Casino.JoinPlayer("Name");
             desk = Casino.JoinPlayer("Derek");
 
-            desk.tableSession.players.Should().HaveCount(2);
-            desk.tableSession.players.Any(x => x.Name == "Name").Should().BeTrue();
+            desk.TableSession.players.Should().HaveCount(2);
+            desk.TableSession.players.Any(x => x.PlayerName == "Name").Should().BeTrue();
 
             desk = Casino.JoinPlayer("Patric");
             desk = Casino.JoinPlayer("Liv");
-            desk.tableSession.players.Should().HaveCount(2);
-            desk.tableSession.players.Any(x => x.Name == "Liv").Should().BeTrue();
-            desk.tableSession.players.Any(x => x.Name == "Name").Should().BeFalse();
+            desk.TableSession.players.Should().HaveCount(2);
+            desk.TableSession.players.Any(x => x.PlayerName == "Liv").Should().BeTrue();
+            desk.TableSession.players.Any(x => x.PlayerName == "Name").Should().BeFalse();
 
             desk = Casino.JoinPlayer("Deb");
             desk = Casino.JoinPlayer("a");
-            desk.tableSession.players.Should().HaveCount(2);
-            desk.tableSession.players.Any(x => x.Name == "Deb").Should().BeTrue();
-            desk.tableSession.players.Any(x => x.Name == "Name").Should().BeFalse();
+            desk.TableSession.players.Should().HaveCount(2);
+            desk.TableSession.players.Any(x => x.PlayerName == "Deb").Should().BeTrue();
+            desk.TableSession.players.Any(x => x.PlayerName == "Name").Should().BeFalse();
         }
 
         [Fact]
@@ -49,10 +49,9 @@ namespace Tests
             desk = Casino.JoinPlayer("Name");
             desk = Casino.JoinPlayer("Derek");
 
-            var players = desk.tableSession.players.FirstOrDefault(x => x.Name == "Name");
-            desk.TakeCard(players.Name);
-            desk.PlayerStop(players.Name);
-            players.CardsInHands.Should().HaveCount(3);
+            var players = desk.TableSession.players.FirstOrDefault(x => x.PlayerName == "Name");
+            desk.TakeCard(players.PlayerName);
+            desk.PlayerStop(players.PlayerName);
         }
         [Fact]
         public void StopTakeCardInDesk()
@@ -61,7 +60,7 @@ namespace Tests
             desk = Casino.JoinPlayer("Derek");
 
             desk.PlayerStop("Name");
-            var Name = desk.tableSession.players.FirstOrDefault(x => x.Name == "Name");
+            var Name = desk.TableSession.players.FirstOrDefault(x => x.PlayerName == "Name");
             Name.CardsInHands.Should().HaveCount(2);
             Name.State.Should().Be(PlayerInGameState.IamDoneTakingCards);
         }
@@ -74,13 +73,13 @@ namespace Tests
 
             desk.PlayerStop("Name");
             desk.PlayerStop("Derek");
-            var Name = desk.tableSession.players.FirstOrDefault(x => x.Name == "Name");
-            var Derek = desk.tableSession.players.FirstOrDefault(x => x.Name == "Derek");
+            var Name = desk.TableSession.players.FirstOrDefault(x => x.PlayerName == "Name");
+            var Derek = desk.TableSession.players.FirstOrDefault(x => x.PlayerName == "Derek");
 
             Name.CardsInHands.Should().HaveCount(2);
             Derek.CardsInHands.Should().HaveCount(2);
 
-            desk.tableSession.RoundNumber.Should().Be(1);
+            desk.TableSession.RoundNumber.Should().Be(1);
         }
 
     }

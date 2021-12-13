@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BlackJack.Domain.Logic
@@ -10,52 +11,60 @@ namespace BlackJack.Domain.Logic
     /// <summary>
     /// Black jack desk with session and players.
     /// </summary>
-    public  class Desk
+    public class Desk
     {
         private readonly int _seed;
-        public TableSession tableSession { get; private set; }
+
+        public int DeskId { get; set; }
+        public TableSession TableSession { get; private set; }
         public event EventHandler DeskStateUpdated;
-        public event EventHandler ReloadRoundMessage;
 
         public Desk()
         {
-            tableSession = new TableSession(Environment.TickCount);
+            TableSession = new TableSession(Environment.TickCount);
         }
 
         public Desk(int seed)
         {
             _seed = seed;
-            tableSession = new TableSession(_seed); ;
+            TableSession = new TableSession(_seed); ;
         }
 
-        internal bool IsDeskPlayable()
+        public bool IsDeskPlayable()
         {
             return GetArrayPlayers().Count() < 2 ? true : false;
         }
 
         public void TakeCard(string id)
         {
-            tableSession.PlayerTakeCard(TakePlayer(id));
+            TableSession.PlayerTakeCard(TakePlayer(id));
             DoSessionStateUpdated();
         }
 
         public async void JoinPlayer(string identity)
         {
-            tableSession.Join(identity);
+            TableSession.Join(identity);
+            DoSessionStateUpdated();
+            await AllPlayersStop();
+        }
+
+        public async void JoinPlayer(int id, string identity)
+        {
+            TableSession.Join(id, identity);
             DoSessionStateUpdated();
             await AllPlayersStop();
         }
 
         public async void PlayerStop(string id)
         {
-            tableSession.PlayerWouldLikeStop(TakePlayer(id));
+            TableSession.PlayerWouldLikeStop(TakePlayer(id));
             DoSessionStateUpdated();
             await AllPlayersStop();
         }
 
         public List<PlayerState> GetArrayPlayers()
         {
-            return tableSession.players;
+            return TableSession.players;
         }
 
 
@@ -64,7 +73,6 @@ namespace BlackJack.Domain.Logic
             var isAnyPlayerWinRound = IsTakeWinnerOrLoser();
             if (isAnyPlayerWinRound)
             {
-                ReloadindRoundMessage();
                 await Task.Delay(5000);
                 RestartRound();
             }
@@ -77,23 +85,18 @@ namespace BlackJack.Domain.Logic
 
         private void RestartRound()
         {
-            tableSession.RestartSession();
+            TableSession.RestartSession();
             DoSessionStateUpdated();
         }
         private PlayerState TakePlayer(string id)
         {
-            return GetArrayPlayers().FirstOrDefault(x => x.Name == id);
+            return GetArrayPlayers().FirstOrDefault(x => x.PlayerName == id);
         }
 
 
         private void DoSessionStateUpdated()
         {
             DeskStateUpdated?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void ReloadindRoundMessage()
-        {
-            ReloadRoundMessage?.Invoke(this, EventArgs.Empty);
         }
 
     }

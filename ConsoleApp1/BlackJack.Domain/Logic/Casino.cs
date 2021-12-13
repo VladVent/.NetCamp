@@ -5,7 +5,7 @@ namespace BlackJack.Domain.Logic
 {
     public static class Casino
     {
-        private static List<Desk> allAvailableTables = new List<Desk>();
+        public static List<Desk> allAvailableTables = new List<Desk>();
         private static Desk GetOrCreateDesk(string identity)
         {
             var desk = allAvailableTables.FirstOrDefault(x => x.IsDeskPlayable());
@@ -18,10 +18,26 @@ namespace BlackJack.Domain.Logic
             return desk;
         }
 
+        private static Desk GetOrCreateDesk(int id, string identity)
+        {
+            var desk = allAvailableTables.FirstOrDefault(x => x.IsDeskPlayable());
+            if (desk == null)
+            {
+                desk = new Desk();
+                allAvailableTables.Add(desk);
+            }
+            desk.JoinPlayer(id, identity);
+            return desk;
+        }
 
         public static Desk JoinPlayer(string identity)
         {
             return GetOrCreateDesk(identity);
+        }
+
+        public static Desk JoinPlayer(int id, string identity)
+        {
+            return GetOrCreateDesk(id, identity);
         }
     }
 

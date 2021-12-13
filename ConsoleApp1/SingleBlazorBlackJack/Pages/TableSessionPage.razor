@@ -4,16 +4,17 @@
 @using BlackJackBlazor.Pages
 @using Radzen
 @using Radzen.Blazor
-@inject IJSRuntime JsRuntime
 @inherits TableSessionsPage
 
 <h3>Your Table</h3>
-@if (IsPlayerWinOrLose())
+          
+@if (IsAnyPlayerWinOrLose())
 {
     <div class="row">
         <div class="col-xl-6">
-            <h3>Refresh game 5 Sec</h3>
+            <h3>Please wait @Count seconds game load new match!</h3>
             <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+            <br />
         </div>
     </div>
 }
@@ -21,17 +22,17 @@
 {
     <div class="d-flex flex-row align-items-center">
         <div>
-            <h4 class="mb-0">@GetPlayer().Name</h4>
+            <h4 class="mb-0">@GetPlayer().PlayerName</h4>
         </div>
     </div>
     <h4 class="mb-0">@("Your Point:" + GetPlayer().SumPoint) @(GetPlayer().State)</h4>
     @foreach (var card in GetPlayer().CardsInHands)
     {
-        var cardFace = card.ToString();
+        cardFace = card.ToString();
         <img src="/Resources/@(cardFace).png" height="150" />
     }
 
-    if (GetPlayer().State == PlayerInGameState.IamThinking)
+    if (GetPlayer().State == PlayerInGameState.IamThinking || !IsAnyPlayerWinOrLose())
     {
         <RadzenButton Click=@(args => TakeCardClick()) Text="Take Card" ButtonStyle="ButtonStyle.Light" />
         <RadzenButton Click=@(args => StopTakeClick()) Text="Stop Take Cards" ButtonStyle="ButtonStyle.Light" />
@@ -41,16 +42,16 @@
 {
     <div class="d-flex flex-row align-items-center">
         <div>
-            <h4 class="mb-0">@GetEnemy().Name</h4>
+            <h4 class="mb-0">@GetEnemy().PlayerName</h4>
         </div>
     </div>
-    if (!IsEnemyWin() && !IsEnemyLost())
+    if (!IsAnyPlayerWinOrLose())
     {
-        <h4 class="mb-0">@("Enemy Point:" + GetEnemy().SumEnemyPoint) @(GetEnemy().State)</h4>
+        <h4 class="mb-0">@("Enemy Point:" + GetEnemy().ShowPointForEnemy) @(GetEnemy().State)</h4>
         <img src="Resources/CardBack.png" height="150" />
         @foreach (var card in GetEnemy().ShowCardsForEnemy)
         {
-            var cardFace = card.ToString();
+            cardFace = card.ToString();
             <img src="/Resources/@(cardFace).png" height="150" />
         }
     }
@@ -59,7 +60,7 @@
         <h4 class="mb-0">@("Enemy Point:" + GetEnemy().SumPoint), @(GetEnemy().State)</h4>
         @foreach (var card in GetEnemy().CardsInHands)
         {
-            var cardFace = card.ToString();
+            cardFace = card.ToString();
             <img src="/Resources/@(cardFace).png" height="150" />
         }
     }

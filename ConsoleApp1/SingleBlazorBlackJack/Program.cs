@@ -1,12 +1,17 @@
 using BlackJack.Domain.Logic;
 using SingleBlazorBlackJack;
+using BlackJack.DAL;
+using BlackJack.DAL.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddServerSideBlazor();
+builder.Services.ConfigureDAL();
+builder.Services.ConfigureBLL();
+builder.Services.AddDbContext<ApplicationContext>();
 
 var app = builder.Build();
 
@@ -24,6 +29,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.MapControllers();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
