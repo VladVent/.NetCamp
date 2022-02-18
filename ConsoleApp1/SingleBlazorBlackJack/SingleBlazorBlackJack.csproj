@@ -74,7 +74,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BlackJack.BLL\BlackJack.BLL.csproj" />
     <ProjectReference Include="..\BlackJack.Domain\BlackJack.Domain.csproj" />
     <ProjectReference Include="..\BlackJackDAL\BlackJack.DAL.csproj" />
   </ItemGroup>
