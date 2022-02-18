@@ -5,7 +5,7 @@ using BlackJack.DAL.Services;
 using AutoMapper;
 using BlackJack.DAL.Models;
 using BlackJack.DAL.Context;
-#pragma warning disable CS8603 // Possible null reference return.
+#pragma warning disable CS8603 // Possible null reference return. //Test
 
 namespace BlackJackBlazor.Pages
 {
