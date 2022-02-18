@@ -13,7 +13,6 @@ namespace BlackJackBlazor.Pages
     {
         public int Count = 5;
 
-
         [Parameter]
         public string cardFace { get; set; }
         [Parameter]

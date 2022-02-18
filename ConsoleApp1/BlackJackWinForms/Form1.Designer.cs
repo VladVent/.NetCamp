@@ -66,7 +66,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(36, 71);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 17);
+            this.label1.Size = new System.Drawing.Size(43, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Score";
             // 
@@ -75,7 +75,7 @@
             this.score.AutoSize = true;
             this.score.Location = new System.Drawing.Point(100, 71);
             this.score.Name = "score";
-            this.score.Size = new System.Drawing.Size(45, 17);
+            this.score.Size = new System.Drawing.Size(43, 16);
             this.score.TabIndex = 1;
             this.score.Text = "Score";
             // 
@@ -104,7 +104,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(36, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 17);
+            this.label2.Size = new System.Drawing.Size(43, 16);
             this.label2.TabIndex = 3;
             this.label2.Text = "Score";
             // 

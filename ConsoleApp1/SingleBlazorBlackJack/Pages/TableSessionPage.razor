@@ -40,7 +40,7 @@
     @if (GetPlayer().State == PlayerInGameState.IamThinking || !IsAnyPlayerWinOrLose())
     {
         <RadzenButton Click=@(args => TakeCardClick()) Text="Take Card" ButtonStyle="ButtonStyle.Light" />
-        <RadzenButton Click=@(args => StopTakeClick()) Text="Stop Take Cards" ButtonStyle="ButtonStyle.Light" />
+        <RadzenButton Click=@(args => StopTakeClick()) Text="Stop Taking Cards" ButtonStyle="ButtonStyle.Light" />
     }
     @if(IsAnyPlayerWinOrLose())
     {

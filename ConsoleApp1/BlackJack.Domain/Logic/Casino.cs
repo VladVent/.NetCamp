@@ -18,27 +18,12 @@ namespace BlackJack.Domain.Logic
             return desk;
         }
 
-        private static Desk GetOrCreateDesk(int id, string identity)
-        {
-            var desk = allAvailableTables.FirstOrDefault(x => x.IsDeskPlayable(identity));
-            if (desk == null)
-            {
-                desk = new Desk();
-                allAvailableTables.Add(desk);
-            }
-            desk.JoinPlayer(id, identity);
-            return desk;
-        }
-
+      
         public static Desk JoinPlayer(string identity)
         {
             return GetOrCreateDesk(identity);
         }
 
-        public static Desk JoinPlayer(int id, string identity)
-        {
-            return GetOrCreateDesk(id, identity);
-        }
     }
 
 

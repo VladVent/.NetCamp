@@ -48,12 +48,6 @@ namespace BlackJack.Domain.Logic
             await AllPlayersStop();
         }
 
-        public async void JoinPlayer(int id, string identity)
-        {
-            TableSession.Join(id, identity);
-            DoSessionStateUpdated();
-            await AllPlayersStop();
-        }
 
         public async void PlayerStop(string id)
         {
