@@ -1,0 +1,87 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="wwwroot\Resources\ACE Clubs.png" />
+    <None Remove="wwwroot\Resources\ACE Diamonds.png" />
+    <None Remove="wwwroot\Resources\ACE Hearts.png" />
+    <None Remove="wwwroot\Resources\ACE Spades.png" />
+    <None Remove="wwwroot\Resources\EIGHT Clubs.png" />
+    <None Remove="wwwroot\Resources\EIGHT Diamonds.png" />
+    <None Remove="wwwroot\Resources\EIGHT Hearts.png" />
+    <None Remove="wwwroot\Resources\EIGHT Spades.png" />
+    <None Remove="wwwroot\Resources\FIVE Clubs.png" />
+    <None Remove="wwwroot\Resources\FIVE Diamonds.png" />
+    <None Remove="wwwroot\Resources\FIVE Hearts.png" />
+    <None Remove="wwwroot\Resources\FIVE Spades.png" />
+    <None Remove="wwwroot\Resources\FOUR Clubs.png" />
+    <None Remove="wwwroot\Resources\FOUR Diamonds.png" />
+    <None Remove="wwwroot\Resources\FOUR Hearts.png" />
+    <None Remove="wwwroot\Resources\FOUR Spades.png" />
+    <None Remove="wwwroot\Resources\JACK Clubs.png" />
+    <None Remove="wwwroot\Resources\JACK Diamonds.png" />
+    <None Remove="wwwroot\Resources\JACK Hearts.png" />
+    <None Remove="wwwroot\Resources\JACK Spades.png" />
+    <None Remove="wwwroot\Resources\KING Clubs.png" />
+    <None Remove="wwwroot\Resources\KING Diamonds.png" />
+    <None Remove="wwwroot\Resources\KING Hearts.png" />
+    <None Remove="wwwroot\Resources\KING Spades.png" />
+    <None Remove="wwwroot\Resources\NINE Clubs.png" />
+    <None Remove="wwwroot\Resources\NINE Diamonds.png" />
+    <None Remove="wwwroot\Resources\NINE Hearts.png" />
+    <None Remove="wwwroot\Resources\NINE Spades.png" />
+    <None Remove="wwwroot\Resources\QUEEN Clubs.png" />
+    <None Remove="wwwroot\Resources\QUEEN Diamonds.png" />
+    <None Remove="wwwroot\Resources\QUEEN Hearts.png" />
+    <None Remove="wwwroot\Resources\QUEEN Spades.png" />
+    <None Remove="wwwroot\Resources\SEVEN Clubs.png" />
+    <None Remove="wwwroot\Resources\SEVEN Diamonds.png" />
+    <None Remove="wwwroot\Resources\SEVEN Hearts.png" />
+    <None Remove="wwwroot\Resources\SEVEN Spades.png" />
+    <None Remove="wwwroot\Resources\SIX Clubs.png" />
+    <None Remove="wwwroot\Resources\SIX Diamonds.png" />
+    <None Remove="wwwroot\Resources\SIX Hearts.png" />
+    <None Remove="wwwroot\Resources\SIX Spades.png" />
+    <None Remove="wwwroot\Resources\TEN Clubs.png" />
+    <None Remove="wwwroot\Resources\TEN Diamonds.png" />
+    <None Remove="wwwroot\Resources\TEN Hearts.png" />
+    <None Remove="wwwroot\Resources\TEN Spades.png" />
+    <None Remove="wwwroot\Resources\THREE Clubs.png" />
+    <None Remove="wwwroot\Resources\THREE Diamonds.png" />
+    <None Remove="wwwroot\Resources\THREE Hearts.png" />
+    <None Remove="wwwroot\Resources\THREE Spades.png" />
+    <None Remove="wwwroot\Resources\TWO Clubs.png" />
+    <None Remove="wwwroot\Resources\TWO Diamonds.png" />
+    <None Remove="wwwroot\Resources\TWO Hearts.png" />
+    <None Remove="wwwroot\Resources\TWO Spades.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Resources\CardBack.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.JSInterop" Version="6.0.0" />
+    <PackageReference Include="Radzen.Blazor" Version="3.13.5" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlackJack.Domain\BlackJack.Domain.csproj" />
+    <ProjectReference Include="..\BlackJackDAL\BlackJack.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Windows.Forms.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

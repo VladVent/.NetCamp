@@ -1,0 +1,84 @@
+﻿@page "/TableSessionPage/{Identity}"
+@using BlackJack.Domain.Logic
+@using BlackJack.Logic
+@using BlackJackBlazor.Pages
+@using Radzen
+@using Radzen.Blazor
+@inherits TableSessionsPage
+
+
+<RadzenCard class="m-3">
+    <h3 align="center">Table Number 1</h3>
+</RadzenCard>
+@if (IsAnyPlayerWinOrLose())
+{
+    <RadzenCard class="m-3">
+
+                <h3 align="center">Please wait @Count seconds game load new match!</h3>
+                <RadzenProgressBar Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+                <br />
+    </RadzenCard>
+}
+@if (GetPlayer() != null)
+{
+
+    <RadzenCard Style="width: 40%;" class="m-3">
+        <div class="row">
+            <h4 class="mb-0" align="center">@GetPlayer().PlayerName</h4>
+            <div class="col-md-4">
+                <h3 class="h5" align="center">@("Your Point:" + GetPlayer().SumPoint)  @("State:" + GetPlayer().State)</h3>
+
+            </div>
+        </div>
+    </RadzenCard>
+    @foreach (var card in GetPlayer().CardsInHands)
+    {
+        cardFace = card.ToString();
+        <img src="/Resources/@(cardFace).png" height="150" />
+    }
+
+    @if (GetPlayer().State == PlayerInGameState.IamThinking || !IsAnyPlayerWinOrLose())
+    {
+        <RadzenButton Click=@(args => TakeCardClick()) Text="Take Card" ButtonStyle="ButtonStyle.Light" />
+        <RadzenButton Click=@(args => StopTakeClick()) Text="Stop Taking Cards" ButtonStyle="ButtonStyle.Light" />
+    }
+    @if(IsAnyPlayerWinOrLose())
+    {
+         <RadzenButton Click=@(args =>  LeaveSessionClick()) Text="Leave" ButtonStyle="ButtonStyle.Light" />
+    }
+   
+
+}
+@if (GetEnemy() != null)
+{
+
+    <div>
+
+        @if (!IsAnyPlayerWinOrLose())
+        {
+            <RadzenCard Style="width: 40%;" class="m-3">
+                <h4 class="mb-0" align="center">@GetEnemy().PlayerName</h4>
+                <h4 class="mb-0">@("Enemy Point:" + GetEnemy().ShowPointForEnemy) @("State:" + GetEnemy().State)</h4>
+            </RadzenCard>
+            <img src="Resources/CardBack.png" height="150" />
+            @foreach (var card in GetEnemy().ShowCardsForEnemy)
+            {
+                cardFace = card.ToString();
+                <img src="/Resources/@(cardFace).png" height="150" />
+            }
+        }
+        else
+        {
+            <RadzenCard Style="width: 40%;" class="m-3">
+                <h4 class="mb-0" align="center">@GetEnemy().PlayerName</h4>
+                <h4 class="mb-0">@("Enemy Point:" + GetEnemy().SumPoint), @("State:" + GetEnemy().State)</h4>
+            </RadzenCard>
+            @foreach (var card in GetEnemy().CardsInHands)
+            {
+                cardFace = card.ToString();
+                <img src="/Resources/@(cardFace).png" height="150" />
+            }
+        }
+    </div>
+
+}

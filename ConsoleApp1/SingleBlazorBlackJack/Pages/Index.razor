@@ -1,0 +1,20 @@
+﻿@page "/"
+@using Radzen
+@using Radzen.Blazor
+@using System.Text.Json
+@inherits IndexModel
+<RadzenCard class="m-3">
+<h1 align="center">Welcome to the BlackJack</h1>
+   </RadzenCard>
+<div class="row d-flex px-3">
+    <div class="col-md-4 align-items-center d-flex">
+        <div class="col-md-4 align-items-center d-flex">
+            <RadzenCard Style="width: 100%;" >
+                <h4 class="md-4">NickName</h4>
+                <RadzenTextBox @bind-Value=identity Class="w-100" />
+                <RadzenButton Click=@(args => Navigator(identity)) Text="Connect" ButtonStyle="ButtonStyle.Light" />
+            </RadzenCard>
+
+        </div>
+    </div>
+</div>

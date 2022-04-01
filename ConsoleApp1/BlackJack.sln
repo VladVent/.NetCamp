@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{B91D581A-A858-46FF-A19B-454D00A62C8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackWinForms", "BlackJackWinForms\BlackJackWinForms.csproj", "{E28B9793-5673-41B8-9A57-3E47B6A8403F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackJack.Domain", "BlackJack.Domain\BlackJack.Domain.csproj", "{691813DD-A152-4D40-B758-E9174A477D65}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OthersUI", "OthersUI", "{0DE2626C-21FF-4A19-805E-6909563E4CCD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SingleBlazorBlackJack", "SingleBlazorBlackJack\SingleBlazorBlackJack.csproj", "{CD001983-BC74-4B5C-96AF-3CB1702D5646}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackJack.DAL", "BlackJackDAL\BlackJack.DAL.csproj", "{022B1B92-E803-4D53-9C94-5CFE6BD8A6E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJackAngular", "BlackJackAngular\BlackJackAngular.csproj", "{E7465B2C-CCEE-4DB3-9702-9949821D7FAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B91D581A-A858-46FF-A19B-454D00A62C8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B91D581A-A858-46FF-A19B-454D00A62C8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B91D581A-A858-46FF-A19B-454D00A62C8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B91D581A-A858-46FF-A19B-454D00A62C8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E28B9793-5673-41B8-9A57-3E47B6A8403F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E28B9793-5673-41B8-9A57-3E47B6A8403F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E28B9793-5673-41B8-9A57-3E47B6A8403F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E28B9793-5673-41B8-9A57-3E47B6A8403F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{691813DD-A152-4D40-B758-E9174A477D65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{691813DD-A152-4D40-B758-E9174A477D65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{691813DD-A152-4D40-B758-E9174A477D65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{691813DD-A152-4D40-B758-E9174A477D65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD001983-BC74-4B5C-96AF-3CB1702D5646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD001983-BC74-4B5C-96AF-3CB1702D5646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD001983-BC74-4B5C-96AF-3CB1702D5646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD001983-BC74-4B5C-96AF-3CB1702D5646}.Release|Any CPU.Build.0 = Release|Any CPU
+		{022B1B92-E803-4D53-9C94-5CFE6BD8A6E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{022B1B92-E803-4D53-9C94-5CFE6BD8A6E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{022B1B92-E803-4D53-9C94-5CFE6BD8A6E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{022B1B92-E803-4D53-9C94-5CFE6BD8A6E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7465B2C-CCEE-4DB3-9702-9949821D7FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7465B2C-CCEE-4DB3-9702-9949821D7FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7465B2C-CCEE-4DB3-9702-9949821D7FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7465B2C-CCEE-4DB3-9702-9949821D7FAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B91D581A-A858-46FF-A19B-454D00A62C8A} = {0DE2626C-21FF-4A19-805E-6909563E4CCD}
+		{E28B9793-5673-41B8-9A57-3E47B6A8403F} = {0DE2626C-21FF-4A19-805E-6909563E4CCD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E0C9E26-3335-4BED-8BCE-C4C958C9E380}
+	EndGlobalSection
+EndGlobal
